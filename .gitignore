@@ -1,0 +1,10 @@
+vendors/
+mcp/local.mcp.json
+local.json
+.mcp.json
+.cursor/mcp.json
+Reports/
+LOCAL-THIS-PC.md
+notes/2026-09-01-station-init.md
+notes/2026-09-01-public-template-repo.md
+

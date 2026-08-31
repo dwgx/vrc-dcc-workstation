@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: VRChat SDK / upload
+    url: https://docs.vrchat.com/
+    about: Agents must not click Build & Publish. Ask a human.

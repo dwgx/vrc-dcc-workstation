@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-manifests:
+    name: Validate manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate JSON
+        run: |
+          python -c "import json,glob,sys
+          ok=True
+          for f in sorted(glob.glob('manifests/*.json')+glob.glob('local.json.example')):
+              try:
+                  json.load(open(f,encoding='utf-8')); print('OK', f)
+              except Exception as e:
+                  ok=False; print('FAIL', f, e)
+          sys.exit(0 if ok else 1)"
+
+  guard-no-secrets-or-binaries:
+    name: Guard against committed binaries/secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fail if tracked binaries/credentials exist
+        run: |
+          set -e
+          bad=$(git ls-files | grep -E '\.(exe|dll|zip|7z|pyc|unitypackage|blend)$|(^|/)\.env$|(^|/)local\.json$' || true)
+          if [ -n "$bad" ]; then
+            echo "::error::Disallowed tracked files found:"; echo "$bad"; exit 1
+          fi
+          echo "No disallowed binaries/credentials tracked."
+      - name: Scan for obvious secrets and this-PC paths
+        run: |
+          set -e
+          if git grep -nIE 'ghp_[A-Za-z0-9]{20,}|gho_[A-Za-z0-9]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----' -- . ':!.github/workflows/*'; then
+            echo "::error::Possible secret found in tracked files."; exit 1
+          fi
+          if git grep -nIE 'C:\\\\Users\\\\dwgx|D:\\\\Software\\\\Tool\\\\WorkStation|D:\\\\Project\\\\Unity\\\\kaguya' -- . ':!.github/workflows/*' ':!LOCAL-THIS-PC.md'; then
+            echo "::error::This-PC path leaked into the public template."; exit 1
+          fi
+          echo "No obvious secrets or this-PC paths found."
+
+  powershell-syntax:
+    name: PowerShell syntax (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Parse scripts
+        shell: pwsh
+        run: |
+          $files = @('scripts/bootstrap.ps1','scripts/refresh-pins.ps1')
+          foreach ($f in $files) {
+            $errors = $null
+            [System.Management.Automation.PSParser]::Tokenize((Get-Content -Raw $f), [ref]$errors) | Out-Null
+            if ($errors.Count -gt 0) { $errors | ForEach-Object { Write-Error $_.Message }; exit 1 }
+            Write-Host "$f parsed with no syntax errors."
+          }
+
+  link-check:
+    name: Check relative doc links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Verify relative markdown links resolve
+        run: |
+          python - <<'PY'
+          import re, glob, os, sys
+          bad = []
+          link = re.compile(r'\[[^\]]+\]\(([^)]+)\)')
+          for md in glob.glob('**/*.md', recursive=True):
+              base = os.path.dirname(md)
+              for m in link.finditer(open(md, encoding='utf-8').read()):
+                  t = m.group(1).split('#')[0].strip()
+                  if not t or t.startswith(('http://','https://','mailto:')):
+                      continue
+                  p = os.path.normpath(os.path.join(base, t))
+                  if not os.path.exists(p):
+                      bad.append(f"{md} -> {t}")
+          if bad:
+              print("Broken relative links:"); [print(" ", b) for b in bad]; sys.exit(1)
+          print("All relative markdown links resolve.")
+          PY

@@ -1,0 +1,16 @@
+---
+description: vrc-dcc-workstation AI handshake and MCP policy
+alwaysApply: true
+---
+
+# vrc-dcc-workstation — Cursor rules
+
+Authoritative file: root `AGENTS.md`.
+
+Skeleton VRChat DCC station (Blender + Unity 2022.3). No third-party binaries in git.
+
+Init: explore → ask (`templates/INIT_QUESTIONNAIRE.md`) → plan → `bootstrap.ps1` dry-run → `-Apply`.
+
+MCP: project / `--mcp-config` only. Never user-global. One blender-mcp client at a time.
+
+Human clicks VRChat SDK Build & Publish. Official Unity 6 MCP stays off 2022.3 avatar projects.

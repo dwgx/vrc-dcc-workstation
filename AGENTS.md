@@ -1,0 +1,111 @@
+# AGENTS.md — vrc-dcc-workstation
+
+Authoritative entry for every AI agent (Claude Code, Codex, Cursor, Gemini CLI, Copilot, Grok).
+Read this file before initializing or driving the station.
+
+This repository is a **skeleton**. It ships no Blender/Unity/VRChat binaries and no avatar projects.
+
+---
+
+## 0. What this is
+
+A portable **VRChat DCC** workstation: Blender (mesh/weights/visemes) plus Unity 2022.3 (Modular Avatar / NDMF / PhysBones / menus). Agents attach **Blender MCP and/or Unity MCP only for the current job**. Do not dump those servers into Claude / Codex / Cursor / Grok **user-global** MCP.
+
+Human clicks VRChat SDK **Build & Publish**. Agents must not.
+
+---
+
+## 1. Init handshake (ask, then act)
+
+When the user asks to initialize / install / set up this station:
+
+### Step 1 — Explore (read-only)
+
+Read `README.md`, this file, `docs/WORKFLOW.md`, `manifests/tools.json`, `manifests/mcp.json`, `docs/AI_USAGE_GUIDE.md`. Detect OS, `git`, `python`/`uv`, Unity Editor, Blender, `uvx`.
+
+### Step 2 — Ask (required)
+
+Use `templates/INIT_QUESTIONNAIRE.md`. Cover at least:
+
+1. **Install root** (default: this clone).
+2. **Blender exe** path and version (this station targets **5.2 LTS**).
+3. **Unity Editor** version (avatars: **2022.3 LTS**, not Unity 6 for this pipeline).
+4. **Avatar Unity project** path (optional until a job needs it).
+5. **MCP**: Blender only / Unity only / both / none until a live DCC job.
+6. **AI client**: Claude Code / Codex / Cursor / Gemini / Copilot / Grok.
+7. Whether to clone optional vendors (CATS 5.2 fork, gummidot docs, Codex VRC skill).
+
+Do not guess another person's Unity project tree.
+
+### Step 3 — Plan
+
+List files you will write (`local.json`, `mcp/local.mcp.json`), vendors you will clone, and MCP you will **not** add to user-global config.
+
+### Step 4 — Execute (after confirmation)
+
+1. `powershell -File scripts/bootstrap.ps1` (dry-run).
+2. Then `-Apply` (write local MCP JSON from templates; fill `local.json` if missing).
+3. Optional `-CloneMcp` for vendors.
+4. Pins: `scripts/refresh-pins.ps1` (prefers `gh api`).
+5. Smoke: Blender `--version`, `uvx --python 3.11 blender-mcp==<pin> --help` if uv exists.
+6. End with `skills/vrc-review`.
+
+### Step 5 — Report
+
+What landed, what was skipped, leftover risk (SDK upload still human).
+
+---
+
+## 2. MCP policy
+
+- Skills always; MCP processes only when this job edits a live scene.
+- One blender-mcp **client** at a time (Cursor **or** Claude Desktop, not both).
+- Unity: CoplayDev unity-mcp (HTTP `http://localhost:8080/mcp` after UPM in the **open** project) and/or lighfu UnityAgent via VPM. Official Unity 6 MCP / `com.unity.ai.assistant` stays off a 2022.3 avatar project.
+- There is **no** live package named UnityMCP-VCC. Do not invent it.
+
+---
+
+## 3. Pipeline
+
+See [docs/WORKFLOW.md](docs/WORKFLOW.md) for the 2026-09 steps. Short form:
+
+```
+Blender  --blender-mcp-->  FBX / VRM
+Unity 2022.3  --unity-mcp / UnityAgent-->  MA / menu / human review
+Human: SDK Build & Publish
+```
+
+Mesh / weights / visemes / CATS / armature names → Blender.
+MA Merge Armature, menus, parameters, PhysBone, FaceEmo, lilToon → Unity.
+An outfit **not adapted** to this body: stop. Unity merge will not fix weights.
+
+---
+
+## 4. Do / Do not
+
+**Do**
+
+- Drive Blender after the human starts N-panel **Start MCP Server**.
+- Prefer live Editor APIs over hand-editing `.prefab` / `.unity` YAML.
+- Stop and ask before PhysBone-limit “fixes”, deleting MA components, or any upload.
+- Write durable facts to `notes/` (`templates/AFTER_ACTION.md`). Chat is not memory.
+
+**Do not**
+
+- Click VRChat Build & Publish, call `upload_vrchat_avatar`, or store SDK cookies.
+- Install official Unity MCP into the 2022.3 avatar project.
+- Load blender-mcp in two GUI clients at once.
+- Merge Blender/Unity servers into four-runtime **user** MCP.
+- Treat session jsonl as the live Unity scene.
+
+---
+
+## 5. After every material job
+
+Read `docs/AGENT_EVOLUTION.md` and `skills/vrc-review/SKILL.md`. Score spec + standard. Notes go in `notes/`. Local scores may go in `Reports/` (gitignored).
+
+---
+
+## 6. Language
+
+Public git and tracked docs: **English**. Chat with a Chinese-speaking owner: Chinese. Paths: absolute or relative to the install root.
