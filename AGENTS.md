@@ -5,6 +5,12 @@ Read this file before initializing or driving the station.
 
 This repository is a **skeleton**. It ships no Blender/Unity/VRChat binaries and no avatar projects.
 
+<!-- I18N:START -->
+**English** · [简体中文](AGENTS.zh-CN.md) · [日本語](AGENTS.ja.md) · [한국어](AGENTS.ko.md)
+<!-- I18N:END -->
+
+Read [docs/I18N.md](docs/I18N.md). Chat in the user's language. Git commits stay English.
+
 ---
 
 ## 0. What this is
@@ -25,8 +31,9 @@ Read `README.md`, this file, `docs/WORKFLOW.md`, `manifests/tools.json`, `manife
 
 ### Step 2 — Ask (required)
 
-Use `templates/INIT_QUESTIONNAIRE.md`. Cover at least:
+Use `templates/INIT_QUESTIONNAIRE.md` (or `templates/i18n/<locale>/INIT_QUESTIONNAIRE.md`). Cover at least:
 
+0. **UI language** (en / zh-CN / ja / ko) if not already obvious from chat.
 1. **Install root** (default: this clone).
 2. **Blender exe** path and version (this station targets **5.2 LTS**).
 3. **Unity Editor** version (avatars: **2022.3 LTS**, not Unity 6 for this pipeline).
@@ -108,4 +115,9 @@ Read `docs/AGENT_EVOLUTION.md` and `skills/vrc-review/SKILL.md`. Score spec + st
 
 ## 6. Language
 
-Public git and tracked docs: **English**. Chat with a Chinese-speaking owner: Chinese. Paths: absolute or relative to the install root.
+1. Resolve locale: user chat → `local.json` `ui_language` → `WORKSTATION_UI_LANG` → OS UI culture → `en`.
+2. Read `AGENTS.<locale>.md` when it exists. Use `templates/i18n/<locale>/INIT_QUESTIONNAIRE.md` and `docs/i18n/<locale>/WORKFLOW.md`.
+3. **Reply in that locale.** Persist `ui_language` in gitignored `local.json`.
+4. Public git history and commit messages stay **English**.
+
+Supported: `en`, `zh-CN`, `ja`, `ko`. Paths: absolute or relative to the install root.

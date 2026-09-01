@@ -1,0 +1,22 @@
+{
+  "schema": "workstation-i18n/v1",
+  "canonical": "en",
+  "locales": ["en", "zh-CN", "ja", "ko"],
+  "autonym": {
+    "en": "English",
+    "zh-CN": "简体中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  },
+  "root_files": ["README", "AGENTS", "DISCLAIMER"],
+  "detect_order": [
+    "user chat language",
+    "local.json ui_language",
+    "WORKSTATION_UI_LANG / VRC_DCC_UI_LANG / DEBUGGER_UI_LANG",
+    "Windows CurrentUICulture",
+    "en"
+  ],
+  "chat": "Reply in the resolved locale. Commit messages and public git history stay English.",
+  "questionnaire": "templates/i18n/<locale>/INIT_QUESTIONNAIRE.md with fallback templates/INIT_QUESTIONNAIRE.md",
+  "docs_i18n": "docs/i18n/<locale>/ for WORKFLOW, UNITY, ATTACH, RULES, I18N, AI_USAGE_GUIDE, CACHE when present"
+}

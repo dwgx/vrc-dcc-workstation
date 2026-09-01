@@ -1,10 +1,12 @@
 # vrc-dcc-workstation
 
-**English** · [简体中文](README.zh-CN.md)
+<!-- I18N:START -->
+**English** · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
+<!-- I18N:END -->
 
 A **skeleton repository** for a portable VRChat DCC workstation: **Blender 5.x LTS** (mesh / weights / visemes) plus **Unity 2022.3** (Modular Avatar / NDMF / PhysBones / menus), driven by AI agents over MCP.
 
-Any agent (Claude Code / Codex / Cursor / Gemini / Copilot / Grok) or human can clone this repo, run the handshake in [AGENTS.md](AGENTS.md), and reconstruct the station on their own machine.
+Any agent (Claude Code / Codex / Cursor / Gemini / Copilot / Grok) or human can clone this repo, resolve the UI locale ([docs/I18N.md](docs/I18N.md)), run the handshake in [AGENTS.md](AGENTS.md) (or `AGENTS.zh-CN.md` / `AGENTS.ja.md` / `AGENTS.ko.md`), and reconstruct the station on their own machine. Chat in the user's language; git commits stay English.
 
 After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so the next session does not rediscover the same failure. See [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md).
 

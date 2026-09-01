@@ -1,5 +1,9 @@
 # Workflow (Blender → Unity → human publish)
 
+<!-- I18N:START -->
+**English** · [简体中文](i18n/zh-CN/WORKFLOW.md) · [日本語](i18n/ja/WORKFLOW.md) · [한국어](i18n/ko/WORKFLOW.md)
+<!-- I18N:END -->
+
 Pins: `manifests/tools.json` (re-check with `scripts/refresh-pins.ps1`; GitHub **releases** beat third-party VPM catalogs). This page is the 2026-09 public pipeline.
 
 ```

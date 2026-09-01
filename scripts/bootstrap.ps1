@@ -81,10 +81,14 @@ $unityHits = @(Find-UnityEditor)
 $blenderHits = @(Find-Blender)
 $uvx = Find-Uvx
 
+. (Join-Path $PSScriptRoot 'resolve-locale.ps1')
+$uiLocale = Get-WorkstationLocale -RepoRoot $InstallRoot
+
 Write-Host "vrc-dcc-workstation bootstrap  root=$InstallRoot  apply=$Apply  clone=$CloneMcp"
 Write-Host ("  [{0}] unity    {1}" -f $(if ($unityHits.Count) { 'OK' } else { 'MISSING' }), ($unityHits -join '; '))
 Write-Host ("  [{0}] blender  {1}" -f $(if ($blenderHits.Count) { 'OK' } else { 'MISSING' }), ($blenderHits -join '; '))
 Write-Host ("  [{0}] uvx      {1}" -f $(if ($uvx) { 'OK' } else { 'MISSING' }), $uvx)
+Write-LocaleBanner -RepoRoot $InstallRoot -Locale $uiLocale
 
 if (-not $Apply) {
     Write-Host 'dry-run only. Re-run with -Apply to write mcp\local.mcp.json and local.json (if missing).'
@@ -114,6 +118,14 @@ if (-not (Test-Path -LiteralPath $localJson)) {
     Write-Host "wrote $localJson (fill unity_project if needed)"
 } else {
     Write-Host "kept existing $localJson"
+}
+
+$envHint = $null
+foreach ($cand in @($env:WORKSTATION_UI_LANG, $env:VRC_DCC_UI_LANG, $env:DEBUGGER_UI_LANG)) {
+    if (-not [string]::IsNullOrWhiteSpace($cand)) { $envHint = $cand; break }
+}
+if ($envHint) {
+    Save-WorkstationLocale -RepoRoot $InstallRoot -Locale $uiLocale
 }
 
 if ($CloneMcp) {

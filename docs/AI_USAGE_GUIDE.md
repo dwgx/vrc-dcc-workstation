@@ -1,5 +1,9 @@
 # AI usage guide
 
+<!-- I18N:START -->
+**English** · [简体中文](i18n/zh-CN/AI_USAGE_GUIDE.md) · [日本語](i18n/ja/AI_USAGE_GUIDE.md) · [한국어](i18n/ko/AI_USAGE_GUIDE.md)
+<!-- I18N:END -->
+
 After clone + bootstrap, agents should:
 
 1. Read `AGENTS.md` (handshake + MCP policy).

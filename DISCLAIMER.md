@@ -1,5 +1,9 @@
 # Disclaimer
 
+<!-- I18N:START -->
+**English** · [简体中文](DISCLAIMER.zh-CN.md) · [日本語](DISCLAIMER.ja.md) · [한국어](DISCLAIMER.ko.md)
+<!-- I18N:END -->
+
 This repository is a **skeleton / bootstrap**. It does **not** ship Blender, Unity, the VRChat SDK, Modular Avatar, avatar projects, or MCP server binaries.
 
 Pins in `manifests/tools.json` point at **official** PyPI/GitHub/VPM sources. You fetch those yourself (or authorize an agent after the handshake).

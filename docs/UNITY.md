@@ -1,5 +1,9 @@
 # Unity packages (avatar project window)
 
+<!-- I18N:START -->
+**English** · [简体中文](i18n/zh-CN/UNITY.md) · [日本語](i18n/ja/UNITY.md) · [한국어](i18n/ko/UNITY.md)
+<!-- I18N:END -->
+
 Add these **inside the avatar Unity project**, not from a home/control-plane window. Pins: `manifests/tools.json`.
 
 ## CoplayDev — MCP for Unity (default Editor bridge)

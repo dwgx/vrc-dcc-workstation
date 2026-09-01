@@ -1,5 +1,9 @@
 # Attach MCP (human + agent)
 
+<!-- I18N:START -->
+**English** · [简体中文](i18n/zh-CN/ATTACH.md) · [日本語](i18n/ja/ATTACH.md) · [한국어](i18n/ko/ATTACH.md)
+<!-- I18N:END -->
+
 Templates live in `mcp/*.template`. Generated `mcp/local.mcp.json` is gitignored (absolute paths). Full pipeline: [WORKFLOW.md](WORKFLOW.md). Unity URLs: [UNITY.md](UNITY.md).
 
 ## Blender

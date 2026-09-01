@@ -1,6 +1,15 @@
 # Init questionnaire (vrc-dcc-workstation)
 
-AI: ask these before writing `local.json` or attaching MCP. Structured options + a recommended default.
+AI: ask these before writing `local.json` or attaching MCP. Structured options + a recommended default. Localized copies: `templates/i18n/<locale>/INIT_QUESTIONNAIRE.md`. See [docs/I18N.md](../docs/I18N.md).
+
+## Q0. UI language
+
+Which language should the agent use in chat?
+- [ ] English (`en`)
+- [ ] 简体中文 (`zh-CN`)
+- [ ] 日本語 (`ja`)
+- [ ] 한국어 (`ko`)
+- Recommended: match how you are already writing. Persist in gitignored `local.json` as `ui_language`. Git commit messages stay English.
 
 ## Q1. Install root
 

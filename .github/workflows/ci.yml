@@ -21,7 +21,7 @@ jobs:
         run: |
           python -c "import json,glob,sys
           ok=True
-          for f in sorted(glob.glob('manifests/*.json')+glob.glob('local.json.example')):
+          for f in sorted(glob.glob('manifests/*.json')+glob.glob('local.json.example')+['locales.json']):
               try:
                   json.load(open(f,encoding='utf-8')); print('OK', f)
               except Exception as e:
@@ -60,13 +60,65 @@ jobs:
       - name: Parse scripts
         shell: pwsh
         run: |
-          $files = @('scripts/bootstrap.ps1','scripts/refresh-pins.ps1')
+          $files = @('scripts/bootstrap.ps1','scripts/refresh-pins.ps1','scripts/resolve-locale.ps1')
           foreach ($f in $files) {
             $errors = $null
             [System.Management.Automation.PSParser]::Tokenize((Get-Content -Raw $f), [ref]$errors) | Out-Null
             if ($errors.Count -gt 0) { $errors | ForEach-Object { Write-Error $_.Message }; exit 1 }
             Write-Host "$f parsed with no syntax errors."
           }
+      - name: Resolve-locale hints
+        shell: pwsh
+        run: |
+          . ./scripts/resolve-locale.ps1
+          $root = (Get-Location).Path
+          $cases = @{ 'zh-TW'='zh-CN'; 'ja-JP'='ja'; 'ko-KR'='ko'; 'en-GB'='en' }
+          foreach ($k in $cases.Keys) {
+            $got = Get-WorkstationLocale -RepoRoot $root -Hint $k
+            if ($got -ne $cases[$k]) { throw "hint $k => $got (want $($cases[$k]))" }
+          }
+          Write-Host 'locale hints ok'
+
+  i18n-siblings:
+    name: Locale siblings exist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Assert README/AGENTS/DISCLAIMER/questionnaire/workflow siblings
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          cfg = json.load(open('locales.json', encoding='utf-8'))
+          missing = []
+          extras = ['I18N.md', 'WORKFLOW.md', 'UNITY.md', 'ATTACH.md', 'RULES.md', 'AI_USAGE_GUIDE.md']
+          for loc in cfg['locales']:
+              if loc == 'en':
+                  for s in cfg['root_files']:
+                      p = s + '.md'
+                      if not os.path.isfile(p):
+                          missing.append(p)
+                  if not os.path.isfile('templates/INIT_QUESTIONNAIRE.md'):
+                      missing.append('templates/INIT_QUESTIONNAIRE.md')
+                  if not os.path.isfile('docs/I18N.md'):
+                      missing.append('docs/I18N.md')
+                  if not os.path.isfile('docs/WORKFLOW.md'):
+                      missing.append('docs/WORKFLOW.md')
+                  continue
+              for s in cfg['root_files']:
+                  p = f'{s}.{loc}.md'
+                  if not os.path.isfile(p):
+                      missing.append(p)
+              q = f'templates/i18n/{loc}/INIT_QUESTIONNAIRE.md'
+              if not os.path.isfile(q):
+                  missing.append(q)
+              for extra in extras:
+                  p = f'docs/i18n/{loc}/{extra}'
+                  if not os.path.isfile(p):
+                      missing.append(p)
+          if missing:
+              print('Missing i18n files:'); [print(' ', m) for m in missing]; sys.exit(1)
+          print('i18n siblings ok')
+          PY
 
   link-check:
     name: Check relative doc links

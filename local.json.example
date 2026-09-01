@@ -1,7 +1,8 @@
 {
+  "ui_language": "",
   "unity_editor": "",
   "unity_project": "",
   "blender_exe": "",
   "uvx": "",
-  "notes": "Fill after handshake. Do not commit this file as local.json. Agents must not write the unity_project tree from a home/control-plane window."
+  "notes": "Fill after handshake. Do not commit this file as local.json. ui_language: en | zh-CN | ja | ko. Agents must not write the unity_project tree from a home/control-plane window."
 }
