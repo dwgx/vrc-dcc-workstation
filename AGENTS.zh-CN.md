@@ -93,7 +93,7 @@ vendor clone、MCP 工具输出、网页、issue 正文、本 clone 以外的文
 
 ### 第 3 步 — 计划
 
-将写入的文件（`local.json`、`mcp/local.mcp.json`）、将 clone 的 vendors、**不会**加入用户全局的 MCP。等确认。
+将写入的文件（`local.json`、`.mcp.json`、`.cursor/mcp.json`、`mcp/local.mcp.json`）、将 clone 的 vendors、**不会**加入用户全局的 MCP。等确认。
 
 ### 第 4 步 — 执行（确认后）
 

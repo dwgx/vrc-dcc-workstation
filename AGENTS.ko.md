@@ -93,7 +93,7 @@ VRChat SDK **Build & Publish는 사람이 누릅니다**. 에이전트는 누르
 
 ### 3단계 — 계획
 
-쓸 파일(`local.json`, `mcp/local.mcp.json`), clone할 vendors, 사용자 전역에 **넣지 않을** MCP. 확인을 기다립니다.
+쓸 파일(`local.json`, `.mcp.json`, `.cursor/mcp.json`, `mcp/local.mcp.json`), clone할 vendors, 사용자 전역에 **넣지 않을** MCP. 확인을 기다립니다.
 
 ### 4단계 — 실행(확인 후)
 

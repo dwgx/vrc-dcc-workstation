@@ -30,7 +30,7 @@
 | `skills/vrc-dcc/` / `skills/vrc-review/` | 改模手册 + 双轴审查（技能正文为英文，对话仍用中文） |
 | `manifests/` | 钉选（PyPI / GitHub / VPM）。用 `scripts/refresh-pins.ps1` 复核 |
 | `mcp/*.template` | 按需 MCP。绝不写进用户全局 |
-| `scripts/bootstrap.ps1` | 默认 dry-run；`-Apply` 写入 gitignore 的 `local.json` / `mcp/local.mcp.json` |
+| `scripts/bootstrap.ps1` | 默认 dry-run；`-Apply` 写入 gitignore 的 `local.json`、`.mcp.json`、`.cursor/mcp.json` |
 
 英文对照表见 [README.md](README.md)。
 

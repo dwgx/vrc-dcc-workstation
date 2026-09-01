@@ -22,6 +22,7 @@ After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so 
 | `OWNER.example.md` | Template for gitignored `OWNER.md` (this clone's prompts) |
 | `docs/MAINTAIN.md` | How an agent patches **this** working copy |
 | `docs/EVAL.md` | Static contract eval (`scripts/eval-agent-contract.py`) |
+| `docs/BOOTSTRAP.md` | Project MCP paths + `local.json` |
 | `docs/WORKFLOW.md` | Blender → Unity → human publish (2026-09 pipeline) |
 | `docs/UNITY.md` | CoplayDev UPM + UnityAgent VPM pins |
 | `CLAUDE.md` / `GEMINI.md` / `.github/copilot-instructions.md` / `.cursor/rules/` | Per-client pointers to `AGENTS.md` |
@@ -29,7 +30,7 @@ After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so 
 | `skills/vrc-dcc/` / `skills/vrc-review/` | Auto-discovered playbook + dual-axis review |
 | `manifests/` | Live pins (PyPI / GitHub / VPM). Re-check with `scripts/refresh-pins.ps1` |
 | `mcp/*.template` | Opt-in MCP. Never user-global |
-| `scripts/bootstrap.ps1` | Dry-run by default; `-Apply` writes gitignored `local.json` / `mcp/local.mcp.json` |
+| `scripts/bootstrap.ps1` | Dry-run by default; `-Apply` writes gitignored `local.json`, `.mcp.json`, `.cursor/mcp.json` |
 
 ## Quick start
 

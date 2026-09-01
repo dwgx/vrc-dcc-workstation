@@ -94,7 +94,7 @@ Do not guess another person's Unity project tree.
 
 ### Step 3 — Plan
 
-List files you will write (`local.json`, `mcp/local.mcp.json`), vendors you will clone, and MCP you will **not** add to user-global config.
+List files you will write (`local.json`, `.mcp.json`, `.cursor/mcp.json`, `mcp/local.mcp.json`), vendors you will clone, and MCP you will **not** add to user-global config.
 
 ### Step 4 — Execute (after confirmation)
 

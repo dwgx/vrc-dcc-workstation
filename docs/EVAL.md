@@ -23,7 +23,7 @@ The script checks, with no network:
 7. `.gitignore` lists `OWNER.md` and `local.json`; `git ls-files` shows they are untracked.
 8. No legacy `.cursorrules`.
 
-Independent **subagent reviews** (explore / dual-axis) are extra; they do not replace the script. Re-run the script after every contract edit. CI link-check uses `git ls-files *.md` so a local clone with installed tools does not false-fail.
+Independent **subagent reviews** (explore / dual-axis) are extra; they do not replace the script. Re-run the script after every contract edit. CI link-check uses `git ls-files *.md` so a local clone with installed tools does not false-fail. Debugger also checks `mcp/client-mcp.json.template` is router-only and bootstrap writes `.cursor/mcp.json`.
 
 ## Expected behavior (rubric)
 

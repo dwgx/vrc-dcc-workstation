@@ -59,12 +59,19 @@ $coplay = Get-GitHubLatestTag -Repo 'CoplayDev/unity-mcp'
 $agent = Get-GitHubLatestTag -Repo 'lighfu/unity-agent' -TagPrefix 'editor-v'
 $dcc = Get-GitHubLatestTag -Repo 'dcc-mcp/dcc-mcp-blender'
 
+$blenderPin = (($tools.tools | Where-Object { $_.id -eq 'blender-mcp' }).pin -split '==')[-1]
+$unityPyPin = (($tools.tools | Where-Object { $_.id -eq 'coplaydev-unity-mcp' }).pypi -split '==')[-1]
+$coplayPin = [string]($tools.tools | Where-Object { $_.id -eq 'coplaydev-unity-mcp' }).pin
+$coplayPin = $coplayPin.Replace('github:', '')
+$agentPin = [string]($tools.tools | Where-Object { $_.id -eq 'lighfu-unity-agent' }).pin
+$dccPin = ([string]($tools.tools | Where-Object { $_.id -eq 'dcc-mcp-blender' }).pin).Replace('github:', '')
+
 $report = @(
-    "blender-mcp pypi=$blender (pin 1.9.0)",
-    "mcpforunityserver pypi=$unityPy (pin 10.1.2)",
-    "CoplayDev/unity-mcp latest=$(if ($coplay) { $coplay } else { 'UNAVAILABLE' }) (pin v10.1.2)",
-    "lighfu/unity-agent editor=$(if ($agent) { $agent } else { 'UNAVAILABLE' }) (pin editor-v0.15.0)",
-    "dcc-mcp-blender latest=$(if ($dcc) { $dcc } else { 'UNAVAILABLE' }) (pin v0.2.3)"
+    "blender-mcp pypi=$blender (pin $blenderPin)",
+    "mcpforunityserver pypi=$unityPy (pin $unityPyPin)",
+    "CoplayDev/unity-mcp latest=$(if ($coplay) { $coplay } else { 'UNAVAILABLE' }) (pin $coplayPin)",
+    "lighfu/unity-agent editor=$(if ($agent) { $agent } else { 'UNAVAILABLE' }) (pin $agentPin)",
+    "dcc-mcp-blender latest=$(if ($dcc) { $dcc } else { 'UNAVAILABLE' }) (pin $dccPin)"
 )
 $report | ForEach-Object { Write-Host $_ }
 
@@ -74,11 +81,11 @@ if (-not $Apply) {
 }
 
 $drift = @()
-if ($blender -ne '1.9.0') { $drift += "blender-mcp $blender" }
-if ($unityPy -ne '10.1.2') { $drift += "mcpforunityserver $unityPy" }
-if ($coplay -and $coplay -ne 'v10.1.2') { $drift += "unity-mcp $coplay" }
-if ($agent -and $agent -ne 'editor-v0.15.0') { $drift += "unity-agent $agent" }
-if ($dcc -and $dcc -ne 'v0.2.3') { $drift += "dcc-mcp-blender $dcc" }
+if ($blender -ne $blenderPin) { $drift += "blender-mcp $blender (pin $blenderPin)" }
+if ($unityPy -ne $unityPyPin) { $drift += "mcpforunityserver $unityPy (pin $unityPyPin)" }
+if ($coplay -and $coplay -ne $coplayPin) { $drift += "unity-mcp $coplay (pin $coplayPin)" }
+if ($agent -and $agent -ne $agentPin) { $drift += "unity-agent $agent (pin $agentPin)" }
+if ($dcc -and $dcc -ne $dccPin) { $drift += "dcc-mcp-blender $dcc (pin $dccPin)" }
 
 if ($drift.Count -eq 0) {
     Write-Host 'pins still match. no note written.'

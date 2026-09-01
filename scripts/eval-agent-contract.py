@@ -77,6 +77,7 @@ MUST_FILES = (
     "docs/MAINTAIN.md",
     "docs/I18N.md",
     "docs/EVAL.md",
+    "docs/BOOTSTRAP.md",
     "templates/INIT_QUESTIONNAIRE.md",
     "locales.json",
     "AGENTS.md",
@@ -228,10 +229,29 @@ def main() -> None:
         fail(".gitignore must ignore OWNER.md", [".gitignore"])
     if "local.json" not in gitignore:
         fail(".gitignore must ignore local.json", [".gitignore"])
+    if ".mcp.json" not in gitignore:
+        fail(".gitignore must ignore project .mcp.json", [".gitignore"])
+    if ".cursor/mcp.json" not in gitignore.replace("\\", "/"):
+        fail(".gitignore must ignore .cursor/mcp.json", [".gitignore"])
 
     tracked_secret = git_ls_files("OWNER.md", "local.json")
     if tracked_secret:
         fail("OWNER.md / local.json must not be tracked", tracked_secret)
+
+    boot = (ROOT / "scripts" / "bootstrap.ps1").read_text(encoding="utf-8")
+    boot_norm = boot.replace("/", "\\")
+    if ".cursor\\mcp.json" not in boot_norm:
+        fail("bootstrap.ps1 must write project .cursor\\mcp.json", ["scripts/bootstrap.ps1"])
+    if kind == "debugger-workstation":
+        tpl = ROOT / "mcp" / "client-mcp.json.template"
+        if not tpl.is_file():
+            fail("missing router-only client MCP template", ["mcp/client-mcp.json.template"])
+        data = json.loads(tpl.read_text(encoding="utf-8"))
+        names = list(data.get("mcpServers", {}))
+        if names != ["debugger-router"]:
+            fail("client MCP template must contain only debugger-router", names)
+        if "client-mcp.json.template" not in boot:
+            fail("bootstrap.ps1 must render mcp/client-mcp.json.template", ["scripts/bootstrap.ps1"])
 
     eval_doc = (ROOT / "docs" / "EVAL.md").read_text(encoding="utf-8")
     if "LLM-as-judge" not in eval_doc:

@@ -10,7 +10,7 @@ clone + bootstrap のあと、エージェントは：
 2. [WORKFLOW.md](WORKFLOW.md) と [UNITY.md](UNITY.md) を読む。
 3. `local.json` があれば読む。無ければ聞いて書く。
 4. `notes/INDEX.md` を読む。
-5. ライブ DCC の仕事のときだけ MCP を付ける（`mcp/cursor.mcp.json.template` → gitignore の `mcp/local.mcp.json`）。
+5. ライブ DCC の仕事のときだけ MCP を付ける（`mcp/cursor.mcp.json.template` → gitignore の `.cursor/mcp.json` / `.mcp.json` / `mcp/local.mcp.json`）。
 6. `skills/vrc-review` で終わる。
 
 ## 既定ピン（`scripts/refresh-pins.ps1` で再確認）

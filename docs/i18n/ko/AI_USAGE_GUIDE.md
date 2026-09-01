@@ -10,7 +10,7 @@ clone + bootstrap 이후 에이전트는:
 2. [WORKFLOW.md](WORKFLOW.md)와 [UNITY.md](UNITY.md)를 읽는다.
 3. `local.json`이 있으면 읽고, 없으면 물어 쓴다.
 4. `notes/INDEX.md`를 읽는다.
-5. 라이브 DCC 작업일 때만 MCP를 붙인다（`mcp/cursor.mcp.json.template` → gitignore된 `mcp/local.mcp.json`）.
+5. 라이브 DCC 작업일 때만 MCP를 붙인다（`mcp/cursor.mcp.json.template` → gitignore된 `.cursor/mcp.json` / `.mcp.json` / `mcp/local.mcp.json`）.
 6. `skills/vrc-review`로 끝낸다.
 
 ## 기본 핀（`scripts/refresh-pins.ps1`로 재확인）

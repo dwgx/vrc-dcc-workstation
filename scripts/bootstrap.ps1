@@ -8,14 +8,16 @@
 param(
     [string]$InstallRoot = '',
     [switch]$Apply,
-    [switch]$CloneMcp
+    [switch]$CloneMcp,
+    [string]$UiLanguage = ''
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
+$RepoRoot = Split-Path -Parent $PSScriptRoot
 if ([string]::IsNullOrWhiteSpace($InstallRoot)) {
-    $InstallRoot = Split-Path -Parent $PSScriptRoot
+    $InstallRoot = $RepoRoot
 }
 
 function Test-Exe([string]$Path) {
@@ -71,9 +73,9 @@ function Find-Uvx {
     return ''
 }
 
-$template = Join-Path $InstallRoot 'mcp\cursor.mcp.json.template'
+$template = Join-Path $RepoRoot 'mcp\cursor.mcp.json.template'
 $outMcp = Join-Path $InstallRoot 'mcp\local.mcp.json'
-$localExample = Join-Path $InstallRoot 'local.json.example'
+$localExample = Join-Path $RepoRoot 'local.json.example'
 $localJson = Join-Path $InstallRoot 'local.json'
 $vendors = Join-Path $InstallRoot 'vendors\upstream'
 
@@ -82,7 +84,7 @@ $blenderHits = @(Find-Blender)
 $uvx = Find-Uvx
 
 . (Join-Path $PSScriptRoot 'resolve-locale.ps1')
-$uiLocale = Get-WorkstationLocale -RepoRoot $InstallRoot
+$uiLocale = Get-WorkstationLocale -RepoRoot $InstallRoot -Hint $UiLanguage
 
 Write-Host "vrc-dcc-workstation bootstrap  root=$InstallRoot  apply=$Apply  clone=$CloneMcp"
 Write-Host ("  [{0}] unity    {1}" -f $(if ($unityHits.Count) { 'OK' } else { 'MISSING' }), ($unityHits -join '; '))
@@ -91,8 +93,35 @@ Write-Host ("  [{0}] uvx      {1}" -f $(if ($uvx) { 'OK' } else { 'MISSING' }), 
 Write-LocaleBanner -RepoRoot $InstallRoot -Locale $uiLocale
 
 if (-not $Apply) {
-    Write-Host 'dry-run only. Re-run with -Apply to write mcp\local.mcp.json and local.json (if missing).'
+    Write-Host 'dry-run only. Re-run with -Apply to write .mcp.json, .cursor\mcp.json, mcp\local.mcp.json, and local.json (if missing).'
     exit 0
+}
+
+function Test-SamePath($a, $b) {
+    if (-not (Test-Path -LiteralPath $a)) { return $false }
+    if (-not (Test-Path -LiteralPath $b)) { return $false }
+    return ((Resolve-Path -LiteralPath $a).Path -eq (Resolve-Path -LiteralPath $b).Path)
+}
+
+if (-not (Test-SamePath $RepoRoot $InstallRoot)) {
+    Write-Host "copy skeleton $RepoRoot -> $InstallRoot"
+    foreach ($rel in @('manifests', 'skills', 'docs', 'scripts', 'templates', 'mcp')) {
+        $src = Join-Path $RepoRoot $rel
+        $dst = Join-Path $InstallRoot $rel
+        if (-not (Test-Path -LiteralPath $src)) { continue }
+        New-Item -ItemType Directory -Force -Path $dst | Out-Null
+        Get-ChildItem -LiteralPath $src -Force | Where-Object {
+            $_.Name -notin @('local.mcp.json', '__pycache__', '.venv')
+        } | ForEach-Object {
+            Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $dst $_.Name) -Recurse -Force
+        }
+    }
+    foreach ($f in @('AGENTS.md', 'AGENTS.zh-CN.md', 'AGENTS.ja.md', 'AGENTS.ko.md', 'README.md', 'CLAUDE.md', 'GEMINI.md', 'OWNER.example.md', 'locales.json', 'local.json.example')) {
+        $src = Join-Path $RepoRoot $f
+        if (Test-Path -LiteralPath $src) {
+            Copy-Item -LiteralPath $src -Destination (Join-Path $InstallRoot $f) -Force
+        }
+    }
 }
 
 if (-not (Test-Path -LiteralPath $template)) {
@@ -102,10 +131,17 @@ if (-not (Test-Path -LiteralPath $template)) {
 $uvxForTpl = if ($uvx) { $uvx.Replace('\', '/') } else { 'uvx' }
 $text = [System.IO.File]::ReadAllText($template)
 $text = $text.Replace('{{UVX}}', $uvxForTpl)
-New-Item -ItemType Directory -Force -Path (Split-Path $outMcp) | Out-Null
 $utf8 = New-Object System.Text.UTF8Encoding $false
-[System.IO.File]::WriteAllText($outMcp, $text, $utf8)
-Write-Host "wrote $outMcp"
+$mcpTargets = @(
+    $outMcp,
+    (Join-Path $InstallRoot '.mcp.json'),
+    (Join-Path $InstallRoot '.cursor\mcp.json')
+)
+foreach ($dest in $mcpTargets) {
+    New-Item -ItemType Directory -Force -Path (Split-Path $dest) | Out-Null
+    [System.IO.File]::WriteAllText($dest, $text, $utf8)
+    Write-Host "wrote $dest"
+}
 
 if (-not (Test-Path -LiteralPath $localJson)) {
     Copy-Item -LiteralPath $localExample -Destination $localJson
@@ -113,6 +149,7 @@ if (-not (Test-Path -LiteralPath $localJson)) {
     if ($unityHits.Count) { $obj.unity_editor = $unityHits[0] }
     if ($blenderHits.Count) { $obj.blender_exe = $blenderHits[0] }
     if ($uvx) { $obj.uvx = $uvx }
+    $obj | Add-Member -NotePropertyName install_root -NotePropertyValue $InstallRoot -Force
     $json = $obj | ConvertTo-Json -Depth 6
     [System.IO.File]::WriteAllText($localJson, $json + [Environment]::NewLine, $utf8)
     Write-Host "wrote $localJson (fill unity_project if needed)"
@@ -121,11 +158,13 @@ if (-not (Test-Path -LiteralPath $localJson)) {
 }
 
 $envHint = $null
-foreach ($cand in @($env:WORKSTATION_UI_LANG, $env:VRC_DCC_UI_LANG, $env:DEBUGGER_UI_LANG)) {
+foreach ($cand in @($UiLanguage, $env:WORKSTATION_UI_LANG, $env:VRC_DCC_UI_LANG, $env:DEBUGGER_UI_LANG)) {
     if (-not [string]::IsNullOrWhiteSpace($cand)) { $envHint = $cand; break }
 }
 if ($envHint) {
-    Save-WorkstationLocale -RepoRoot $InstallRoot -Locale $uiLocale
+    Save-WorkstationLocale -RepoRoot $InstallRoot -Locale $uiLocale -InstallRoot $InstallRoot -WriteLocale
+} else {
+    Save-WorkstationLocale -RepoRoot $InstallRoot -InstallRoot $InstallRoot
 }
 
 if ($CloneMcp) {
@@ -152,4 +191,4 @@ if ($CloneMcp) {
     }
 }
 
-Write-Host 'done. Next: docs/ATTACH.md. Do not paste MCP into user-global client config.'
+Write-Host 'done. Next: docs/ATTACH.md and docs/BOOTSTRAP.md. Do not paste MCP into user-global client config.'

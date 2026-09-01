@@ -93,7 +93,7 @@ VRChat SDK の **Build & Publish は人が押します**。エージェントは
 
 ### 手順 3 — 計画
 
-書くファイル（`local.json`、`mcp/local.mcp.json`）、clone する vendors、ユーザーグローバルに**足さない** MCP。確認を待つ。
+書くファイル（`local.json`、`.mcp.json`、`.cursor/mcp.json`、`mcp/local.mcp.json`）、clone する vendors、ユーザーグローバルに**足さない** MCP。確認を待つ。
 
 ### 手順 4 — 実行（確認後）
 

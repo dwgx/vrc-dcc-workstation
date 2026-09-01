@@ -4,14 +4,14 @@
 **English** · [简体中文](i18n/zh-CN/ATTACH.md) · [日本語](i18n/ja/ATTACH.md) · [한국어](i18n/ko/ATTACH.md)
 <!-- I18N:END -->
 
-Templates live in `mcp/*.template`. Generated `mcp/local.mcp.json` is gitignored (absolute paths). Full pipeline: [WORKFLOW.md](WORKFLOW.md). Unity URLs: [UNITY.md](UNITY.md).
+Templates live in `mcp/*.template`. `-Apply` writes gitignored `.cursor/mcp.json`, `.mcp.json`, and `mcp/local.mcp.json` (same payload). Layout: [BOOTSTRAP.md](BOOTSTRAP.md). Full pipeline: [WORKFLOW.md](WORKFLOW.md). Unity URLs: [UNITY.md](UNITY.md).
 
 ## Blender
 
 1. Fill `blender_exe` in `local.json`.
 2. Enable the blender-mcp add-on; start **Start MCP Server** in the N-panel.
 3. Client: `uvx --python 3.11 blender-mcp==<pin from manifests/tools.json>`.
-4. Attach via project MCP or `claude --mcp-config mcp/local.mcp.json`.
+4. Attach via project MCP (`.cursor/mcp.json` / `.mcp.json`) or `claude --mcp-config mcp/local.mcp.json`.
 
 One blender-mcp client at a time.
 

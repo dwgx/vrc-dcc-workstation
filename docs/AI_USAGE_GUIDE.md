@@ -10,7 +10,7 @@ After clone + bootstrap, agents should:
 2. Read `docs/WORKFLOW.md` and `docs/UNITY.md`.
 3. Read `local.json` if it exists; otherwise ask and write it.
 4. Read `notes/INDEX.md`.
-5. Attach MCP only for a live DCC job (`mcp/cursor.mcp.json.template` → gitignored `mcp/local.mcp.json`).
+5. Attach MCP only for a live DCC job (`mcp/cursor.mcp.json.template` → gitignored `.cursor/mcp.json` / `.mcp.json` / `mcp/local.mcp.json`).
 6. End with `skills/vrc-review`.
 
 ## Default pins (re-check with `scripts/refresh-pins.ps1`)

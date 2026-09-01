@@ -10,7 +10,7 @@ clone + bootstrap 之后，agent 应当：
 2. 读 [WORKFLOW.md](WORKFLOW.md) 与 [UNITY.md](UNITY.md)。
 3. 若有 `local.json` 则读；否则询问并写入。
 4. 读 `notes/INDEX.md`。
-5. 只为现场 DCC 任务挂 MCP（`mcp/cursor.mcp.json.template` → gitignore 的 `mcp/local.mcp.json`）。
+5. 只为现场 DCC 任务挂 MCP（`mcp/cursor.mcp.json.template` → gitignore 的 `.cursor/mcp.json` / `.mcp.json` / `mcp/local.mcp.json`）。
 6. 以 `skills/vrc-review` 收尾。
 
 ## 默认钉选（用 `scripts/refresh-pins.ps1` 复核）

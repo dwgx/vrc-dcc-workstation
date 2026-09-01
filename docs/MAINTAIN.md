@@ -17,7 +17,7 @@ The public GitHub history is a **reference skeleton**. The product for an agent 
 
 Do not invent a parallel constitution in `.cursor/` / chat. Thin client files stay pointers at `AGENTS.md`.
 
-Codex may also read `AGENTS.override.md` (closer path wins). This template still uses gitignored `OWNER.md` so Claude / Cursor / Gemini / Grok share one overlay. After a contract edit, run `python scripts/eval-agent-contract.py` ([docs/EVAL.md](EVAL.md)).
+Codex may also read `AGENTS.override.md` (closer path wins). This template still uses gitignored `OWNER.md` so Claude / Cursor / Gemini / Grok share one overlay. After a contract edit, run `python scripts/eval-agent-contract.py` ([docs/EVAL.md](EVAL.md)). Layout of `-Apply`: [BOOTSTRAP.md](BOOTSTRAP.md).
 
 ## What chat cannot do
 

@@ -51,6 +51,31 @@ function Get-WorkstationLocale {
     return 'en'
 }
 
+function Get-WorkstationInstallRoot {
+    [CmdletBinding()]
+    param(
+        [string]$RepoRoot = '',
+        [string]$Override = ''
+    )
+    if (-not [string]::IsNullOrWhiteSpace($Override)) {
+        return $Override.Trim()
+    }
+    if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
+        $RepoRoot = Split-Path -Parent $PSScriptRoot
+    }
+    $localPath = Join-Path $RepoRoot 'local.json'
+    if (Test-Path -LiteralPath $localPath) {
+        try {
+            $obj = Get-Content -LiteralPath $localPath -Raw -Encoding UTF8 | ConvertFrom-Json
+            $ir = [string]$obj.install_root
+            if (-not [string]::IsNullOrWhiteSpace($ir)) {
+                return $ir.Trim()
+            }
+        } catch { }
+    }
+    return $RepoRoot
+}
+
 function Get-LocaleSuffix([string]$Locale) {
     switch ($Locale) {
         'zh-CN' { return '.zh-CN' }
@@ -75,7 +100,9 @@ function Get-LocaleRootFile {
 function Save-WorkstationLocale {
     param(
         [Parameter(Mandatory = $true)][string]$RepoRoot,
-        [Parameter(Mandatory = $true)][string]$Locale
+        [string]$Locale = '',
+        [string]$InstallRoot = '',
+        [switch]$WriteLocale
     )
     $path = Join-Path $RepoRoot 'local.json'
     $utf8 = New-Object System.Text.UTF8Encoding $false
@@ -88,8 +115,12 @@ function Save-WorkstationLocale {
         $obj = Get-Content -LiteralPath $example -Raw -Encoding UTF8 | ConvertFrom-Json
     }
     if ($null -eq $obj) {
-        $obj = [pscustomobject]@{ ui_language = $Locale }
-    } else {
+        $obj = [pscustomobject]@{ ui_language = ''; install_root = '' }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($InstallRoot)) {
+        $obj | Add-Member -NotePropertyName install_root -NotePropertyValue $InstallRoot -Force
+    }
+    if ($WriteLocale -and -not [string]::IsNullOrWhiteSpace($Locale)) {
         $existing = $null
         try { $existing = [string]$obj.ui_language } catch { }
         if ([string]::IsNullOrWhiteSpace($existing)) {
