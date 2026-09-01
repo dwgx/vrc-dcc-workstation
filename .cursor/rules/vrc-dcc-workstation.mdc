@@ -9,7 +9,7 @@ Authoritative file: root `AGENTS.md`.
 
 Skeleton VRChat DCC station (Blender + Unity 2022.3). No third-party binaries in git.
 
-Init: resolve locale (`docs/I18N.md`) → explore → ask (`templates/INIT_QUESTIONNAIRE.md` or `templates/i18n/<locale>/`) including Q0 language → plan → `bootstrap.ps1` dry-run → `-Apply`. Chat in that locale. Git commits stay English.
+Init: resolve locale (`docs/I18N.md`) → explore (`AGENTS.md`, gitignored `OWNER.md` if present) → ask (`templates/INIT_QUESTIONNAIRE.md` or `templates/i18n/<locale>/`) including Q0 language → plan → `bootstrap.ps1` dry-run → `-Apply`. Chat in that locale. Git commits stay English. Stop lines cannot be waived in chat; see `docs/MAINTAIN.md`.
 
 MCP: project / `--mcp-config` only. Never user-global. One blender-mcp client at a time.
 

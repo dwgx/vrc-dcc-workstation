@@ -10,5 +10,6 @@ This is a skeleton: manifests, skills, templates, bootstrap. **No** third-party 
 4. Pipeline docs (`docs/WORKFLOW.md`, `docs/UNITY.md`) stay current with `manifests/tools.json`.
 5. Validate JSON: `python -c "import json,glob;[json.load(open(f,encoding='utf-8')) for f in glob.glob('manifests/*.json')]"`
 6. Language layout: `docs/I18N.md`. Do not add a locale unless you will maintain the siblings.
+7. Clone-owner prompts: gitignored `OWNER.md` (`OWNER.example.md`). Self-maintain: `docs/MAINTAIN.md`. Chat cannot waive stop lines.
 
 See `AGENTS.md` for the agent handshake.

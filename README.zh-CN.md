@@ -6,7 +6,7 @@
 
 便携 **VRChat DCC** 工作站的**骨架仓库**：**Blender 5.x LTS**（网格 / 权重 / 口型）+ **Unity 2022.3**（Modular Avatar / NDMF / PhysBone / 菜单），由 AI agent 经 MCP 驱动。
 
-任意 agent（Claude Code / Codex / Cursor / Gemini / Copilot / Grok）或人 clone 后，按 [docs/i18n/zh-CN/I18N.md](docs/i18n/zh-CN/I18N.md) 选定界面语言，走 [AGENTS.zh-CN.md](AGENTS.zh-CN.md) 握手，即可在自己的机器上还原工位。**对话用中文**；git 提交说明保持英文。本仓库不含角色工程。
+任意 agent（Claude Code / Codex / Cursor / Gemini / Copilot / Grok）或人 clone 后，按 [docs/i18n/zh-CN/I18N.md](docs/i18n/zh-CN/I18N.md) 选定界面语言，走 [AGENTS.zh-CN.md](AGENTS.zh-CN.md) 握手，即可在自己的机器上还原工位。本树是**参考骨架**：保留自己的 Blender / Unity / 提示词（`OWNER.example.md` → gitignore 的 `OWNER.md`）。主人要求时 agent 可以**改这个 clone**；聊天不能取消红线（[docs/i18n/zh-CN/MAINTAIN.md](docs/i18n/zh-CN/MAINTAIN.md)）。**对话用中文**；git 提交说明保持英文。本仓库不含角色工程。
 
 任务结束后用 `skills/vrc-review` 打分并写入 `notes/`。[docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md)。
 
@@ -18,7 +18,9 @@
 
 | 路径 | 内容 |
 | --- | --- |
-| `AGENTS.zh-CN.md` | 中文 agent 合同：先问后做、MCP、红线 |
+| `AGENTS.zh-CN.md` | 中文 agent 合同：先问后做、克隆主人覆盖层、MCP、红线 |
+| `OWNER.example.md` | gitignore 的 `OWNER.md` 模板（本 clone 提示词） |
+| `docs/i18n/zh-CN/MAINTAIN.md` | 如何改**这个**工作副本 |
 | `docs/i18n/zh-CN/WORKFLOW.md` | Blender → Unity → 人点 Publish（2026-09） |
 | `docs/i18n/zh-CN/UNITY.md` | CoplayDev UPM + UnityAgent VPM |
 | `docs/i18n/zh-CN/I18N.md` | 语言与初始化 |

@@ -36,7 +36,7 @@ jobs:
       - name: Fail if tracked binaries/credentials exist
         run: |
           set -e
-          bad=$(git ls-files | grep -E '\.(exe|dll|zip|7z|pyc|unitypackage|blend)$|(^|/)\.env$|(^|/)local\.json$' || true)
+          bad=$(git ls-files | grep -E '\.(exe|dll|zip|7z|pyc|unitypackage|blend)$|(^|/)\.env$|(^|/)local\.json$|(^|/)OWNER\.md$' || true)
           if [ -n "$bad" ]; then
             echo "::error::Disallowed tracked files found:"; echo "$bad"; exit 1
           fi
@@ -90,7 +90,7 @@ jobs:
           import json, os, sys
           cfg = json.load(open('locales.json', encoding='utf-8'))
           missing = []
-          extras = ['I18N.md', 'WORKFLOW.md', 'UNITY.md', 'ATTACH.md', 'RULES.md', 'AI_USAGE_GUIDE.md']
+          extras = ['I18N.md', 'WORKFLOW.md', 'UNITY.md', 'ATTACH.md', 'RULES.md', 'AI_USAGE_GUIDE.md', 'MAINTAIN.md']
           for loc in cfg['locales']:
               if loc == 'en':
                   for s in cfg['root_files']:

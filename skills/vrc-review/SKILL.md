@@ -8,6 +8,6 @@ description: >-
 
 # vrc-review
 
-Read `AGENTS.md` then `docs/AGENT_EVOLUTION.md`. Scores: spec + standard. Critical if SDK Publish, official Unity 6 MCP in the 2022.3 avatar project, secrets in notes, or a control-plane window wrote the avatar project tree.
+Read `AGENTS.md` then `docs/AGENT_EVOLUTION.md`. If `OWNER.md` exists, read it (clone-owner overlay). Scores: spec + standard. Critical if SDK Publish, official Unity 6 MCP in the 2022.3 avatar project, secrets in notes, or a control-plane window wrote the avatar project tree.
 
-Durable facts: `notes/` + `templates/AFTER_ACTION.md`.
+Chat in the resolved locale. Durable facts: `notes/` + `templates/AFTER_ACTION.md`.

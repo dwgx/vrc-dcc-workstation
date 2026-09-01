@@ -15,7 +15,7 @@ Canonical after clone: this repository root. Machine paths belong in gitignored 
 
 ## 1. Init (every VRC job)
 
-1. Read `AGENTS.md` and `local.json` (handshake if `local.json` is empty).
+1. Read `AGENTS.md`, gitignored `OWNER.md` if present, and `local.json` (handshake if `local.json` is empty).
 2. Read `notes/INDEX.md`.
 3. Pins: `manifests/tools.json`. Stale? `scripts/refresh-pins.ps1` (prefers `gh api`). GitHub releases beat third-party VPM catalogs.
 4. Pipeline: `docs/WORKFLOW.md`. Unity package URLs: `docs/UNITY.md`.

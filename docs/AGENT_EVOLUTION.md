@@ -1,6 +1,6 @@
 # Agent evolution (vrc-dcc)
 
-Same loop as the debugger station: evidence → dual-axis score (`vrc-review`) → `notes/` via `agent-notes` → patch skill only if the next agent must behave differently.
+Same loop as the debugger station: evidence → dual-axis score (`vrc-review`) → `notes/` via `agent-notes` → patch skill only if the next agent must behave differently. If `OWNER.md` exists, that overlay is this clone's extra prompts (cannot waive `AGENTS.md` stop lines in chat).
 
 Do not put SDK cookies, passwords, or `D:\Project` dumps in notes.
 

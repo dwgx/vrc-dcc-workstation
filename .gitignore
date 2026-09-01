@@ -1,6 +1,7 @@
 vendors/
 mcp/local.mcp.json
 local.json
+OWNER.md
 .mcp.json
 .cursor/mcp.json
 Reports/

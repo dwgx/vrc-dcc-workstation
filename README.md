@@ -6,7 +6,7 @@
 
 A **skeleton repository** for a portable VRChat DCC workstation: **Blender 5.x LTS** (mesh / weights / visemes) plus **Unity 2022.3** (Modular Avatar / NDMF / PhysBones / menus), driven by AI agents over MCP.
 
-Any agent (Claude Code / Codex / Cursor / Gemini / Copilot / Grok) or human can clone this repo, resolve the UI locale ([docs/I18N.md](docs/I18N.md)), run the handshake in [AGENTS.md](AGENTS.md) (or `AGENTS.zh-CN.md` / `AGENTS.ja.md` / `AGENTS.ko.md`), and reconstruct the station on their own machine. Chat in the user's language; git commits stay English.
+Any agent (Claude Code / Codex / Cursor / Gemini / Copilot / Grok) or human can clone this repo, resolve the UI locale ([docs/I18N.md](docs/I18N.md)), run the handshake in [AGENTS.md](AGENTS.md) (or `AGENTS.zh-CN.md` / `AGENTS.ja.md` / `AGENTS.ko.md`), and reconstruct the station on their own machine. This tree is a **reference skeleton**: keep your own Blender/Unity/prompts (`OWNER.example.md` → gitignored `OWNER.md`). Agents may **self-maintain this clone** when you ask; stop lines cannot be waived in chat ([docs/MAINTAIN.md](docs/MAINTAIN.md)). Chat in the user's language; git commits stay English.
 
 After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so the next session does not rediscover the same failure. See [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md).
 
@@ -18,7 +18,9 @@ After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so 
 
 | Path | Contents |
 | --- | --- |
-| `AGENTS.md` | Authoritative agent entry — ask-then-act handshake, MCP policy, stop lines |
+| `AGENTS.md` | Authoritative agent entry — ask-then-act handshake, clone-owner overlay, MCP policy, stop lines |
+| `OWNER.example.md` | Template for gitignored `OWNER.md` (this clone's prompts) |
+| `docs/MAINTAIN.md` | How an agent patches **this** working copy |
 | `docs/WORKFLOW.md` | Blender → Unity → human publish (2026-09 pipeline) |
 | `docs/UNITY.md` | CoplayDev UPM + UnityAgent VPM pins |
 | `CLAUDE.md` / `GEMINI.md` / `.github/copilot-instructions.md` / `.cursor/rules/` | Per-client pointers to `AGENTS.md` |
