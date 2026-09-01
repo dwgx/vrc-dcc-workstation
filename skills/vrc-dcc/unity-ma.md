@@ -16,7 +16,7 @@ Project path: `local.json` `unity_project`. Editor: Unity **2022.3 LTS**. Packag
 1. CoplayDev unity-mcp — pin in `manifests/tools.json`. HTTP `localhost:8080/mcp`.
 2. lighfu UnityAgent `editor-v*` — VPM `https://lighfu.github.io/vpm/`.
 3. Never `EditorUtility.DisplayDialog` from MCP (hangs the Editor).
-4. Prefer `execute_csharp` / UnityAgent tools over editing `.prefab` / `.unity` YAML by hand.
+4. Prefer `execute_csharp` / UnityAgent tools over editing `.prefab` / `.unity` YAML by hand. Do **not** use `execute_csharp`, `ExecuteMenuItem`, or VRC SDK builder APIs to Build & Publish.
 
 Do not install official Unity MCP (Unity 6) into this 2022.3 avatar project. Extra Hub path: env `VRC_DCC_UNITY_HUB`.
 

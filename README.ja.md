@@ -6,7 +6,7 @@
 
 ポータブルな VRChat DCC ワークステーションの**雛形**です。**Blender 5.x LTS**（メッシュ / ウェイト / ヴィセム）と **Unity 2022.3**（Modular Avatar / NDMF / PhysBone / メニュー）を、MCP 経由で AI エージェントが駆動します。
 
-clone したら [docs/I18N.md](docs/I18N.md) で UI 言語を決め、[AGENTS.ja.md](AGENTS.ja.md) のヒアリングを実行してください。会話は日本語で。git のコミットメッセージは英語です。アバター本体は同梱しません。
+clone したら [docs/i18n/ja/I18N.md](docs/i18n/ja/I18N.md) で UI 言語を決め、[AGENTS.ja.md](AGENTS.ja.md) のヒアリングを実行してください。会話は日本語で。git のコミットメッセージは英語です。アバター本体は同梱しません。
 
 仕事のあと `skills/vrc-review` で採点し、`notes/` に残します。[docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md)。
 
@@ -19,10 +19,14 @@ clone したら [docs/I18N.md](docs/I18N.md) で UI 言語を決め、[AGENTS.ja
 | パス | 内容 |
 | --- | --- |
 | `AGENTS.ja.md` | エージェント契約（日本語） |
+| `OWNER.example.md` | gitignore の `OWNER.md` テンプレート |
 | `docs/EVAL.md` | 契約の静的チェック（英語） |
+| `docs/i18n/ja/MAINTAIN.md` | この作業コピーの直し方 |
 | `docs/i18n/ja/WORKFLOW.md` | Blender → Unity → 人が Publish（2026-09） |
 | `docs/i18n/ja/UNITY.md` | CoplayDev UPM と UnityAgent VPM |
 | `docs/i18n/ja/I18N.md` | 言語の仕組み |
+| `skills/vrc-dcc/` / `skills/vrc-review/` | 改変プレイブック + 双軸レビュー |
+| `mcp/*.template` | 必要時のみ MCP。ユーザーグローバル禁止 |
 | `scripts/bootstrap.ps1` | 既定はドライラン。`-Apply` で gitignore の `local.json` を書く |
 
 英語の表の全文は [README.md](README.md) にあります。

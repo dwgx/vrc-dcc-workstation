@@ -6,7 +6,7 @@
 
 휴대용 VRChat DCC 워크스테이션 **뼈대**입니다. **Blender 5.x LTS**(메시 / 웨이트 / 비젬)와 **Unity 2022.3**(Modular Avatar / NDMF / PhysBone / 메뉴)를 MCP로 AI 에이전트가 다룹니다.
 
-clone한 뒤 [docs/I18N.md](docs/I18N.md)로 UI 언어를 정하고 [AGENTS.ko.md](AGENTS.ko.md) 핸드셰이크를 실행하세요. 대화는 한국어, git 커밋 메시지는 영어입니다. 아바타 본체는 포함하지 않습니다.
+clone한 뒤 [docs/i18n/ko/I18N.md](docs/i18n/ko/I18N.md)로 UI 언어를 정하고 [AGENTS.ko.md](AGENTS.ko.md) 핸드셰이크를 실행하세요. 대화는 한국어, git 커밋 메시지는 영어입니다. 아바타 본체는 포함하지 않습니다.
 
 작업 후 `skills/vrc-review`로 점수를 매기고 `notes/`에 남깁니다. [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md).
 
@@ -19,10 +19,14 @@ clone한 뒤 [docs/I18N.md](docs/I18N.md)로 UI 언어를 정하고 [AGENTS.ko.m
 | 경로 | 내용 |
 | --- | --- |
 | `AGENTS.ko.md` | 에이전트 계약(한국어) |
+| `OWNER.example.md` | gitignore된 `OWNER.md` 템플릿 |
 | `docs/EVAL.md` | 정적 계약 체크(영어) |
+| `docs/i18n/ko/MAINTAIN.md` | 이 작업 사본을 고치는 법 |
 | `docs/i18n/ko/WORKFLOW.md` | Blender → Unity → 사람이 Publish (2026-09) |
 | `docs/i18n/ko/UNITY.md` | CoplayDev UPM과 UnityAgent VPM |
 | `docs/i18n/ko/I18N.md` | 언어 규칙 |
+| `skills/vrc-dcc/` / `skills/vrc-review/` | 개조 플레이북 + 쌍축 리뷰 |
+| `mcp/*.template` | 필요할 때만 MCP. 사용자 전역 금지 |
 | `scripts/bootstrap.ps1` | 기본은 드라이런. `-Apply`가 gitignore된 `local.json`을 씀 |
 
 영어 표의 전문은 [README.md](README.md)에 있습니다.

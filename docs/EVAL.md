@@ -17,9 +17,11 @@ The script checks, with no network:
 1. Required files (`AGENTS.md` siblings, `OWNER.example.md`, `docs/MAINTAIN.md`, this file).
 2. Language-invariant HTML tags in every `AGENTS*.md` (`eval:owner-overlay`, `eval:chat-cannot-waive`, `eval:no-user-global-mcp`, `eval:untrusted-data`, plus kind tags).
 3. Untrusted-data heading in every locale sibling.
-4. `CLAUDE.md` / `GEMINI.md` / Copilot / `.cursor/rules/*.mdc` mention `AGENTS.md` and `OWNER.md`. Always-on `AGENTS.md` and `.mdc` stay under Cursor's documented length ceiling.
-5. `.gitignore` lists `OWNER.md` and `local.json`; `git ls-files` shows they are untracked.
-6. No legacy `.cursorrules`.
+4. Localized stop-line **anchors** in every `AGENTS.<locale>.md` (not English-only strings). VRC also requires `Build & Publish`, `upload_vrchat_avatar`, `Unity 6 MCP`, and the home/control-plane write boundary.
+5. Forbidden phrasing is absent from contracts (chat-waiver wording, blanket "do not refuse").
+6. `CLAUDE.md` / `GEMINI.md` / Copilot / `.cursor/rules/*.mdc` mention `AGENTS.md` and `OWNER.md`. Always-on `AGENTS.md` and `.mdc` stay under Cursor's documented length ceiling.
+7. `.gitignore` lists `OWNER.md` and `local.json`; `git ls-files` shows they are untracked.
+8. No legacy `.cursorrules`.
 
 Independent **subagent reviews** (explore / dual-axis) are extra; they do not replace the script. Re-run the script after every contract edit. CI link-check uses `git ls-files *.md` so a local clone with installed tools does not false-fail.
 

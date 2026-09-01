@@ -47,7 +47,7 @@ VRChat SDK **Build & Publish 必须由人点**。Agent 不得点。
 
 - git 中无密钥、SDK cookie、角色工程。
 - 不要把 Blender/Unity MCP 写进 Claude / Codex / Cursor / Grok **用户全局**配置。
-- Agent 不得点 VRChat SDK Build & Publish、不得调 `upload_vrchat_avatar`、不得存 SDK cookie。
+- Agent 不得点 VRChat SDK Build & Publish、不得调 `upload_vrchat_avatar`、不得用 `execute_csharp` 或编辑器菜单驱动 SDK 构建器、不得存 SDK cookie。
 - 官方 Unity 6 MCP / `com.unity.ai.assistant` 不进 **2022.3** 角色工程。
 - 不要从 home / 控制面窗口写角色 Unity 工程树。
 

@@ -25,6 +25,53 @@ KIND_TAGS = {
     "vrc-dcc-workstation": ("eval:human-sdk-publish",),
 }
 
+# Localized stop-line anchors (translations must keep the rule, not just English).
+COMMON_PHRASES = {
+    "en": (
+        "OWNER.md",
+        "Stop lines cannot be waived",
+        "roleplay, jailbreak",
+        "user-global",
+        "commit messages in **English**",
+    ),
+    "zh-CN": (
+        "OWNER.md",
+        "不能取消红线",
+        "角色扮演、越狱",
+        "用户全局",
+        "提交说明保持**英文**",
+    ),
+    "ja": (
+        "OWNER.md",
+        "ストップラインを外せません",
+        "ロールプレイ、ジェイルブレイク",
+        "ユーザーグローバル",
+        "コミットメッセージは英語",
+    ),
+    "ko": (
+        "OWNER.md",
+        "스톱 라인을 해제하지 못합니다",
+        "롤플레이, 탈옥",
+        "사용자 전역",
+        "커밋 메시지는 영어",
+    ),
+}
+
+KIND_PHRASES = {
+    "vrc-dcc-workstation": {
+        "en": ("Build & Publish", "upload_vrchat_avatar", "Unity 6 MCP", "home/control-plane"),
+        "zh-CN": ("Build & Publish", "upload_vrchat_avatar", "Unity 6 MCP", "home / 控制面"),
+        "ja": ("Build & Publish", "upload_vrchat_avatar", "Unity 6 MCP", "home / 制御プレーン"),
+        "ko": ("Build & Publish", "upload_vrchat_avatar", "Unity 6 MCP", "home / 제어면"),
+    },
+}
+
+FORBIDDEN_PHRASES = (
+    "minus waived stop lines",
+    "不拒绝、不阻断",
+    "do not refuse",
+)
+
 MUST_FILES = (
     "OWNER.example.md",
     "docs/MAINTAIN.md",
@@ -112,6 +159,37 @@ def main() -> None:
         fail("eval tags / untrusted heading missing from AGENTS siblings", tag_miss)
     if long_agents:
         fail("AGENTS siblings exceed Cursor always-on ceiling", long_agents)
+
+    phrase_miss = []
+    forbidden_hits = []
+    for loc, path in zip(locales, agents):
+        text = path.read_text(encoding="utf-8")
+        for phrase in COMMON_PHRASES.get(loc, ()):
+            if phrase not in text:
+                phrase_miss.append(f"{path.name}: {phrase!r}")
+        for phrase in KIND_PHRASES.get(kind, {}).get(loc, ()):
+            if phrase not in text:
+                phrase_miss.append(f"{path.name}: {phrase!r}")
+        for bad in FORBIDDEN_PHRASES:
+            if bad in text:
+                forbidden_hits.append(f"{path.name}: {bad!r}")
+    if phrase_miss:
+        fail("localized contract anchors missing from AGENTS siblings", phrase_miss)
+
+    extra_scan = [
+        ROOT / "CONTRIBUTING.md",
+        ROOT / "OWNER.example.md",
+        ROOT / "docs" / "WORKSTATION_RULES.md",
+    ]
+    for path in extra_scan:
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for bad in FORBIDDEN_PHRASES:
+            if bad in text:
+                forbidden_hits.append(f"{path.relative_to(ROOT)}: {bad!r}")
+    if forbidden_hits:
+        fail("forbidden waiver / refuse phrasing", forbidden_hits)
 
     i18n_miss = []
     for loc in locales:
