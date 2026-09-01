@@ -19,6 +19,7 @@ clone したら [docs/I18N.md](docs/I18N.md) で UI 言語を決め、[AGENTS.ja
 | パス | 内容 |
 | --- | --- |
 | `AGENTS.ja.md` | エージェント契約（日本語） |
+| `docs/EVAL.md` | 契約の静的チェック（英語） |
 | `docs/i18n/ja/WORKFLOW.md` | Blender → Unity → 人が Publish（2026-09） |
 | `docs/i18n/ja/UNITY.md` | CoplayDev UPM と UnityAgent VPM |
 | `docs/i18n/ja/I18N.md` | 言語の仕組み |

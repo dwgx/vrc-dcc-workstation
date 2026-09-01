@@ -21,6 +21,7 @@ After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so 
 | `AGENTS.md` | Authoritative agent entry — ask-then-act handshake, clone-owner overlay, MCP policy, stop lines |
 | `OWNER.example.md` | Template for gitignored `OWNER.md` (this clone's prompts) |
 | `docs/MAINTAIN.md` | How an agent patches **this** working copy |
+| `docs/EVAL.md` | Static contract eval (`scripts/eval-agent-contract.py`) |
 | `docs/WORKFLOW.md` | Blender → Unity → human publish (2026-09 pipeline) |
 | `docs/UNITY.md` | CoplayDev UPM + UnityAgent VPM pins |
 | `CLAUDE.md` / `GEMINI.md` / `.github/copilot-instructions.md` / `.cursor/rules/` | Per-client pointers to `AGENTS.md` |

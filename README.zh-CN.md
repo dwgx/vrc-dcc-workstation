@@ -21,6 +21,7 @@
 | `AGENTS.zh-CN.md` | 中文 agent 合同：先问后做、克隆主人覆盖层、MCP、红线 |
 | `OWNER.example.md` | gitignore 的 `OWNER.md` 模板（本 clone 提示词） |
 | `docs/i18n/zh-CN/MAINTAIN.md` | 如何改**这个**工作副本 |
+| `docs/EVAL.md` | 静态合同测评（英文） |
 | `docs/i18n/zh-CN/WORKFLOW.md` | Blender → Unity → 人点 Publish（2026-09） |
 | `docs/i18n/zh-CN/UNITY.md` | CoplayDev UPM + UnityAgent VPM |
 | `docs/i18n/zh-CN/I18N.md` | 语言与初始化 |

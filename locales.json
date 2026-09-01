@@ -1,5 +1,6 @@
 {
   "schema": "workstation-i18n/v1",
+  "kind": "vrc-dcc-workstation",
   "canonical": "en",
   "locales": ["en", "zh-CN", "ja", "ko"],
   "autonym": {

@@ -19,6 +19,7 @@ clone한 뒤 [docs/I18N.md](docs/I18N.md)로 UI 언어를 정하고 [AGENTS.ko.m
 | 경로 | 내용 |
 | --- | --- |
 | `AGENTS.ko.md` | 에이전트 계약(한국어) |
+| `docs/EVAL.md` | 정적 계약 체크(영어) |
 | `docs/i18n/ko/WORKFLOW.md` | Blender → Unity → 사람이 Publish (2026-09) |
 | `docs/i18n/ko/UNITY.md` | CoplayDev UPM과 UnityAgent VPM |
 | `docs/i18n/ko/I18N.md` | 언어 규칙 |

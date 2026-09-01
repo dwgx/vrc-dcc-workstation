@@ -27,6 +27,8 @@ jobs:
               except Exception as e:
                   ok=False; print('FAIL', f, e)
           sys.exit(0 if ok else 1)"
+      - name: Eval agent contract
+        run: python scripts/eval-agent-contract.py
 
   guard-no-secrets-or-binaries:
     name: Guard against committed binaries/secrets
@@ -128,19 +130,22 @@ jobs:
       - name: Verify relative markdown links resolve
         run: |
           python - <<'PY'
-          import re, glob, os, sys
+          import re, os, sys, subprocess
           bad = []
           link = re.compile(r'\[[^\]]+\]\(([^)]+)\)')
-          for md in glob.glob('**/*.md', recursive=True):
+          mds = subprocess.check_output(["git", "ls-files", "*.md"], text=True).splitlines()
+          for md in mds:
               base = os.path.dirname(md)
-              for m in link.finditer(open(md, encoding='utf-8').read()):
-                  t = m.group(1).split('#')[0].strip()
-                  if not t or t.startswith(('http://','https://','mailto:')):
+              with open(md, encoding="utf-8") as fh:
+                  text = fh.read()
+              for m in link.finditer(text):
+                  t = m.group(1).split("#")[0].strip()
+                  if not t or t.startswith(("http://", "https://", "mailto:", "data:")):
                       continue
-                  p = os.path.normpath(os.path.join(base, t))
+                  p = os.path.normpath(os.path.join(base, t) if base else t)
                   if not os.path.exists(p):
                       bad.append(f"{md} -> {t}")
           if bad:
               print("Broken relative links:"); [print(" ", b) for b in bad]; sys.exit(1)
-          print("All relative markdown links resolve.")
+          print("All tracked relative markdown links resolve.", len(mds), "files")
           PY
