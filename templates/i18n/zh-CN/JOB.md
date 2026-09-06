@@ -32,3 +32,5 @@ cwd 可以是 home、本文件夹、或角色 Unity 工程。
 Cursor 已经开在角色 Unity 文件夹时，主人用**任意措辞**点名这一刀即可。已经约 100 轮哑巴 MCP → **新开对话**。
 
 把 `templates/avatar-project/` 拷进 Unity 不是必须的。
+
+工位自身迭代（无默认角色、身份失败即停）：[docs/i18n/zh-CN/ITERATION.md](../../../docs/i18n/zh-CN/ITERATION.md)。不是 Unity 改模。

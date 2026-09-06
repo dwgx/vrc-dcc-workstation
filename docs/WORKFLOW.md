@@ -18,6 +18,8 @@ Human: VRChat SDK Build & Publish
 2. Do **not** attach Blender/Unity MCP to Claude / Codex / Cursor / Grok **user-global** config.
 3. Open the **avatar Unity project** in its own window when you add packages or drive the Editor.
 
+Named `vrc_*` need a filled `POLICY.json` (`unity_root_name`). They do not pick the first avatar in the scene. Station iteration: [ITERATION.md](ITERATION.md).
+
 ## 1. Blender (mesh / weights / visemes)
 
 Target editor: **Blender 5.2 LTS**. Connect with PyPI `blender-mcp` at the pin in `manifests/tools.json` (CPython **3.11** under `uvx` if the default Python is 3.14+).

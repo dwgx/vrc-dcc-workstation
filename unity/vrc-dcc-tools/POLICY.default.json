@@ -9,5 +9,7 @@
   "expected_hips_y": null,
   "hips_slack": 0.05,
   "sku_quota": 1,
-  "note": "Package fallback when Assets/VrcDcc/POLICY.json is missing. Overlay per avatar from maps/<id>/POLICY.json via the Unity-cwd installer."
+  "nipple_smr_path": null,
+  "gogo_root_path": null,
+  "note": "Package fallback when Assets/VrcDcc/POLICY.json is missing. Empty unity_root_name refuses named tools (NO_AVATAR_IDENTITY). Overlay per avatar from maps/<id>/POLICY.json via the Unity-cwd installer."
 }

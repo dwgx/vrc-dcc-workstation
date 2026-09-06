@@ -18,6 +18,8 @@ Human: VRChat SDK Build & Publish
 2. **不要**把 Blender / Unity MCP 写进 Claude / Codex / Cursor / Grok **用户全局**配置。
 3. 加包或驱动编辑器时，在**角色 Unity 工程自己的窗口**里打开。
 
+命名 `vrc_*` 需要填好的 `POLICY.json`（`unity_root_name`）。不会抓场景里第一个角色。工位迭代：[ITERATION.md](ITERATION.md)。
+
 ## 1. Blender（网格 / 权重 / 口型 viseme）
 
 目标编辑器：**Blender 5.2 LTS**。用 `manifests/tools.json` 里钉选的 PyPI `blender-mcp` 连接（默认 Python 是 3.14+ 时，在 `uvx` 下用 CPython **3.11**）。

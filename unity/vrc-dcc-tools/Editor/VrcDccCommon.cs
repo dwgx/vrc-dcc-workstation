@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using VRC.SDK3.Avatars.Components;
 
 namespace VrcDcc.Tools.Editor
 {
     internal static class VrcDccCommon
     {
-        public const string AvatarParamHelp = "Avatar root GameObject name. Empty = POLICY unity_root_name, else first VRCAvatarDescriptor.";
+        public const string AvatarParamHelp = "Avatar root GameObject name. Empty = POLICY unity_root_name. Never the first VRCAvatarDescriptor in the scene.";
 
         public static string AvatarName(JObject p)
         {
@@ -29,33 +28,33 @@ namespace VrcDcc.Tools.Editor
         {
             if (string.IsNullOrEmpty(name))
                 name = VrcDccPolicy.RootName;
-            if (!string.IsNullOrEmpty(name))
-            {
-                var found = GameObject.Find(name);
-                if (found != null) return found;
-                var all = UnityEngine.Object.FindObjectsOfType<Transform>(true);
-                for (var i = 0; i < all.Length; i++)
-                {
-                    if (all[i] != null && all[i].name == name && all[i].parent == null)
-                        return all[i].gameObject;
-                }
-                for (var i = 0; i < all.Length; i++)
-                {
-                    if (all[i] != null && all[i].name == name)
-                        return all[i].gameObject;
-                }
-            }
-            var descs = UnityEngine.Object.FindObjectsOfType<VRCAvatarDescriptor>(true);
-            if (descs != null && descs.Length > 0 && descs[0] != null)
-                return descs[0].gameObject;
+            if (string.IsNullOrEmpty(name))
+                return null;
+            var hits = VrcDccIdentity.FindExactName(name);
+            if (hits.Count == 1)
+                return hits[0];
             return null;
         }
 
         public static object NeedAvatar(JObject p, out GameObject av)
         {
-            av = FindAvatar(AvatarName(p));
-            if (av == null)
-                return new ErrorResponse("NO_AVATAR", new { avatar = AvatarName(p) });
+            av = null;
+            if (VrcDccPolicy.IsInvalid)
+                return new ErrorResponse("POLICY_INVALID", new { error = VrcDccPolicy.InvalidReason });
+            var name = AvatarName(p);
+            if (string.IsNullOrEmpty(name))
+                return new ErrorResponse("NO_AVATAR_IDENTITY", new { hint = "Set POLICY unity_root_name or pass avatar=" });
+            var hits = VrcDccIdentity.FindExactName(name);
+            if (hits.Count == 0)
+                return new ErrorResponse("NO_AVATAR", new { avatar = name });
+            if (hits.Count > 1)
+                return new ErrorResponse("AMBIGUOUS_AVATAR", new
+                {
+                    avatar = name,
+                    n = hits.Count,
+                    paths = VrcDccIdentity.Paths(hits, 8)
+                });
+            av = hits[0];
             return null;
         }
 

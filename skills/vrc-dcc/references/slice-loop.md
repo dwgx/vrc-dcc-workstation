@@ -47,7 +47,7 @@ Chat in the owner's locale (zh-CN / ja / en / ko). Tracked files stay English. P
 | Accessory pose | `vrc_pose_bounds` (BakeMesh, not AABB) |
 | After Owner hand-delete | `vrc_leftover_menu` |
 
-Empty `avatar=` uses `POLICY.json` `unity_root_name`, else the first `VRCAvatarDescriptor`. `vrc_audit.fitted` is always false. `isSynced=0` is not fitted. `NEED_PREFAB_PATH` / `NO_BODY_PREFAB` / `WRIST_NOT_GRIP` / `ZERO_WEIGHT_CONSTRAINT` / `LEFTOVER_MENU` = do not hang the SKU.
+Empty `avatar=` uses `POLICY.json` `unity_root_name` only. Missing or duplicate Hierarchy names refuse (`NO_AVATAR_IDENTITY` / `NO_AVATAR` / `AMBIGUOUS_AVATAR`). Never the first `VRCAvatarDescriptor` in the scene. `vrc_audit.fitted` is always false. Nipple / GoGo fields carry `nippleIdentity` / `gogoIdentity` (`ok` / `not_applicable` / `ambiguous` / `missing_policy_path`); weights stay `-1` unless `ok`. `isSynced=0` is not fitted. `NEED_PREFAB_PATH` / `NO_BODY_PREFAB` / `WRIST_NOT_GRIP` / `ZERO_WEIGHT_CONSTRAINT` / `LEFTOVER_MENU` = do not hang the SKU.
 
 POLICY `disable_mcp_tools` (default `execute_code`) is applied when the package loads. Do not re-enable it to skip identity.
 

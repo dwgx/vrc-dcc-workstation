@@ -16,4 +16,4 @@ Then:
 3. First dump → `python refresh.py <id> --from-dump …` (keep `notes.json`).
 4. Door: either a line in gitignored `notes/CURRENT.md`, or this avatar’s own freeze note. Do not copy another body's POLICY/freeze onto a new body.
 5. `python review.py next <id>`.
-6. Unity window: `scripts/install-vrc-dcc-tools.ps1` (copies POLICY into `Assets/VrcDcc/POLICY.json`).
+6. Unity window: `scripts/install-vrc-dcc-tools.ps1` (copies POLICY into `Assets/VrcDcc/POLICY.json`). Named `vrc_*` refuse empty / placeholder `unity_root_name` (`NO_AVATAR_IDENTITY`) and refuse two Hierarchy objects with the same name (`AMBIGUOUS_AVATAR`). Optional `nipple_smr_path` / `gogo_root_path` pin one mesh; omit them only when the dump can see exactly one candidate.

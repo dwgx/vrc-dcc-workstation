@@ -87,6 +87,7 @@ if (Test-Path -LiteralPath $policySrc) {
 } elseif (Test-Path -LiteralPath $policyDefault) {
     Copy-Item -LiteralPath $policyDefault -Destination $policyDest -Force
     Write-Output "copied default POLICY -> $policyDest"
+    Write-Output "warning: default POLICY has empty unity_root_name; named vrc_* will return NO_AVATAR_IDENTITY until maps/<id>/POLICY.json is copied."
 }
 if (-not (Test-Path -LiteralPath $policyDest)) {
     Write-Error "POLICY.json missing after copy: $policyDest"

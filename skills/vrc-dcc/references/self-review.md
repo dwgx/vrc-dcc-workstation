@@ -10,6 +10,7 @@ Primary loops (steal, do not install extra MCP):
 | Protocol `tools/list` ≠ IDE sidebar; Reload may keep old names | [Cursor forum](https://forum.cursor.com/t/mcp-server-doesnt-update/164437) + [MCP tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) | slice-loop GetDynamicTools; **quit if stale** |
 | 8080 LISTEN ≠ registered `vrc_*`; refresh client after `register_tools` | [CoplayDev v8 networking](https://github.com/CoplayDev/unity-mcp/blob/v9.6.6/docs/migrations/v8_NEW_NETWORKING_SETUP.md) | `VrcDccMcpBoot` + http-listen lesson |
 | Closed loop: dump → Owner Edit look; unadapted mesh → Blender | [sentfromspace loop](https://sentfromspace.xyz/blog/claude-vrchat-avatar/) · [felix skill](https://github.com/felixchaos/vrchat-avatar-modding-skill) | named `vrc_*`; do not install those packages |
+| Evidence ladder, inspect≠upload, detect toolchain before a plugin playbook | [VRChatEditorSkill](https://github.com/XiaoboooOvO/VRChatEditorSkill) MIT | [evidence-layers.md](evidence-layers.md) · [SOURCES.md](../../../docs/SOURCES.md). Do not vendor the zip; do not make LilyCal the default wardrobe |
 
 ## Dispatch (parent keeps judgment)
 

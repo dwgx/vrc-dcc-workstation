@@ -35,6 +35,7 @@ Mesh / weights / visemes / CATS → Blender. MA / menus / PhysBone / FaceEmo / l
 ## 3. On-demand
 
 - [references/slice-loop.md](references/slice-loop.md) — one slice: `handshake.py` + `gate.py` + named `vrc_*` (not invented `execute_code`)
+- [../../docs/ITERATION.md](../../docs/ITERATION.md) — station base loop (fail-closed identity). Not a Unity mutate.
 - [references/self-review.md](references/self-review.md) — after a station/layer slice: dispatch independent auditors; generator ≠ evaluator
 - [references/dcc-session.md](references/dcc-session.md) — avatar-cwd session (no estate init, no guessed morphs)
 - [references/avatar-intake.md](references/avatar-intake.md) — 改模开局：先命名 `<avatar>`，再 dump；无默认角色
@@ -50,6 +51,8 @@ Mesh / weights / visemes / CATS → Blender. MA / menus / PhysBone / FaceEmo / l
 - [references/gogoloco.md](references/gogoloco.md) — 默认走路 paryi；Base **Append** + `vrc-dcc.loco-switch`；Action Replace；不要 disabled-Replace
 - [references/plugin-conflicts.md](references/plugin-conflicts.md) — two gizmos, one lane; `maps/<avatar>/conflicts.json`; Owner names the AFK/loco winner
 - [references/review-board.md](references/review-board.md) — reviewed vs new; `REVIEW.json` / `review.py`
+- [references/evidence-layers.md](references/evidence-layers.md) — STATIC_SOURCE … UPLOAD_CONFIRMED; inspect ≠ publish
+- [../../docs/SOURCES.md](../../docs/SOURCES.md) — no mesh dumps in git; how public research is absorbed
 - [references/upload-test.md](references/upload-test.md) — 人上传后测；Editor Play 证不了 loco/棉花糖/孔
 - [references/perf-vram.md](references/perf-vram.md) — SDK 显存 vs Profiler；卸无用包，不压 2K
 - [references/index-library.md](references/index-library.md) — find / Booth / dispatch

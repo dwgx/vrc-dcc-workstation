@@ -9,5 +9,7 @@
   "expected_hips_y": null,
   "hips_slack": 0.05,
   "sku_quota": 1,
-  "note": "Per-avatar overlay. Empty body_token = identity still needs prefabPath. Copy to Unity Assets/VrcDcc/POLICY.json via install-vrc-dcc-tools.ps1 from that Unity cwd."
+  "nipple_smr_path": null,
+  "gogo_root_path": null,
+  "note": "Per-avatar overlay. Empty body_token = identity still needs prefabPath. Copy to Unity Assets/VrcDcc/POLICY.json via install-vrc-dcc-tools.ps1 from that Unity cwd. Optional nipple_smr_path / gogo_root_path are Hierarchy paths relative to the avatar root; empty/omit = unique-candidate search (zero or two+ must not invent a pick)."
 }

@@ -18,4 +18,4 @@
 4. `python maps/handshake.py <id>` — **必填参数**。CLI 不默认角色名。
 5. 活体事实：`STATE.md`、`MAP.md` **确定**、`POLICY.json`、`conflicts.json`、`REVIEW.json`。
 
-工位 vs 产品 vs 后续世界域：[DOMAINS.md](../../DOMAINS.md)。
+工位 vs 产品 vs 后续世界域：[DOMAINS.md](../../DOMAINS.md)。公开骨架怎么迭代：[ITERATION.md](../../ITERATION.md)。

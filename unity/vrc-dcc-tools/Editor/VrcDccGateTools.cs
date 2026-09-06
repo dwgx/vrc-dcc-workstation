@@ -33,6 +33,8 @@ namespace VrcDcc.Tools.Editor
 
         static object Handle(JObject p)
         {
+            if (VrcDccPolicy.IsInvalid)
+                return new ErrorResponse("POLICY_INVALID", new { error = VrcDccPolicy.InvalidReason, instantiate = false });
             var path = VrcDccCommon.Param(p, "prefabPath", "path", "");
             if (VrcDccPolicy.RequirePrefabPath && string.IsNullOrEmpty(path))
             {

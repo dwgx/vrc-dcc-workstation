@@ -18,4 +18,4 @@ This skeleton has **no default avatar**. Foreign clones and public PRs must not 
 
 Playbooks that mention `Body_b`, `paryi_Loco`, or a shop outfit name are **patterns or examples**. Dump the live prefab before copying them.
 
-Station vs product vs later world domain: [DOMAINS.md](DOMAINS.md).
+Station vs product vs later world domain: [DOMAINS.md](DOMAINS.md). How the public skeleton iterates: [ITERATION.md](ITERATION.md).

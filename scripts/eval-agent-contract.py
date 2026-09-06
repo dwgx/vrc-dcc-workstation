@@ -82,6 +82,8 @@ MUST_FILES = (
     "docs/BOOTSTRAP.md",
     "docs/AVATAR_PROFILE.md",
     "docs/DOMAINS.md",
+    "docs/ITERATION.md",
+    "docs/SOURCES.md",
     "templates/INIT_QUESTIONNAIRE.md",
     "templates/JOB.md",
     "locales.json",

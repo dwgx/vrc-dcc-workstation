@@ -8,7 +8,7 @@
 
 任意 agent（Claude Code / Codex / Cursor / Gemini / Copilot / Grok）或人 clone 后，按 [docs/i18n/zh-CN/I18N.md](docs/i18n/zh-CN/I18N.md) 选定界面语言。**装站 / 初始化本 clone** 才走 [AGENTS.zh-CN.md](AGENTS.zh-CN.md) 问卷。改模干活走 `templates/JOB.md`（按意图分类，不要口令）。本树是**参考骨架**：保留自己的 Blender / Unity / 提示词（`OWNER.example.md` → gitignore 的 `OWNER.md`）。主人要求时 agent 可以**改这个 clone**；聊天不能取消红线（[docs/i18n/zh-CN/MAINTAIN.md](docs/i18n/zh-CN/MAINTAIN.md)）。**对话用中文**；git 提交说明保持英文。本仓库不含角色工程。
 
-任务结束后用 `skills/vrc-review` 打分并写入 `notes/`。[docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md)。
+任务结束后用 `skills/vrc-review` 打分并写入 `notes/`。[docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md)。工位自身怎么变好（无默认角色、身份失败即停）：[docs/i18n/zh-CN/ITERATION.md](docs/i18n/zh-CN/ITERATION.md)。底模和 ZIP **不进** git：[docs/i18n/zh-CN/SOURCES.md](docs/i18n/zh-CN/SOURCES.md)。
 
 > **不分发 Blender / Unity / VRChat 二进制，也不含角色工程。** 见 [DISCLAIMER.zh-CN.md](DISCLAIMER.zh-CN.md)。
 
@@ -31,7 +31,8 @@
 | `maps/` | 每角色记忆 CLI（`handshake.py` / `gate.py`）+ 模板。活的 `maps/<id>/` 被 gitignore |
 | `unity/vrc-dcc-tools` | 命名 `vrc_*`（`com.vrc-dcc.tools`） |
 | `skills/vrc-dcc/` / `skills/vrc-review/` / `skills/vrc-world/` | 改模手册、双轴审查、世界/Udon（草案；技能正文英文） |
-| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` | 角色 vs 世界 vs 工位；世界管线草稿；公开 PR 切片 |
+| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/ITERATION.md` | 角色 vs 世界 vs 工位；世界管线草稿；公开 PR 切片；基线怎么迭代 |
+| `docs/i18n/zh-CN/SOURCES.md` | 底模/ZIP 不进 git；公开栈偷什么、拒什么 |
 | `docs/AVATAR_PROFILE.md` | 无默认角色；活体事实在 `maps/<avatar>/` |
 | `manifests/` | 钉选（PyPI / GitHub / VPM）。用 `scripts/refresh-pins.ps1` 复核 |
 | `mcp/*.template` | 按需 MCP。绝不写进用户全局 |

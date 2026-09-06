@@ -37,6 +37,8 @@ python review.py coverage <avatar>
 
 `gate`: `edit` | `world` | `blender` | `none`. Loco, marshmallow jiggle, PCS sound, SDK bits are `world`. Clothes/nipple rest can be `edit`. Unadapted mesh is `blender`.
 
+Do not write `world` because YAML looked good. Layer names: [evidence-layers.md](evidence-layers.md). `edit` ≈ `UNITY_RESOLVED`. Upload claims need `UPLOAD_CONFIRMED` + `owner_ok`.
+
 ## Rules
 
 1. **Same slice as the Unity write.** Upsert the rows you touched. Do not wait for “收尾”.

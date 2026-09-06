@@ -84,7 +84,11 @@ namespace VrcDcc.Tools.Editor
                 }
             }
             float nipOn = -1f, nipUp = -1f, nipSmall = -1f;
-            var bodySmr = FindNippleMesh(av.transform);
+            var nipPick = VrcDccIdentity.UniqueTransform(
+                av.transform, VrcDccPolicy.NippleSmrPath, VrcDccIdentity.NippleSmrs(av.transform));
+            SkinnedMeshRenderer bodySmr = null;
+            if (nipPick.status == VrcDccIdentity.Ok && nipPick.transform != null)
+                bodySmr = nipPick.transform.GetComponent<SkinnedMeshRenderer>();
             if (bodySmr != null && bodySmr.sharedMesh != null)
             {
                 var mesh = bodySmr.sharedMesh;
@@ -96,7 +100,9 @@ namespace VrcDcc.Tools.Editor
                     else if (n.IndexOf("Nipple_Small") >= 0) nipSmall = bodySmr.GetBlendShapeWeight(si);
                 }
             }
-            var gogo = FindGoGoRoot(av.transform);
+            var gogoPick = VrcDccIdentity.UniqueTransform(
+                av.transform, VrcDccPolicy.GogoRootPath, VrcDccIdentity.GogoRoots(av.transform));
+            var gogo = gogoPick.status == VrcDccIdentity.Ok ? gogoPick.transform : null;
             var gogoBaseOn = 0;
             var gogoBaseMode = -1;
             if (gogo != null)
@@ -131,12 +137,18 @@ namespace VrcDcc.Tools.Editor
                 nippleOn = nipOn.ToString(inv),
                 nippleUp = nipUp.ToString(inv),
                 nippleSmall = nipSmall.ToString(inv),
+                nippleIdentity = nipPick.status,
+                nipplePath = nipPick.path,
+                nippleCandidates = nipPick.candidates,
                 audio = av.GetComponentsInChildren<AudioSource>(true).Length,
                 physbones = CountType(av, "VRCPhysBone"),
                 lights = av.GetComponentsInChildren<Light>(true).Length,
                 smr = av.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length,
                 motchiriFx = motchiri == null ? 0 : 1,
                 gogoPresent = gogo == null ? 0 : 1,
+                gogoIdentity = gogoPick.status,
+                gogoPath = gogoPick.path,
+                gogoCandidates = gogoPick.candidates,
                 gogoBaseOn,
                 gogoBaseMode,
                 abtPresent = av.transform.Find("ABT") == null ? 0 : 1,
@@ -150,43 +162,6 @@ namespace VrcDcc.Tools.Editor
             if (missOT > 0)
                 return new ErrorResponse("MISS_OT", data);
             return new SuccessResponse("vrc_audit", data);
-        }
-
-        static SkinnedMeshRenderer FindNippleMesh(Transform av)
-        {
-            var named = av.Find("Body_b");
-            if (named != null)
-            {
-                var smr = named.GetComponent<SkinnedMeshRenderer>();
-                if (smr != null && smr.sharedMesh != null) return smr;
-            }
-            var smrs = av.GetComponentsInChildren<SkinnedMeshRenderer>(true);
-            for (var i = 0; i < smrs.Length; i++)
-            {
-                var smr = smrs[i];
-                if (smr == null || smr.sharedMesh == null) continue;
-                var mesh = smr.sharedMesh;
-                for (var si = 0; si < mesh.blendShapeCount; si++)
-                {
-                    if (mesh.GetBlendShapeName(si).IndexOf("Nipple_") >= 0)
-                        return smr;
-                }
-            }
-            return null;
-        }
-
-        static Transform FindGoGoRoot(Transform av)
-        {
-            var t = av.Find("功能/GogoLoco All (Modular Avatar)") ?? av.Find("功能/GogoLoco All");
-            if (t != null) return t;
-            var trs = av.GetComponentsInChildren<Transform>(true);
-            for (var i = 0; i < trs.Length; i++)
-            {
-                var tr = trs[i];
-                if (tr != null && tr.name.IndexOf("GogoLoco") >= 0)
-                    return tr;
-            }
-            return null;
         }
 
         static int CountType(GameObject av, string needle)

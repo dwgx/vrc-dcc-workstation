@@ -31,6 +31,8 @@ jobs:
         run: python scripts/eval-agent-contract.py
       - name: Public CLI regressions
         run: python tests/run_s00a_regressions.py
+      - name: POLICY identity (S00-b)
+        run: python tests/test_policy_identity.py
 
   guard-no-secrets-or-binaries:
     name: Guard against committed binaries/secrets

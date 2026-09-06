@@ -32,3 +32,5 @@ If Cursor is already on the Unity folder, the owner pastes **only the task**. Al
 Copying `templates/avatar-project/` is **optional** on a machine that already has `session-probe` `kind: dcc`.
 
 After ~100 silent MCP turns, **new chat**. Do not invent a second constitution.
+
+Station clone self-improve (identity, maps CLI, playbooks): [docs/ITERATION.md](../docs/ITERATION.md). Not a Unity mutate.

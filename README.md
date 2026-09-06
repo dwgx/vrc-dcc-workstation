@@ -8,7 +8,7 @@ A **skeleton repository** for a portable VRChat DCC workstation: **Blender 5.x L
 
 Any agent (Claude Code / Codex / Cursor / Gemini / Copilot / Grok) or human can clone this repo and resolve the UI locale ([docs/I18N.md](docs/I18N.md)). **Install / bootstrap this clone:** handshake in [AGENTS.md](AGENTS.md) (or `AGENTS.zh-CN.md` / `AGENTS.ja.md` / `AGENTS.ko.md`). **Avatar / DCC job:** [`templates/JOB.md`](templates/JOB.md) — classify by intent, not a passphrase. This tree is a **reference skeleton**: keep your own Blender/Unity/prompts (`OWNER.example.md` → gitignored `OWNER.md`). Agents may **self-maintain this clone** when you ask; stop lines cannot be waived in chat ([docs/MAINTAIN.md](docs/MAINTAIN.md)). Chat in the user's language; git commits stay English.
 
-After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so the next session does not rediscover the same failure. See [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md).
+After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so the next session does not rediscover the same failure. See [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md). Station self-improve (no default avatar, fail-closed identity): [docs/ITERATION.md](docs/ITERATION.md). What is **not** in git: [docs/SOURCES.md](docs/SOURCES.md).
 
 > This repository ships **no** Blender/Unity/VRChat binaries and **no** avatar projects. See [DISCLAIMER.md](DISCLAIMER.md).
 
@@ -31,7 +31,8 @@ After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so 
 | `maps/` | Per-avatar memory CLI (`handshake.py`, `gate.py`) + templates. Live `maps/<id>/` is gitignored |
 | `unity/vrc-dcc-tools` | Named `vrc_*` Editor package (`com.vrc-dcc.tools`) on CoplayDev 8080 |
 | `skills/vrc-dcc/` / `skills/vrc-review/` / `skills/vrc-world/` | Avatar playbook, dual-axis review, Worlds/Udon (draft) |
-| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/AVATAR_PROFILE.md` | Avatar vs world vs station; world stub; public PR slices; no default character |
+| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/AVATAR_PROFILE.md` / `docs/ITERATION.md` | Avatar vs world vs station; world stub; public PR slices; no default character; how the base iterates |
+| `docs/SOURCES.md` | What stays out of git (meshes, vendor zips); steal vs refuse public stacks |
 | `manifests/` | Live pins (PyPI / GitHub / VPM). Re-check with `scripts/refresh-pins.ps1` |
 | `mcp/*.template` | Opt-in MCP. Never user-global |
 | `scripts/bootstrap.ps1` | Dry-run by default; `-Apply` writes gitignored `local.json`, `.mcp.json`, `.cursor/mcp.json` |

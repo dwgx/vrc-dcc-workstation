@@ -2,7 +2,7 @@
 
 This skeleton has **no default character**. Per-body facts live in gitignored `maps/<avatar>/` and `OWNER.md`. [docs/AVATAR_PROFILE.md](../../../docs/AVATAR_PROFILE.md).
 
-Do not hunt jsonl. Do not WebSearch the live prefab. One `vrc_audit` dump beats a screenshot. Do not assume another clone’s shop name, `Body_b`, or `paryi_Loco`.
+Do not hunt jsonl. Do not WebSearch the live prefab. One `vrc_audit` dump beats a screenshot. Do not assume another clone’s shop name, `Body_b`, or `paryi_Loco`. Detect what is **on this prefab** (MA vs FaceEmo vs lilycalInventory vs vendor FX) before loading a plugin playbook. Empty `unityMCP` → `MCP_REQUIRED`, not invented `execute_code`.
 
 Worked example (not a handshake default): [examples/composite-avatar.md](examples/composite-avatar.md).
 

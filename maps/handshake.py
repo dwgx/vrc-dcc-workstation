@@ -16,6 +16,7 @@ from pathlib import Path
 
 from _stdio import utf8_stdio
 from gate import load_job
+from policy import validate_policy
 from review import lint_data, load_review, open_items
 
 HERE = Path(__file__).resolve().parent
@@ -31,8 +32,9 @@ def load_policy(name: str) -> dict:
     if not path.is_file():
         raise SystemExit("missing %s (copy maps/templates/POLICY.json)" % path)
     data = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(data, dict):
-        raise SystemExit("POLICY.json must be an object")
+    errs = validate_policy(name, data)
+    if errs:
+        raise SystemExit("; ".join(errs))
     return data
 
 
@@ -64,6 +66,8 @@ def cmd_handshake(name: str, as_json: bool) -> int:
         "unity_root_name": policy.get("unity_root_name") or name,
         "body_token": policy.get("body_token") or "",
         "require_prefab_path": bool(policy.get("require_prefab_path", True)),
+        "nipple_smr_path": (policy.get("nipple_smr_path") or "").strip(),
+        "gogo_root_path": (policy.get("gogo_root_path") or "").strip(),
         "disable_mcp_tools": policy.get("disable_mcp_tools") or [],
         "job": {
             "sku_quota": quota,
@@ -101,6 +105,8 @@ def cmd_handshake(name: str, as_json: bool) -> int:
     print("unity_root_name:", payload["unity_root_name"])
     print("body_token:", payload["body_token"] or "-")
     print("require_prefab_path:", str(payload["require_prefab_path"]).lower())
+    print("nipple_smr_path:", payload["nipple_smr_path"] or "-")
+    print("gogo_root_path:", payload["gogo_root_path"] or "-")
     tools = payload["disable_mcp_tools"]
     print("disable_mcp_tools:", " ".join(tools) if tools else "-")
     j = payload["job"]
