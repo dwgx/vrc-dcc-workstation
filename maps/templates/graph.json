@@ -1,0 +1,9 @@
+{
+  "avatar": "AVATAR_ID",
+  "scene": "Assets/AVATAR_ID.unity",
+  "updated": "YYYY-MM-DD",
+  "dump": "seed",
+  "dump_note": "Seed. Replace after the first Unity dump. Keep node ids stable.",
+  "nodes": [],
+  "edges": []
+}

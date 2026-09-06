@@ -1,0 +1,40 @@
+.codegraph/*
+!.codegraph/.gitignore
+__pycache__/
+maps/**/*.out.json
+vendors/
+mcp/local.mcp.json
+local.json
+OWNER.md
+.mcp.json
+.cursor/mcp.json
+Reports/
+LOCAL-THIS-PC.md
+notes/2026-*.md
+notes/CURRENT.md
+
+# Live per-avatar maps (clone-owner overlay). CLI + templates stay tracked.
+maps/*/
+!maps/templates/
+!maps/templates/**
+!maps/library/
+!maps/library/**
+maps/library/__pycache__/
+# Live world overlays use maps/worlds/<id>/ — already ignored by maps/*/ above.
+
+# USB shelf scan output (clone-owner inventory).
+maps/library/catalog.json
+maps/library/notes.json
+maps/library/LIBRARY.md
+maps/library/seed.json
+
+# This-PC CodeGraph helpers (edit user-global adapters / first-product paths).
+scripts/install-kaguya-codegraph.ps1
+scripts/repair-codegraph-adapters.ps1
+templates/kaguya-codegraph.json
+
+# Clone-owner fusion dump (not the public synthetic example).
+skills/vrc-dcc/references/examples/one-fusion-body.md
+
+# Local regression evidence (never the public tree).
+tests/_evidence/

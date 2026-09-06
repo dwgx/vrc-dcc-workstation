@@ -1,0 +1,14 @@
+{
+  "name": "com.vrc-dcc.tools",
+  "displayName": "VRC DCC Tools",
+  "version": "0.1.1",
+  "unity": "2022.3",
+  "description": "Named 改模 MCP tools on the existing CoplayDev HTTP server. Not a second MCP. Not EditorEye.",
+  "documentationUrl": "https://github.com/dwgx/vrc-dcc-workstation",
+  "license": "MIT",
+  "author": {
+    "name": "vrc-dcc-workstation"
+  },
+  "keywords": ["vrchat", "modular-avatar", "mcp"],
+  "hideInEditor": false
+}

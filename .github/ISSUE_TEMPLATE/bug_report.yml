@@ -1,0 +1,17 @@
+name: Bug report
+description: Something in the skeleton, bootstrap, or docs is wrong
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Expected vs actual. No SDK cookies, no avatar files.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS / Unity / Blender versions
+    validations:
+      required: false

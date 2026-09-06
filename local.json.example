@@ -1,0 +1,12 @@
+{
+  "ui_language": "",
+  "install_root": "",
+  "unity_editor": "",
+  "unity_project": "",
+  "blender_exe": "",
+  "uvx": "",
+  "python_exe": "",
+  "unityvrchat_library": "",
+  "unityvrchat_stage": "",
+  "notes": "Fill after handshake. Do not commit this file as local.json. ui_language: en | zh-CN | ja | ko. unityvrchat_library: USB shelf root. unityvrchat_stage: ingest drop folder. Agents must not write the unity_project tree from a home/control-plane window."
+}

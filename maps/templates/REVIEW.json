@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "avatar": "AVATAR_ID",
+  "updated": "YYYY-MM-DD",
+  "note": "Copy to maps/<avatar>/REVIEW.json. New Unity work = unreviewed. world needs owner_ok. python maps/review.py next AVATAR_ID",
+  "lessons": [
+    {
+      "id": "example.do-not-retry",
+      "title": "Short name of the failed approach",
+      "failed": "What the agent tried",
+      "do": "What to do instead",
+      "playbook": "skills/vrc-dcc/references/vrc-agent-pitfalls.md"
+    }
+  ],
+  "items": [
+    {
+      "id": "example.sdk-build",
+      "node": "",
+      "area": "upload",
+      "title": "SDK Build after last Editor write",
+      "asked": "",
+      "status": "unreviewed",
+      "gate": "world",
+      "slice": "",
+      "owner_ok": false,
+      "evidence": [],
+      "must_not": ["SDK Publish from the agent"],
+      "notes": ""
+    }
+  ]
+}

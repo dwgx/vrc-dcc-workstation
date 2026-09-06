@@ -1,0 +1,153 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-manifests:
+    name: Validate manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate JSON
+        run: |
+          python -c "import json,glob,sys
+          ok=True
+          for f in sorted(glob.glob('manifests/*.json')+glob.glob('local.json.example')+['locales.json']):
+              try:
+                  json.load(open(f,encoding='utf-8')); print('OK', f)
+              except Exception as e:
+                  ok=False; print('FAIL', f, e)
+          sys.exit(0 if ok else 1)"
+      - name: Eval agent contract
+        run: python scripts/eval-agent-contract.py
+      - name: Public CLI regressions
+        run: python tests/run_s00a_regressions.py
+
+  guard-no-secrets-or-binaries:
+    name: Guard against committed binaries/secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fail if tracked binaries/credentials exist
+        run: |
+          set -e
+          bad=$(git ls-files | grep -E '\.(exe|dll|zip|7z|pyc|unitypackage|blend)$|(^|/)\.env$|(^|/)local\.json$|(^|/)OWNER\.md$' || true)
+          if [ -n "$bad" ]; then
+            echo "::error::Disallowed tracked files found:"; echo "$bad"; exit 1
+          fi
+          echo "No disallowed binaries/credentials tracked."
+      - name: Scan for obvious secrets and this-PC paths
+        run: |
+          set -e
+          if git grep -nIE 'ghp_[A-Za-z0-9]{20,}|gho_[A-Za-z0-9]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----' -- . ':!.github/workflows/*'; then
+            echo "::error::Possible secret found in tracked files."; exit 1
+          fi
+          if git grep -nIE 'C:\\\\Users\\\\dwgx|D:\\\\Software\\\\Tool\\\\WorkStation|D:\\\\Project\\\\Unity\\\\kaguya' -- . ':!.github/workflows/*' ':!LOCAL-THIS-PC.md'; then
+            echo "::error::This-PC path leaked into the public template."; exit 1
+          fi
+          echo "No obvious secrets or this-PC paths found."
+
+  powershell-syntax:
+    name: PowerShell syntax (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Parse scripts
+        shell: pwsh
+        run: |
+          $files = @('scripts/bootstrap.ps1','scripts/refresh-pins.ps1','scripts/resolve-locale.ps1')
+          foreach ($f in $files) {
+            $errors = $null
+            [System.Management.Automation.PSParser]::Tokenize((Get-Content -Raw $f), [ref]$errors) | Out-Null
+            if ($errors.Count -gt 0) { $errors | ForEach-Object { Write-Error $_.Message }; exit 1 }
+            Write-Host "$f parsed with no syntax errors."
+          }
+      - name: Resolve-locale hints
+        shell: pwsh
+        run: |
+          . ./scripts/resolve-locale.ps1
+          $root = (Get-Location).Path
+          $cases = @{ 'zh-TW'='zh-CN'; 'ja-JP'='ja'; 'ko-KR'='ko'; 'en-GB'='en' }
+          foreach ($k in $cases.Keys) {
+            $got = Get-WorkstationLocale -RepoRoot $root -Hint $k
+            if ($got -ne $cases[$k]) { throw "hint $k => $got (want $($cases[$k]))" }
+          }
+          Write-Host 'locale hints ok'
+
+  i18n-siblings:
+    name: Locale siblings exist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Assert README/AGENTS/DISCLAIMER/questionnaire/workflow siblings
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          cfg = json.load(open('locales.json', encoding='utf-8'))
+          missing = []
+          extras = ['I18N.md', 'WORKFLOW.md', 'UNITY.md', 'ATTACH.md', 'RULES.md', 'AI_USAGE_GUIDE.md', 'MAINTAIN.md']
+          for loc in cfg['locales']:
+              if loc == 'en':
+                  for s in cfg['root_files']:
+                      p = s + '.md'
+                      if not os.path.isfile(p):
+                          missing.append(p)
+                  if not os.path.isfile('templates/INIT_QUESTIONNAIRE.md'):
+                      missing.append('templates/INIT_QUESTIONNAIRE.md')
+                  if not os.path.isfile('docs/I18N.md'):
+                      missing.append('docs/I18N.md')
+                  if not os.path.isfile('docs/WORKFLOW.md'):
+                      missing.append('docs/WORKFLOW.md')
+                  continue
+              for s in cfg['root_files']:
+                  p = f'{s}.{loc}.md'
+                  if not os.path.isfile(p):
+                      missing.append(p)
+              q = f'templates/i18n/{loc}/INIT_QUESTIONNAIRE.md'
+              if not os.path.isfile(q):
+                  missing.append(q)
+              for extra in extras:
+                  p = f'docs/i18n/{loc}/{extra}'
+                  if not os.path.isfile(p):
+                      missing.append(p)
+          if missing:
+              print('Missing i18n files:'); [print(' ', m) for m in missing]; sys.exit(1)
+          print('i18n siblings ok')
+          PY
+
+  link-check:
+    name: Check relative doc links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Verify relative markdown links resolve
+        run: |
+          python - <<'PY'
+          import re, os, sys, subprocess
+          bad = []
+          link = re.compile(r'\[[^\]]+\]\(([^)]+)\)')
+          mds = subprocess.check_output(["git", "ls-files", "*.md"], text=True).splitlines()
+          for md in mds:
+              base = os.path.dirname(md)
+              with open(md, encoding="utf-8") as fh:
+                  text = fh.read()
+              for m in link.finditer(text):
+                  t = m.group(1).split("#")[0].strip()
+                  if not t or t.startswith(("http://", "https://", "mailto:", "data:")):
+                      continue
+                  p = os.path.normpath(os.path.join(base, t) if base else t)
+                  if not os.path.exists(p):
+                      bad.append(f"{md} -> {t}")
+          if bad:
+              print("Broken relative links:"); [print(" ", b) for b in bad]; sys.exit(1)
+          print("All tracked relative markdown links resolve.", len(mds), "files")
+          PY

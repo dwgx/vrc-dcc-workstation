@@ -1,0 +1,17 @@
+{
+  "exclude": [
+    "Library/",
+    "Temp/",
+    "Logs/",
+    "obj/",
+    "Packages/com.vrchat.*/",
+    "Packages/com.unity.*/",
+    "Packages/jp.lilxyzw.liltoon/",
+    "Packages/lyuma.av3emulator/",
+    "Packages/vrchat.blackstartx.gesture-manager/",
+    "Packages/dev.vrlabs.av3manager/",
+    "Packages/com.vrcfury.temp/",
+    "Packages/com.vrsuya.core/",
+    "Packages/com.vrsuya.installer/"
+  ]
+}

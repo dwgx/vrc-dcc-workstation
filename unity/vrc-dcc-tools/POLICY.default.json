@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "avatar": "",
+  "unity_root_name": "",
+  "body_token": "",
+  "require_prefab_path": true,
+  "disable_mcp_tools": ["execute_code"],
+  "leftover_needles": [],
+  "expected_hips_y": null,
+  "hips_slack": 0.05,
+  "sku_quota": 1,
+  "note": "Package fallback when Assets/VrcDcc/POLICY.json is missing. Overlay per avatar from maps/<id>/POLICY.json via the Unity-cwd installer."
+}

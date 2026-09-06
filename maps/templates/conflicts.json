@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "avatar": "AVATAR_ID",
+  "updated": "",
+  "note": "Owner names a lane winner when two gizmos overlap. Agent does not silently pick. Playbook: skills/vrc-dcc/references/plugin-conflicts.md",
+  "bias": {},
+  "lanes": []
+}

@@ -1,0 +1,12 @@
+{
+  "exclude": [
+    ".github/",
+    "maps/**/*.json",
+    "templates/**/*.json",
+    "maps/**/MAP.md",
+    "maps/library/LIBRARY.md"
+  ],
+  "deprioritize": [
+    "scripts/"
+  ]
+}

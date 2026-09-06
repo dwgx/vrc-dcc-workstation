@@ -1,0 +1,39 @@
+{
+  "name": "VrcDcc.Tools.Editor",
+  "rootNamespace": "VrcDcc.Tools.Editor",
+  "references": [
+    "MCPForUnity.Editor",
+    "nadena.dev.modular-avatar.core"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "Newtonsoft.Json.dll",
+    "VRCSDKBase.dll",
+    "VRCSDK3A.dll"
+  ],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [
+    {
+      "name": "com.coplaydev.unity-mcp",
+      "expression": "",
+      "define": "VRC_DCC_MCP"
+    },
+    {
+      "name": "nadena.dev.modular-avatar",
+      "expression": "",
+      "define": "VRC_DCC_MA"
+    },
+    {
+      "name": "com.vrchat.avatars",
+      "expression": "",
+      "define": "VRC_DCC_AVATARS"
+    }
+  ],
+  "noEngineReferences": false
+}

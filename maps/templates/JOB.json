@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "avatar": "AVATAR_ID",
+  "sku_quota": 1,
+  "sku_used": 0,
+  "skus": [],
+  "open_slice": null,
+  "mutated": false,
+  "note": "New chat: python maps/gate.py AVATAR_ID reset. One Booth SKU until Owner looks."
+}

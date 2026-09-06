@@ -1,0 +1,16 @@
+# Optional stdio Unity (if HTTP 8080 is blocked). Not the Cursor default.
+
+{
+  "mcpServers": {
+    "unityMCP": {
+      "command": "{{UVX}}",
+      "args": [
+        "--from",
+        "mcpforunityserver==10.1.2",
+        "mcp-for-unity",
+        "--transport",
+        "stdio"
+      ]
+    }
+  }
+}

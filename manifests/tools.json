@@ -1,0 +1,74 @@
+{
+  "schema": "vrc-dcc-tools/v1",
+  "pinned_utc": "2026-09-01",
+  "hosts_note": "Machine paths belong in gitignored local.json after handshake. Do not commit them here.",
+  "tools": [
+    {
+      "id": "blender-mcp",
+      "role": "default-blender-connect",
+      "upstream": "https://github.com/ahujasid/blender-mcp",
+      "pin": "pypi:blender-mcp==1.9.0",
+      "released": "2026-08-30",
+      "requires_python": ">=3.10",
+      "run_python": "3.11",
+      "install": "uvx blender-mcp install-addon then enable Interface: Blender MCP; N-panel Start MCP Server"
+    },
+    {
+      "id": "sandraschi-blender-mcp",
+      "role": "optional-vrc-export-validate",
+      "upstream": "https://github.com/sandraschi/blender-mcp",
+      "pin": "github:v0.11.1",
+      "released": "2026-08-17",
+      "note": "Headless Blender via BLENDER_EXECUTABLE. Do not run beside ahujasid in the same client."
+    },
+    {
+      "id": "dcc-mcp-blender",
+      "role": "fallback-blender-5x",
+      "upstream": "https://github.com/dcc-mcp/dcc-mcp-blender",
+      "pin": "github:v0.2.3",
+      "released": "2026-08-25",
+      "win_addon": "https://github.com/dcc-mcp/dcc-mcp-blender/releases/download/v0.2.3/dcc_mcp_blender_addon_win64_v0.2.3.zip"
+    },
+    {
+      "id": "coplaydev-unity-mcp",
+      "role": "default-unity-editor",
+      "upstream": "https://github.com/CoplayDev/unity-mcp",
+      "pin": "github:v10.1.2",
+      "pypi": "mcpforunityserver==10.1.2",
+      "unity": "2021.3–6.x",
+      "upm": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#v10.1.2",
+      "cursor_http": "http://localhost:8080/mcp"
+    },
+    {
+      "id": "lighfu-unity-agent",
+      "role": "catalog-do-not-install",
+      "upstream": "https://github.com/lighfu/unity-agent",
+      "pin": "editor-v0.15.0",
+      "released": "2026-08-19",
+      "unity": "2022.3+",
+      "vpm": "https://lighfu.github.io/vpm/",
+      "note": "Catalog fact only. Do not Add via VCC/ALCOM on this 2022.3 avatar pipeline. Named vrc_* on CoplayDev 8080 instead."
+    },
+    {
+      "id": "swax-unitymcp-vrc",
+      "role": "optional-vrc-worlds",
+      "upstream": "https://github.com/swax/UnityMCP-VRC",
+      "pin": "main (no GitHub releases as of 2026-09-01)",
+      "updated": "2026-08-28",
+      "note": "Worlds / UdonSharp. Not first pick for MA clothes."
+    },
+    {
+      "id": "ivanmurzak-unity-mcp",
+      "role": "optional-generic-unity",
+      "upstream": "https://github.com/IvanMurzak/Unity-MCP",
+      "pin": "0.90.0",
+      "released": "2026-08-24"
+    }
+  ],
+  "forbidden": [
+    "official Unity MCP / Unity CLI Pipeline / com.unity.ai.assistant on this 2022.3 avatar project (needs Unity 6)",
+    "VRChat SDK Build & Publish driven by an agent",
+    "sandraschi unity3d-mcp upload_vrchat_avatar",
+    "TunaSync-Studio/UnityMCP-VCC (exists; do not use as this station's default avatar bridge)"
+  ]
+}

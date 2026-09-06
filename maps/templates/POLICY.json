@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "avatar": "AVATAR_ID",
+  "unity_root_name": "AVATAR_ID",
+  "body_token": "",
+  "require_prefab_path": true,
+  "disable_mcp_tools": ["execute_code"],
+  "leftover_needles": [],
+  "expected_hips_y": null,
+  "hips_slack": 0.05,
+  "sku_quota": 1,
+  "note": "Per-avatar overlay. Empty body_token = identity still needs prefabPath. Copy to Unity Assets/VrcDcc/POLICY.json via install-vrc-dcc-tools.ps1 from that Unity cwd."
+}

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "blender": {
+      "command": "{{UVX}}",
+      "args": ["--python", "3.11", "blender-mcp==1.9.0"],
+      "env": {
+        "UV_PYTHON_PREFERENCE": "only-managed"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "vrc-dcc-mcp/v1",
+  "default_profile": "cursor-avatar",
+  "rule": "One blender-mcp client at a time. Attach from the avatar project window or a dedicated vrc-dcc workspace. Never paste these servers into four-runtime user-global MCP.",
+  "profiles": {
+    "cursor-avatar": {
+      "client": "cursor",
+      "servers": ["blender", "unityMCP"]
+    },
+    "claude-desktop": {
+      "client": "claude-desktop",
+      "servers": ["blender"]
+    }
+  },
+  "servers": {
+    "blender": {
+      "package": "blender-mcp==1.9.0",
+      "transport": "stdio",
+      "python": "3.11"
+    },
+    "unityMCP": {
+      "package": "mcpforunityserver==10.1.2",
+      "transport": "http",
+      "url": "http://localhost:8080/mcp",
+      "requires": "CoplayDev UPM in the open Unity project + Window → MCP for Unity → Start"
+    }
+  }
+}

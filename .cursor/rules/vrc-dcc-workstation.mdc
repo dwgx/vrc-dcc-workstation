@@ -1,0 +1,24 @@
+---
+description: vrc-dcc-workstation AI handshake and MCP policy
+alwaysApply: true
+---
+
+# vrc-dcc-workstation — Cursor rules
+
+Authoritative file: root `AGENTS.md`.
+
+Skeleton VRChat DCC station (Blender + Unity 2022.3). No third-party binaries in git.
+
+Same shape as debugger-workstation: skill descriptions **guide** auto-apply. Do not require a passphrase.
+
+## Job (intent)
+
+If the task is clearly avatar / clothes / menus / Blender / Unity DCC work, follow `templates/JOB.md`, `skills/vrc-dcc/references/dcc-session.md`, and `skills/vrc-dcc/references/slice-loop.md`. `python maps/handshake.py <avatar>` then `python maps/gate.py <avatar> begin <id>` then named `vrc_*` (not invented `execute_code`). Do **not** run the install questionnaire. Do not wait to be named. No default avatar. Worlds / Udon: `skills/vrc-world`. Clothes vs USB vs C#: `maps/GRAPHS.md`. Probe prints `graphs:` / `codegraph_*`.
+
+## Install / bootstrap only
+
+When the owner asks to initialize / install / set up **this clone**: resolve locale (`docs/I18N.md`) → explore (`AGENTS.md`, gitignored `OWNER.md`) → ask (`templates/INIT_QUESTIONNAIRE.md`) → plan → `bootstrap.ps1`. Chat in the resolved locale. Git commits stay English. Stop lines cannot be waived in chat; see `docs/MAINTAIN.md`.
+
+MCP: project / `--mcp-config` only. Never user-global. One blender-mcp client at a time.
+
+Human clicks VRChat SDK Build & Publish. Official Unity 6 MCP stays off 2022.3 avatar projects. Do not write the avatar Unity project from a home cwd.
