@@ -1,10 +1,12 @@
 ---
 name: vrc-review
 description: >-
-  Dual-axis review and after-action notes for VRChat DCC work. Auto-apply when
-  finishing 改模/avatar/export/MCP/pin work, or when the user asks for a VRC
-  score / 评分 / 收尾. Writes notes/ and the REVIEW board. Never SDK upload
-  from the agent.
+  Dual-axis review and after-action notes for VRChat DCC work. Auto-apply only
+  when finishing 改模/avatar/export/MCP/pin work in a vrc-dcc-workstation
+  clone (or a named VRChat job), or when the user asks for a VRC score /
+  评分 / 收尾. Do not use on generic app/web PRs. Do not auto-apply a
+  user-global copy onto another repo. Writes notes/ and the REVIEW board.
+  Never SDK upload from the agent.
 ---
 
 # vrc-review

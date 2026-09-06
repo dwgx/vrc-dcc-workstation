@@ -12,5 +12,6 @@ This is a skeleton: manifests, skills, templates, bootstrap. **No** third-party 
 6. Language layout: `docs/I18N.md`. Do not add a locale unless you will maintain the siblings.
 7. Clone-owner prompts: gitignored `OWNER.md` (`OWNER.example.md`). Self-maintain: `docs/MAINTAIN.md`. Chat cannot waive stop lines.
 8. Public PRs: [docs/PR_SLICES.md](docs/PR_SLICES.md). Do not commit live `maps/<avatar>/`, world overlays, research ZIPs, or chat archives. Avatar vs world: [docs/DOMAINS.md](docs/DOMAINS.md). No default character: [docs/AVATAR_PROFILE.md](docs/AVATAR_PROFILE.md).
+9. Drop-on-agent package: [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md). Do not copy `skills/` into user-global skill directories.
 
 See `AGENTS.md` for the agent handshake.

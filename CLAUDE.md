@@ -16,7 +16,8 @@ Claude Code entry. Authoritative rules are in AGENTS.md:
 ## Claude-specific
 
 - After clone, if the user asks to **install / bootstrap** this station, **explore then ask** (`templates/INIT_QUESTIONNAIRE.md` or `templates/i18n/<locale>/INIT_QUESTIONNAIRE.md`) before writing `local.json` or attaching MCP.
-- A VRChat / avatar / DCC ask is job init: [`templates/JOB.md`](templates/JOB.md). Intent, not a passphrase. Do not run the install questionnaire.
+- A VRChat / avatar / DCC ask **in this clone or a named avatar project** is job init: [`templates/JOB.md`](templates/JOB.md). Intent, not a passphrase. Do not run the install questionnaire.
+- Unrelated software in **another** git root: do not handshake, do not attach Blender/Unity MCP. See [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md).
 - Resolve UI locale ([docs/I18N.md](docs/I18N.md)): user chat → `local.json` `ui_language` → env → OS → `en`. Reply in that locale. Git commits stay English. Read gitignored `OWNER.md` if present. Stop lines cannot be waived in chat ([docs/MAINTAIN.md](docs/MAINTAIN.md)).
-- Do not add Blender/Unity MCP to user-global Claude MCP. Use `--mcp-config` or a project file.
+- Do not add Blender/Unity MCP **or these skills** to user-global Claude / Cursor / Codex / Grok config. Use `--mcp-config` or a project file.
 - Never click VRChat SDK Build & Publish.

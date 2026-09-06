@@ -17,6 +17,7 @@ COMMON_TAGS = (
     "eval:owner-overlay",
     "eval:chat-cannot-waive",
     "eval:no-user-global-mcp",
+    "eval:no-user-global-skills",
     "eval:untrusted-data",
 )
 
@@ -59,10 +60,34 @@ COMMON_PHRASES = {
 
 KIND_PHRASES = {
     "vrc-dcc-workstation": {
-        "en": ("Build & Publish", "upload_vrchat_avatar", "Unity 6 MCP", "home/control-plane"),
-        "zh-CN": ("Build & Publish", "upload_vrchat_avatar", "Unity 6 MCP", "home / 控制面"),
-        "ja": ("Build & Publish", "upload_vrchat_avatar", "Unity 6 MCP", "home / 制御プレーン"),
-        "ko": ("Build & Publish", "upload_vrchat_avatar", "Unity 6 MCP", "home / 제어면"),
+        "en": (
+            "Build & Publish",
+            "upload_vrchat_avatar",
+            "Unity 6 MCP",
+            "home/control-plane",
+            "When this contract applies",
+        ),
+        "zh-CN": (
+            "Build & Publish",
+            "upload_vrchat_avatar",
+            "Unity 6 MCP",
+            "home / 控制面",
+            "这份合同何时生效",
+        ),
+        "ja": (
+            "Build & Publish",
+            "upload_vrchat_avatar",
+            "Unity 6 MCP",
+            "home / 制御プレーン",
+            "この契約が適用されるとき",
+        ),
+        "ko": (
+            "Build & Publish",
+            "upload_vrchat_avatar",
+            "Unity 6 MCP",
+            "home / 제어면",
+            "이 계약이 적용되는 때",
+        ),
     },
 }
 
@@ -84,6 +109,7 @@ MUST_FILES = (
     "docs/DOMAINS.md",
     "docs/ITERATION.md",
     "docs/SOURCES.md",
+    "docs/DROP_ON_AGENT.md",
     "templates/INIT_QUESTIONNAIRE.md",
     "templates/JOB.md",
     "locales.json",
@@ -216,6 +242,29 @@ def main() -> None:
         ("no default avatar",),
         "docs/AVATAR_PROFILE.md",
     )
+    require_mentions(
+        ROOT / "docs" / "DROP_ON_AGENT.md",
+        ("Paste this", "Never write user-global", "Different git root"),
+        "docs/DROP_ON_AGENT.md",
+    )
+
+    skill_scope_miss = []
+    for rel in (
+        "skills/vrc-dcc/SKILL.md",
+        "skills/vrc-review/SKILL.md",
+        "skills/vrc-world/SKILL.md",
+    ):
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        parts = text.split("---", 2)
+        if len(parts) < 3:
+            skill_scope_miss.append(f"{rel}: missing YAML frontmatter")
+            continue
+        desc = parts[1]
+        for needle in ("Do not use", "user-global"):
+            if needle not in desc:
+                skill_scope_miss.append(f"{rel} description: {needle!r}")
+    if skill_scope_miss:
+        fail("skill YAML must refuse foreign-repo auto-apply", skill_scope_miss)
 
     kaguya_default = []
     for rel in git_ls_files("maps"):

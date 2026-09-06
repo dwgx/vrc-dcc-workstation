@@ -11,6 +11,7 @@
 <!-- eval:owner-overlay -->
 <!-- eval:chat-cannot-waive -->
 <!-- eval:no-user-global-mcp -->
+<!-- eval:no-user-global-skills -->
 <!-- eval:untrusted-data -->
 <!-- eval:human-sdk-publish -->
 
@@ -23,6 +24,20 @@
 휴대용 **VRChat DCC** 워크스테이션: Blender(메시 / 웨이트 / 비젬) + Unity 2022.3(Modular Avatar / NDMF / PhysBone / 메뉴). 월드 / Udon은 **별도** 스킬(`skills/vrc-world`). 이 공개 저장소를 사설 월드 제품명으로 바꾸지 마세요. 에이전트는 **지금 작업에 필요할 때만** Blender MCP 및/또는 Unity MCP를 붙입니다. Claude / Codex / Cursor / Grok **사용자 전역** MCP에 넣지 마세요.
 
 VRChat SDK **Build & Publish는 사람이 누릅니다**. 에이전트는 누르면 안 됩니다.
+
+이 GitHub URL을 에이전트에 건네기: [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md) (영어 붙여넣기. 답변은 주인의 언어).
+
+---
+
+## 0a. 이 계약이 적용되는 때
+
+워크스페이스 git 루트의 `locales.json` `"kind"`가 `vrc-dcc-workstation`이거나, 주인이 이 작업으로 **지명한 VRChat 아바타 Unity 프로젝트**를 열었을 때.
+
+사용자 전역에 스킬 복사본이 있다고 해서 **다른 git 루트**에서 `handshake.py`를 돌리거나 Blender/Unity MCP를 붙이지 마세요. 일반 앱 / 웹 / 라이브러리 작업은 DCC가 아닙니다. VRChat 아바타/월드 의도가 없는 Blender나 Unity도 범위 밖입니다. 이 PC에 Blender/Unity가 없으면 문서만. 경로를 지어내지 마세요.
+
+스킬은 **이 clone 안**에 둡니다. Claude / Codex / Cursor / Grok **사용자 전역**에 넣지 마세요. 전역 `vrc-dcc`는 무관한 코딩 대화를 가로챕니다.
+
+다른 사람의 clone: **이** OS와 이미 설치된 에디터를 탐지하세요. 문서 예시 경로는 제거 명령이 아닙니다.
 
 ---
 
@@ -72,7 +87,7 @@ VRChat SDK **Build & Publish는 사람이 누릅니다**. 에이전트는 누르
 
 주인이 이 clone을 **DCC / 아바타 작업**으로 건네면(cwd가 home / 이 clone / 아바타 Unity여도): [`templates/JOB.md`](templates/JOB.md). 아래 2절 설치 설문은 타지 않는다.
 
-**의도**로 분류한다. 암호 문구를 만들지 않는다. debugger-workstation 스킬 자동 적용과 같다. VRChat / 옷 / 메뉴 / Blender / Unity DCC면 시작한다(`skills/vrc-dcc`). 월드 / Udon / 씬이면 `skills/vrc-world`. 아바타 `handshake.py`는 돌리지 않는다. `session-probe`를 quote. **기본 아바타가 없다.** `handshake.py`의 `<avatar>`는 CURRENT 또는 주인 지정. 플레이북은 범용. 채팅에 두 번째 헌법을 만들지 않는다.
+**의도**로 분류한다. 암호 문구를 만들지 않는다. debugger-workstation 스킬 자동 적용과 같다. VRChat **아바타** / 옷 / 메뉴 / 아바타 Blender-Unity DCC면 시작한다(`skills/vrc-dcc`). 월드 / Udon / 씬이면 `skills/vrc-world`. 아바타 `handshake.py`는 돌리지 않는다. 무관한 소프트웨어면 멈춘다([docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md)). `session-probe`가 있으면 quote. **기본 아바타가 없다.** `handshake.py`의 `<avatar>`는 CURRENT 또는 주인 지정. 플레이북은 범용. 채팅에 두 번째 헌법을 만들지 않는다.
 
 이 clone은 스테이션이지 아바타 작업 트리가 아니다. 쓰기는 `local.json`의 `unity_project`(그 프로젝트 창). 실질 변경은 `notes/`에 지문(언제 / 왜 / 무엇을). 세션: `skills/vrc-dcc/references/dcc-session.md`.
 
@@ -98,8 +113,10 @@ VRChat SDK **Build & Publish는 사람이 누릅니다**. 에이전트는 누르
 5. **MCP**: 문서만 / Blender / Unity / 둘 다 / 없음.
 6. **AI 클라이언트**.
 7. 선택 vendors clone 여부(CATS 5.2, gummidot 문서, Codex VRC skill).
+8. **스킬 / MCP 위치**: 이 clone / `--mcp-config`만. 사용자 전역 금지(다른 저장소 코딩이 개조로 새지 않게).
+9. **없는 앱**: Blender나 Unity가 없으면 해당 MCP를 건너뛴다. 문서만으로도 된다.
 
-다른 사람의 Unity 트리를 추측하지 마세요.
+다른 사람의 Unity 트리를 추측하지 마세요. 문서 예시 경로에 맞추려고 기존 스택을 제거하지 마세요.
 
 ### 3단계 — 계획
 

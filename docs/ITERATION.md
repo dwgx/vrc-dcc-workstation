@@ -22,6 +22,7 @@ Do not skip ahead to World live dumps or a second Unity MCP. Land one slice, tes
 |---|---|---|
 | **S00-a** | Landed on `9ba91ca` | No default avatar; dump names stay unresolved; `--on-body` refused; overlay out of git |
 | **S00-b** | Landed this tree | Fail-closed identity and POLICY (wrong / duplicate / bad schema). No first-`VRCAvatarDescriptor`, no first `Nipple_` / first `GogoLoco` |
+| **Drop-on-agent** | Landed this tree | Foreign clone paste block; ask-then-act install; skills stay in-clone so they do not hijack other repos |
 | **S00-c** | Later | Tool allowlist, nonzero MCP errors, request id, JOB lease |
 | **S01-a** | Docs draft only | `skills/vrc-world` routing. Not live `world_*` |
 | **S01-b** | Later | Core / Avatar / World assemblies. Do not add Avatar SDK to a Worlds project to compile |

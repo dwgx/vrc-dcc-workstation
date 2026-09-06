@@ -10,6 +10,8 @@
 
 任务结束后用 `skills/vrc-review` 打分并写入 `notes/`。[docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md)。工位自身怎么变好（无默认角色、身份失败即停）：[docs/i18n/zh-CN/ITERATION.md](docs/i18n/zh-CN/ITERATION.md)。底模和 ZIP **不进** git：[docs/i18n/zh-CN/SOURCES.md](docs/i18n/zh-CN/SOURCES.md)。
 
+**把仓库丢给 agent：** [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md)（英文提示词；用你的语言汇报）。装站先问再做。技能留在**本 clone**，不要拷进用户全局，以免别的仓库写代码被拐去改模。
+
 > **不分发 Blender / Unity / VRChat 二进制，也不含角色工程。** 见 [DISCLAIMER.zh-CN.md](DISCLAIMER.zh-CN.md)。
 
 ---

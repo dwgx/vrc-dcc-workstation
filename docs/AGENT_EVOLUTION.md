@@ -7,7 +7,7 @@ A failed 改模 window is evidence. Write `notes/YYYY-MM-DD-*-session-postmortem
 Three promotions:
 
 1. **This avatar only** → `maps/<avatar>/REVIEW.json` + `notes.json` + `STATE.md` + `POLICY.json`.
-2. **Next avatar will hit it** → copy the lesson into `skills/vrc-dcc/references/` (English playbook). If this clone sits under a parent workstation that syncs skills, patch both copies the same slice. Architecture: `maps/README.md`. Dual copies that drift make the lock disappear.
+2. **Next avatar will hit it** → copy the lesson into `skills/vrc-dcc/references/` (English playbook). If this clone sits under a parent workstation that syncs skills, patch both copies the same slice. Do **not** copy skills into user-global dirs for “convenience” — that hijacks unrelated coding chats ([docs/DROP_ON_AGENT.md](DROP_ON_AGENT.md)). Architecture: `maps/README.md`. Dual copies that drift make the lock disappear.
 
 Self-review after a material station slice: [skills/vrc-dcc/references/self-review.md](../skills/vrc-dcc/references/self-review.md) (dispatch independent auditors; generator ≠ evaluator). Do not copy Anthropic `init.sh` / `feature_list.json`. Do not commit vendor skill zips or base meshes ([docs/SOURCES.md](SOURCES.md)).
 3. **Control loop** (handshake, gate, named `vrc_*`, POLICY schema) → station `maps/templates/` + `unity/vrc-dcc-tools`. Dual-axis first. Do not grow CURRENT.

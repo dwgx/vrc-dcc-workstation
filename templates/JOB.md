@@ -9,12 +9,14 @@ Not station **install**. Same split as debugger-workstation: the skill descripti
 | Owner intent | Path |
 |---|---|
 | Initialize / install / set up **this clone** | `AGENTS.md` section 2 (questionnaire) |
-| Edit a VRChat avatar, clothes, menus, visemes, PhysBones, Blender/Unity DCC | **This file** + `skills/vrc-dcc/references/dcc-session.md` |
+| Edit a VRChat avatar, clothes, menus, visemes, PhysBones, avatar Blender/Unity DCC | **This file** + `skills/vrc-dcc/references/dcc-session.md` |
 | Edit or audit a VRChat **World** / Udon / scene | `skills/vrc-world` + `docs/WORLD.md` (not avatar handshake) |
+| Unrelated software in **another** git root (app, web, library, non-VRC game) | **Stop.** Wrong tree. [docs/DROP_ON_AGENT.md](../docs/DROP_ON_AGENT.md) |
+| Blender / Unity without VRChat avatar or Worlds intent | **Stop.** Out of scope |
 | Unclear, and `session-probe` `station_memory: yes` | Job path. One question if needed. Do not dump the install questionnaire |
 | Unclear, empty station, owner said “set up” | Install path |
 
-Do **not** treat any fixed phrase as the switch. Wording varies. If the task is clearly avatar/DCC work, start. Do not wait to be named. There is **no default avatar**. `handshake.py` requires `<avatar>` from `notes/CURRENT.md` or the owner.
+Do **not** treat any fixed phrase as the switch. Wording varies. If the task is clearly VRChat avatar/DCC work **in this station or a named avatar project**, start. Do not wait to be named. There is **no default avatar**. `handshake.py` requires `<avatar>` from `notes/CURRENT.md` or the owner. A user-global skill copy does **not** make a random repo a DCC job.
 
 ## When this clone is the DCC job
 

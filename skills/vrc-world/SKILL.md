@@ -1,10 +1,12 @@
 ---
 name: vrc-world
 description: >-
-  VRChat Worlds / Udon / scene / multiplayer state (世界, UdonSharp, SceneDescriptor,
-  ClientSim). Auto-apply when the user wants to edit or audit a Worlds project —
-  do not wait to be named. Not for avatar clothes / Modular Avatar. Named world
-  dumps are proposed, not invented execute_code. Never click SDK Build & Publish.
+  VRChat Worlds / Udon / scene / multiplayer state (世界, UdonSharp,
+  SceneDescriptor, ClientSim). Auto-apply only when the owner named a VRChat
+  Worlds job or this clone is vrc-dcc-workstation with a Worlds ask. Do not use
+  for generic Unity/game scenes, avatar clothes, or Modular Avatar. Do not
+  auto-apply a user-global copy onto another repo. Named world dumps are
+  proposed, not invented execute_code. Never click SDK Build & Publish.
 ---
 
 # vrc-world

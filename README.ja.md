@@ -6,7 +6,7 @@
 
 ポータブルな VRChat DCC ワークステーションの**雛形**です。**Blender 5.x LTS**（メッシュ / ウェイト / ヴィセム）と **Unity 2022.3**（Modular Avatar / NDMF / PhysBone / メニュー）を、MCP 経由で AI エージェントが駆動します。ワールド / Udon は別スキル（`skills/vrc-world`）。このリポジトリは私有ワールド製品ではありません。
 
-clone したら [docs/i18n/ja/I18N.md](docs/i18n/ja/I18N.md) で UI 言語を決める。**インストール / セットアップ**のときだけ [AGENTS.ja.md](AGENTS.ja.md) のヒアリング。アバター作業は `templates/JOB.md`（意図で分類。合言葉は作らない）。会話は日本語で。git のコミットメッセージは英語です。アバター本体は同梱しません。
+clone したら [docs/i18n/ja/I18N.md](docs/i18n/ja/I18N.md) で UI 言語を決める。**インストール / セットアップ**のときだけ [AGENTS.ja.md](AGENTS.ja.md) のヒアリング。アバター作業は `templates/JOB.md`（意図で分類。合言葉は作らない）。会話は日本語で。git のコミットメッセージは英語です。アバター本体は同梱しません。エージェントに渡す英語ブロック：[docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md)。スキルは **この clone** に置く（ユーザーグローバル禁止）。
 
 仕事のあと `skills/vrc-review` で採点し、`notes/` に残します。[docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md)。
 

@@ -11,8 +11,10 @@
 | 主人意图 | 路径 |
 |---|---|
 | 初始化 / 安装 / 搭建**本 clone** | `AGENTS.md` 第 2 节问卷 |
-| 改 VRChat 角色、衣服、菜单、口型、PhysBone、Blender/Unity DCC | **本文件** + `dcc-session.md` |
+| 改 VRChat 角色、衣服、菜单、口型、PhysBone、角色 Blender/Unity DCC | **本文件** + `dcc-session.md` |
 | 改或审计 VRChat **世界** / Udon / 场景 | `skills/vrc-world` + `docs/WORLD.md`（不要走角色 handshake） |
+| **另一个** git 根里写无关软件（App / 网页 / 库 / 非 VRC 游戏） | **停。** 错树。[DROP_ON_AGENT.md](../../../docs/DROP_ON_AGENT.md) |
+| Blender / Unity 但没有 VRChat 角色或世界意图 | **停。** 超范围 |
 | 说不清，且 probe `station_memory: yes` | 走干活。必要时问一句。不要甩装站问卷 |
 | 说不清、工位是空的、主人说「先搭起来」 | 走装站 |
 

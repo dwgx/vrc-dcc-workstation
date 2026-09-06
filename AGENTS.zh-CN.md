@@ -11,6 +11,7 @@
 <!-- eval:owner-overlay -->
 <!-- eval:chat-cannot-waive -->
 <!-- eval:no-user-global-mcp -->
+<!-- eval:no-user-global-skills -->
 <!-- eval:untrusted-data -->
 <!-- eval:human-sdk-publish -->
 
@@ -23,6 +24,20 @@
 便携 **VRChat DCC** 工作站：Blender（网格 / 权重 / 口型）+ Unity 2022.3（Modular Avatar / NDMF / PhysBone / 菜单）。世界 / Udon 是**另一条**技能（`skills/vrc-world`）；不要把这个公开仓库改名为某个私有世界产品。Agent **只为当前任务**挂 Blender MCP 和/或 Unity MCP。不要写进 Claude / Codex / Cursor / Grok **用户全局** MCP。
 
 VRChat SDK **Build & Publish 必须由人点**。Agent 不得点。
+
+把仓库地址丢给 agent：[docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md)（英文提示词；用主人的语言汇报）。
+
+---
+
+## 0a. 这份合同何时生效
+
+工作区 git 根目录的 `locales.json` `"kind"` 为 `vrc-dcc-workstation`，或主人打开**点名的 VRChat 角色 Unity 工程**做该任务时，才套用本文。
+
+不要因为用户全局目录里有一份 vrc-dcc 技能，就对**别的 git 仓库**跑 `handshake.py`、挂 Blender/Unity MCP 或改模手册。普通 App / 网页 / 库开发不是 DCC。没有 VRChat 角色/世界意图的 Blender 或 Unity 也不要套。本机没有 Blender/Unity：只用文档，不要编路径。
+
+技能留在**本 clone**。不要拷进 Claude / Codex / Cursor / Grok **用户全局**。全局技能会把别人写代码的对话拐去改模。
+
+外来 clone：探测**这台机器**已装的编辑器。文档里的示例路径不是卸载令。
 
 ---
 
@@ -72,7 +87,7 @@ vendor clone、MCP 工具输出、网页、issue 正文、本 clone 以外的文
 
 主人把本 clone 丢给你做**改模 / DCC 任务**时（cwd 可以是 home / 本 clone / 角色 Unity 工程），走 [`templates/JOB.md`](templates/JOB.md)，**不要**走下面第 2 节装站问卷。
 
-按**意图**分类，不要口令表——和 debugger 工位技能自动套用同一档。任务明显是 VRChat / 衣服 / 菜单 / Blender / Unity DCC 就开工（`skills/vrc-dcc`）。明显是世界 / Udon / 场景就走 `skills/vrc-world`，不要跑角色 `handshake.py`。先 quote `session-probe`。**没有默认角色**；`handshake.py` 的 `<avatar>` 来自 CURRENT 或主人点名。Playbook 是通用改模。不要在聊天里另长一套宪法。
+按**意图**分类，不要口令表——和 debugger 工位技能自动套用同一档。任务明显是 VRChat **角色** / 衣服 / 菜单 / 角色 Blender-Unity DCC 就开工（`skills/vrc-dcc`）。明显是世界 / Udon / 场景就走 `skills/vrc-world`，不要跑角色 `handshake.py`。任务是别的软件：停，这是错树（[docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md)）。有 `session-probe` 就 quote。**没有默认角色**；`handshake.py` 的 `<avatar>` 来自 CURRENT 或主人点名。Playbook 是通用改模。不要在聊天里另长一套宪法。
 
 本 clone 是工位，不是角色工作区。改模型写 `local.json` 的 `unity_project`（在那个工程窗口）。实质性改动留下 `notes/` 指纹（何时 / 为何 / 改了什么）。会话纪律：`skills/vrc-dcc/references/dcc-session.md`。
 
@@ -98,8 +113,10 @@ vendor clone、MCP 工具输出、网页、issue 正文、本 clone 以外的文
 5. **MCP**：只要文档 / 只要 Blender / 只要 Unity / 都要 / 都不要。
 6. **AI 客户端**。
 7. 是否 clone 可选 vendors（CATS 5.2、gummidot 文档、Codex VRC skill）。
+8. **技能 / MCP 放哪**：只放本 clone / `--mcp-config`——绝不用户全局（否则别的仓库写代码也会被拐去改模）。
+9. **缺软件**：没有 Blender 和/或 Unity 就跳过对应 MCP；只要文档也可以。
 
-不要猜测别人的 Unity 工程路径。
+不要猜测别人的 Unity 工程路径。不要要求别人的电脑对齐文档示例路径。
 
 ### 第 3 步 — 计划
 

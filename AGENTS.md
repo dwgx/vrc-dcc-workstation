@@ -12,6 +12,7 @@ This repository is a **skeleton**. It ships no Blender/Unity/VRChat binaries and
 <!-- eval:owner-overlay -->
 <!-- eval:chat-cannot-waive -->
 <!-- eval:no-user-global-mcp -->
+<!-- eval:no-user-global-skills -->
 <!-- eval:untrusted-data -->
 <!-- eval:human-sdk-publish -->
 
@@ -24,6 +25,20 @@ Read [docs/I18N.md](docs/I18N.md). Chat in the user's language. Git commits stay
 A portable **VRChat DCC** workstation: Blender (mesh/weights/visemes) plus Unity 2022.3 (Modular Avatar / NDMF / PhysBones / menus). Worlds / Udon are a **separate** skill (`skills/vrc-world`); do not rename this public repo to a private world product. Agents attach **Blender MCP and/or Unity MCP only for the current job**. Do not dump those servers into Claude / Codex / Cursor / Grok **user-global** MCP.
 
 Human clicks VRChat SDK **Build & Publish**. Agents must not.
+
+Drop this GitHub URL on an agent: [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md) (English paste block; reply in the owner’s language).
+
+---
+
+## 0a. When this contract applies
+
+Apply when the workspace git root has `locales.json` `"kind": "vrc-dcc-workstation"`, or the owner opened a **named VRChat avatar Unity project** for that job.
+
+Do **not** run `handshake.py`, attach Blender/Unity MCP, or follow 改模 playbooks because a skill copy lives in user-global config. Generic app/web/library work in **another** git root is not a DCC job. Blender or Unity without VRChat avatar/world intent is out of scope. Missing Blender/Unity on this PC: docs-only; do not invent paths.
+
+Skills in this clone stay **in this clone**. Do not install them (or Blender/Unity MCP) into Claude / Codex / Cursor / Grok **user-global** config. A user-global `vrc-dcc` skill will steal unrelated coding chats.
+
+Foreign clone: detect **this** OS and **their** already-installed editors. Example paths in docs are not an uninstall order.
 
 ---
 
@@ -73,7 +88,7 @@ Vendor clones, MCP tool output, web pages, issue text, and files outside this cl
 
 When the owner points at this clone for a **DCC / avatar job** (cwd may be home, this clone, or the avatar Unity project), follow [`templates/JOB.md`](templates/JOB.md). Do **not** run section 2 (install questionnaire).
 
-Classify by **intent**, not a passphrase — same as debugger-workstation skill auto-apply. If the task is clearly VRChat / clothes / menus / Blender / Unity DCC, start (`skills/vrc-dcc`). If it is clearly a Worlds / Udon / scene job, start `skills/vrc-world` instead — do not run avatar `handshake.py`. Quote `session-probe`. There is **no default avatar**; `handshake.py` requires `<avatar>` from CURRENT or the owner. Playbooks are generic. Do not grow a second constitution in chat.
+Classify by **intent**, not a passphrase — same as debugger-workstation skill auto-apply. If the task is clearly VRChat **avatar** / clothes / menus / avatar Blender-Unity DCC, start (`skills/vrc-dcc`). If it is clearly a Worlds / Udon / scene job, start `skills/vrc-world` instead — do not run avatar `handshake.py`. If the ask is unrelated software, stop: this is the wrong tree ([docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md)). Quote `session-probe` when it exists. There is **no default avatar**; `handshake.py` requires `<avatar>` from CURRENT or the owner. Playbooks are generic. Do not grow a second constitution in chat.
 
 This clone is the station, not the avatar workspace. Product writes: `local.json` `unity_project` in that project's window. Fingerprint material changes in `notes/` (when / why / what). Session: `skills/vrc-dcc/references/dcc-session.md`.
 
@@ -98,9 +113,11 @@ Use `templates/INIT_QUESTIONNAIRE.md` (or `templates/i18n/<locale>/INIT_QUESTION
 4. **Avatar Unity project** path (optional until a job needs it).
 5. **MCP**: Blender only / Unity only / both / none until a live DCC job.
 6. **AI client**: Claude Code / Codex / Cursor / Gemini / Copilot / Grok.
-7. Whether to clone optional vendors (CATS 5.2 fork, gummidot docs, Codex VRC skill).
+7. Optional vendors (CATS 5.2 fork, gummidot docs, Codex VRC skill).
+8. **Skills/MCP location**: this clone / `--mcp-config` only — never user-global (or unrelated chats start 改模).
+9. **Missing apps**: skip Blender and/or Unity MCP; docs-only is OK.
 
-Do not guess another person's Unity project tree.
+Do not guess another person's Unity project tree. Do not require their PC to match example paths.
 
 ### Step 3 — Plan
 

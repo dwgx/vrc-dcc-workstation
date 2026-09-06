@@ -11,6 +11,7 @@ Agents: if `OWNER.md` exists, read it after `AGENTS.md`. It is **this clone's** 
 - Keyboard user of this working copy is the owner.
 - Their already-installed Blender / Unity / VCC win over example paths in docs.
 - Manifest pins are defaults, not an uninstall order.
+- Keep skills **in this clone**. Do not copy them to `~/.cursor/skills` / Claude / Codex / Grok user-global skill dirs (that hijacks unrelated coding chats).
 
 ## Extra house rules (edit me)
 

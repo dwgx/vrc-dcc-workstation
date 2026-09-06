@@ -10,6 +10,8 @@ Any agent (Claude Code / Codex / Cursor / Gemini / Copilot / Grok) or human can 
 
 After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so the next session does not rediscover the same failure. See [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md). Station self-improve (no default avatar, fail-closed identity): [docs/ITERATION.md](docs/ITERATION.md). What is **not** in git: [docs/SOURCES.md](docs/SOURCES.md).
 
+**Give this URL to an agent:** [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md) — English paste block; the agent reports in **your** language. Install is ask-then-act. Skills stay in **this clone** so they do not hijack unrelated coding chats.
+
 > This repository ships **no** Blender/Unity/VRChat binaries and **no** avatar projects. See [DISCLAIMER.md](DISCLAIMER.md).
 
 ---
@@ -33,6 +35,7 @@ After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so 
 | `skills/vrc-dcc/` / `skills/vrc-review/` / `skills/vrc-world/` | Avatar playbook, dual-axis review, Worlds/Udon (draft) |
 | `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/AVATAR_PROFILE.md` / `docs/ITERATION.md` | Avatar vs world vs station; world stub; public PR slices; no default character; how the base iterates |
 | `docs/SOURCES.md` | What stays out of git (meshes, vendor zips); steal vs refuse public stacks |
+| `docs/DROP_ON_AGENT.md` | English paste block: clone URL → install questionnaire or 改模 job; do not hijack other repos |
 | `manifests/` | Live pins (PyPI / GitHub / VPM). Re-check with `scripts/refresh-pins.ps1` |
 | `mcp/*.template` | Opt-in MCP. Never user-global |
 | `scripts/bootstrap.ps1` | Dry-run by default; `-Apply` writes gitignored `local.json`, `.mcp.json`, `.cursor/mcp.json` |
@@ -42,7 +45,8 @@ After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so 
 ```powershell
 git clone https://github.com/dwgx/vrc-dcc-workstation.git
 cd vrc-dcc-workstation
-# handshake: read AGENTS.md, fill questionnaire
+# Open this folder in the AI client. Paste docs/DROP_ON_AGENT.md, or say "set up this clone".
+# The agent must ask templates/INIT_QUESTIONNAIRE.md before bootstrap.ps1 -Apply.
 powershell -File .\scripts\bootstrap.ps1
 powershell -File .\scripts\bootstrap.ps1 -Apply
 ```
@@ -65,6 +69,7 @@ There is a live repo named TunaSync UnityMCP-VCC; **do not use it** (or swax/Uni
 - Agent-driven VRChat SDK **Build & Publish**
 - Official Unity 6 MCP on a 2022.3 avatar project
 - Blender + Unity MCP in four-runtime **user-global** config
+- Copying `skills/` into user-global skill directories (unrelated repos start 改模)
 - Two blender-mcp GUI clients at once
 
 ## License

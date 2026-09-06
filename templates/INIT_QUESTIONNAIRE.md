@@ -53,4 +53,16 @@ Claude Code / Codex / Cursor / Gemini / Copilot / Grok — so we emit the matchi
 - [ ] Agent will not install official Unity 6 MCP into this 2022.3 project
 - [ ] Agent will not store SDK cookies
 
-After answers: write a short plan, then execute.
+## Q8. Skills and MCP location
+
+- [ ] Keep skills and MCP **in this clone** / `--mcp-config` only (recommended)
+- [ ] I understand: do **not** copy `skills/` into `~/.cursor/skills` or other user-global skill dirs (that hijacks unrelated coding chats)
+
+## Q9. Missing apps on this PC
+
+- [ ] No Blender — skip Blender MCP; docs-only is OK
+- [ ] No Unity — skip Unity MCP; docs-only is OK
+- [ ] Both present — attach later, only for a live scene
+- Recommended: never invent paths; never uninstall an existing editor to match example docs.
+
+After answers: write a short plan, then execute. Do not `-Apply` until the owner confirms.

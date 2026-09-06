@@ -6,7 +6,7 @@
 
 휴대용 VRChat DCC 워크스테이션 **뼈대**입니다. **Blender 5.x LTS**(메시 / 웨이트 / 비젬)와 **Unity 2022.3**(Modular Avatar / NDMF / PhysBone / 메뉴)를 MCP로 AI 에이전트가 다룹니다. 월드 / Udon은 별도 스킬(`skills/vrc-world`). 이 저장소는 사설 월드 제품이 아닙니다.
 
-clone한 뒤 [docs/i18n/ko/I18N.md](docs/i18n/ko/I18N.md)로 UI 언어를 정하세요. **설치 / 세팅**일 때만 [AGENTS.ko.md](AGENTS.ko.md) 핸드셰이크. 아바타 작업은 `templates/JOB.md` (의도로 분류, 암호 문구 없음). 대화는 한국어, git 커밋 메시지는 영어입니다. 아바타 본체는 포함하지 않습니다.
+clone한 뒤 [docs/i18n/ko/I18N.md](docs/i18n/ko/I18N.md)로 UI 언어를 정하세요. **설치 / 세팅**일 때만 [AGENTS.ko.md](AGENTS.ko.md) 핸드셰이크. 아바타 작업은 `templates/JOB.md` (의도로 분류, 암호 문구 없음). 대화는 한국어, git 커밋 메시지는 영어입니다. 아바타 본체는 포함하지 않습니다. 에이전트에 건넬 영어 블록: [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md). 스킬은 **이 clone**에 둡니다(사용자 전역 금지).
 
 작업 후 `skills/vrc-review`로 점수를 매기고 `notes/`에 남깁니다. [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md).
 

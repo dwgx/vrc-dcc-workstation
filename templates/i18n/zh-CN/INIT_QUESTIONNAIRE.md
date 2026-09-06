@@ -53,4 +53,16 @@ Claude Code / Codex / Cursor / Gemini / Copilot / Grok — 只生成对应入口
 - [ ] Agent 不会把官方 Unity 6 MCP 装进这个 2022.3 工程
 - [ ] Agent 不会保存 SDK cookie
 
-答完后先写短计划，再执行。
+## Q8. 技能和 MCP 放哪
+
+- [ ] 只放**本 clone** / `--mcp-config`（推荐）
+- [ ] 明白：不要把 `skills/` 拷进 `~/.cursor/skills` 或其他用户全局技能目录（会把别的写代码对话拐去改模）
+
+## Q9. 这台电脑缺软件
+
+- [ ] 没有 Blender — 跳过 Blender MCP；只要文档也可以
+- [ ] 没有 Unity — 跳过 Unity MCP；只要文档也可以
+- [ ] 都有 — 以后改现场景再挂
+- 推荐：不要编路径；不要为了对齐文档示例而卸载现有编辑器。
+
+答完后先写短计划，再执行。主人确认前不要 `-Apply`。

@@ -10,7 +10,7 @@ The workstation is a **reusable agent contract + playbooks + named Editor tools*
 
 **No.** Live bodies, Booth packs, USB shelves, FBX/VRM, `.unitypackage`, textures, and 15-file world kits stay in the clone-owner overlay / Unity project / `F:` shelf. Public git must stay small enough to clone. Per-body facts live in gitignored `maps/<id>/`.
 
-What *does* belong in git: how to handshake any named avatar, fail-closed identity, MA/bit/GoGo/nipple **rules**, named `vrc_*`, and the iteration loop ([ITERATION.md](ITERATION.md)).
+What *does* belong in git: how to handshake any named avatar, fail-closed identity, MA/bit/GoGo/nipple **rules**, named `vrc_*`, the drop-on-agent paste ([DROP_ON_AGENT.md](DROP_ON_AGENT.md)), and the iteration loop ([ITERATION.md](ITERATION.md)).
 
 ## How web / Astra research enters this tree
 

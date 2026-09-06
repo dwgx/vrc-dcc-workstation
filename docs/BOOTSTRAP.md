@@ -18,6 +18,8 @@ How `-Apply` turns this skeleton into a station. Dry-run is the default. Does no
 
 Same JSON. Gitignored (paths / uvx). Attach still requires a live Blender MCP server / Unity MCP window.
 
+Missing Blender or Unity: bootstrap reports `MISSING` and continues. Docs-only is a valid station. Do not invent paths. Do not uninstall an existing editor to match example docs.
+
 ## `local.json`
 
 Always gitignored. `-Apply` writes `install_root` plus discovered Unity/Blender/uvx when the file is new. `ui_language` is written only with `-UiLanguage` or `WORKSTATION_UI_LANG` / `VRC_DCC_UI_LANG`, so an English Windows UI cannot lock out a Chinese chat.

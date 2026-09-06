@@ -2,23 +2,24 @@
 name: vrc-dcc
 description: >-
   VRChat avatar DCC (改模, clothes, visemes, PhysBones, Modular Avatar,
-  NDMF, FaceEmo, lilToon, FBX, VRM, CATS, Blender, Unity). Auto-apply
-  when the user wants to edit a VRChat avatar or the task is clearly
-  Blender/Unity for an avatar — do not wait to be named. Worlds / Udon:
-  skills/vrc-world, not this file. Load slice-loop.md:
-  python maps/handshake.py <avatar> then python maps/gate.py begin, then
-  named vrc_audit / vrc_pose_bounds (not invented execute_code). Read
-  AGENTS.md in this clone. Attach Blender/Unity MCP only for this job, never
-  user-global MCP. Never click SDK Build & Publish.
+  NDMF, FaceEmo, lilToon, FBX, VRM, CATS). Auto-apply only when git root
+  locales.json kind is vrc-dcc-workstation, or the owner named a VRChat
+  avatar job. Do not use for generic app/web/game code, non-VRChat Unity,
+  Blender film/VFX, or unrelated PRs. Do not auto-apply a user-global copy
+  onto another repo. Worlds/Udon: skills/vrc-world. handshake.py <avatar>
+  then gate.py then named vrc_* (not invented execute_code). Never
+  user-global MCP. Never SDK Build & Publish.
 ---
 
 # vrc-dcc
 
 Canonical after clone: this repository root. Machine paths belong in gitignored `local.json` (see `local.json.example`).
 
+**Scope:** this clone (`locales.json` kind `vrc-dcc-workstation`) or a named VRChat avatar Unity window. Another git root whose ask is not VRChat 改模: stop. Do not handshake, do not attach Blender/Unity MCP. Keep this skill **in this clone**; do not copy it to user-global skills.
+
 ## 1. Init (every VRC job)
 
-If the window cwd is the **avatar Unity project**, or the ask is clearly a VRChat / avatar / DCC job, load [references/dcc-session.md](references/dcc-session.md), [references/slice-loop.md](references/slice-loop.md), and [references/token-budget.md](references/token-budget.md) first. Classify by intent (see `templates/JOB.md`); do not require a passphrase. Do not treat four-runtime `CONTINUE.md` as this job after `kind: dcc` or after that intent. Home/station cwd: do not write the avatar Unity project; paste for a Unity window. Door: `notes/CURRENT.md` Products table names `<avatar>`. Run `python maps/handshake.py <avatar>`. If `vrc_audit` is missing from `unityMCP` after reopen, Unity window: `scripts/install-vrc-dcc-tools.ps1` then Reload.
+If the window cwd is a **named VRChat avatar Unity project**, or the ask is clearly a VRChat avatar / DCC job **in this clone**, load [references/dcc-session.md](references/dcc-session.md), [references/slice-loop.md](references/slice-loop.md), and [references/token-budget.md](references/token-budget.md) first. Classify by intent (see `templates/JOB.md`); do not require a passphrase. Do not treat four-runtime `CONTINUE.md` as this job after `kind: dcc` or after that intent. Home/station cwd: do not write the avatar Unity project; paste for a Unity window. Door: `notes/CURRENT.md` Products table names `<avatar>`. Run `python maps/handshake.py <avatar>`. If `vrc_audit` is missing from `unityMCP` after reopen, Unity window: `scripts/install-vrc-dcc-tools.ps1` then Reload. Another git root whose ask is not VRChat: stop (see [docs/DROP_ON_AGENT.md](../../docs/DROP_ON_AGENT.md)).
 
 1. Read `AGENTS.md`, gitignored `OWNER.md` if present, and `local.json`. Empty `local.json` during **install** is the questionnaire. A DCC job with `notes/` already there: skip `INIT_QUESTIONNAIRE`.
 2. Read `notes/CURRENT.md` (door). `INDEX.md` is the archive. Then `python maps/handshake.py <avatar>`. Do **not** dump MAP + LIBRARY on init. Clothes/plugins / USB packs: `query.py` on demand (`maps/AGENT.md` when the slice is find/Booth). C#: `maps/GRAPHS.md` on demand. Snapshot only if CURRENT names it.
