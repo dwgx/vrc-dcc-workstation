@@ -9,6 +9,7 @@ Not station **install**. Same split as debugger-workstation: the skill descripti
 | Owner intent | Path |
 |---|---|
 | Initialize / install / set up **this clone** | `AGENTS.md` section 2 (questionnaire) |
+| Improve / expand **this clone** (maps CLI, slices, i18n, not Unity mutate) | `docs/MAINTAIN.md` + `skills/vrc-dcc/references/maintain-loop.md`; live board gitignored `notes/HANDOFF.md` |
 | Edit a VRChat avatar, clothes, menus, visemes, PhysBones, avatar Blender/Unity DCC | **This file** + `skills/vrc-dcc/references/dcc-session.md` |
 | Edit or audit a VRChat **World** / Udon / scene | `skills/vrc-world` + `docs/WORLD.md` (not avatar handshake) |
 | Unrelated software in **another** git root (app, web, library, non-VRC game) | **Stop.** Wrong tree. [docs/DROP_ON_AGENT.md](../docs/DROP_ON_AGENT.md) |
@@ -35,4 +36,4 @@ Copying `templates/avatar-project/` is **optional** on a machine that already ha
 
 After ~100 silent MCP turns, **new chat**. Do not invent a second constitution.
 
-Station clone self-improve (identity, maps CLI, playbooks): [docs/ITERATION.md](../docs/ITERATION.md). Not a Unity mutate.
+Station clone self-improve (identity, maps CLI, playbooks): [docs/ITERATION.md](../docs/ITERATION.md) and gitignored `notes/HANDOFF.md`. Not a Unity mutate.

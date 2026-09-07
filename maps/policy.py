@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from allowlist import AVATAR_PREFIX, deny_reason
+
 SCHEMA = 1
 PLACEHOLDERS = frozenset({"", "AVATAR_ID"})
 
@@ -78,4 +80,11 @@ def validate_policy(folder_id: str, data: Any) -> list[str]:
             if t in seen_allow:
                 errs.append("POLICY allow_mcp_tools duplicate %r" % t)
             seen_allow.add(t)
+            name = t.strip()
+            if not name.startswith(AVATAR_PREFIX):
+                errs.append("POLICY allow_mcp_tools %r must be a vrc_* name" % t)
+                continue
+            why = deny_reason(name)
+            if why:
+                errs.append("POLICY allow_mcp_tools %r is denied (%s)" % (t, why))
     return errs

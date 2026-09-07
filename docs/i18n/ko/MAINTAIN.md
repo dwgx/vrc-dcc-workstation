@@ -13,7 +13,7 @@
 3. 고칠 파일을 계획한다. **스톱 라인**（SDK Publish, 사용자 전역 MCP, 2022.3의 Unity 6 MCP）을 바꾸면 확인을 기다린다.
 4. 패치. 절 순서와 i18n 형제를 맞춘다（`docs/I18N.md`）.
 5. 쌍축 리뷰（`skills/vrc-review`）. 증거는 실제로 실행한 명령.
-6. 남길 교훈 → `notes/`（`templates/AFTER_ACTION.md`）. 상시 규칙 → 스킬 또는 `AGENTS.md`. [AGENT_EVOLUTION.md](../../AGENT_EVOLUTION.md).
+6. 남길 교훈 → `notes/`（`templates/AFTER_ACTION.md`）. 상시 규칙 → 스킬 또는 `AGENTS.md`. [AGENT_EVOLUTION.md](../../AGENT_EVOLUTION.md). 이 clone의 다음 슬라이스는 gitignore된 `notes/HANDOFF.md`（[`templates/HANDOFF.md`](../../../templates/HANDOFF.md)）. 확장 레인: `notes/tracks/`.
 
 `.cursor/`나 채팅에 두 번째 헌법을 만들지 않는다. 얇은 클라이언트 파일은 `AGENTS.md`를 가리킨다.
 
@@ -25,7 +25,7 @@ Codex는 `AGENTS.override.md`도 읽을 수 있다（가까운 경로가 이김�
 
 ## 커밋하지 말 것
 
-`OWNER.md`, `local.json`, `LOCAL-THIS-PC.md`, 날짜 `notes/YYYY-MM-DD-*.md`, `notes/CURRENT.md`, 살아있는 `maps/<avatar>/`, USB `catalog.json` / `notes.json` / `LIBRARY.md`, SDK 쿠키, 아바타 프로젝트, vendor 바이너리. `.gitignore`와 `DISCLAIMER.ko.md`.
+`OWNER.md`, `local.json`, `LOCAL-THIS-PC.md`, 날짜 `notes/YYYY-MM-DD-*.md`, `notes/CURRENT.md`, `notes/HANDOFF.md`, `notes/tracks/`, 살아있는 `maps/<avatar>/`, USB `catalog.json` / `notes.json` / `LIBRARY.md`, SDK 쿠키, 아바타 프로젝트, vendor 바이너리. `.gitignore`와 `DISCLAIMER.ko.md`.
 
 ## 업스트림 vs 이 fork
 

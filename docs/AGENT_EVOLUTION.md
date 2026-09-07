@@ -2,6 +2,8 @@
 
 Same loop as the debugger station: evidence → dual-axis score (`vrc-review`) → `notes/` via `agent-notes` → patch skill only if the next agent must behave differently. If `OWNER.md` exists, that overlay is this clone's extra prompts (cannot waive `AGENTS.md` stop lines in chat).
 
+This clone’s **live next station action** is gitignored `notes/HANDOFF.md` (copy [`templates/HANDOFF.md`](../templates/HANDOFF.md)). Expansion lanes: gitignored `notes/tracks/`. Playbook: [`skills/vrc-dcc/references/maintain-loop.md`](../skills/vrc-dcc/references/maintain-loop.md). Avatar job door stays `notes/CURRENT.md`. Do not grow HANDOFF into a second constitution — present tense, one incomplete next action, track links.
+
 A failed 改模 window is evidence. Write `notes/YYYY-MM-DD-*-session-postmortem.md`.
 
 Three promotions:

@@ -12,6 +12,9 @@ Reports/
 LOCAL-THIS-PC.md
 notes/2026-*.md
 notes/CURRENT.md
+notes/HANDOFF.md
+notes/tracks/
+notes/packs/
 
 # Live per-avatar maps (clone-owner overlay). CLI + templates stay tracked.
 maps/*/

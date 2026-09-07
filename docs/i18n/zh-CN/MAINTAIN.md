@@ -13,7 +13,7 @@
 3. 计划将改的文件。若改的是**红线**（SDK Publish、用户全局 MCP、2022.3 上的 Unity 6 MCP），先等确认。
 4. 动手。章节顺序与 i18n 兄弟文件保持同步（`docs/I18N.md`）。
 5. 双轴审查（`skills/vrc-review`）。证据 = 实际跑过的命令。
-6. 可沉淀的教训 → `notes/`（`templates/AFTER_ACTION.md`）。站立规则 → 技能或 `AGENTS.md`。见 [AGENT_EVOLUTION.md](../../AGENT_EVOLUTION.md)。
+6. 可沉淀的教训 → `notes/`（`templates/AFTER_ACTION.md`）。站立规则 → 技能或 `AGENTS.md`。见 [AGENT_EVOLUTION.md](../../AGENT_EVOLUTION.md)。本 clone 的活下一片：gitignore 的 `notes/HANDOFF.md`（从 [`templates/HANDOFF.md`](../../../templates/HANDOFF.md) 复制）。扩展轨：`notes/tracks/`。Playbook：[`maintain-loop.md`](../../../skills/vrc-dcc/references/maintain-loop.md)。
 
 不要在 `.cursor/` 或聊天里另长一套宪法。瘦客户端文件继续指向 `AGENTS.md`。
 
@@ -25,7 +25,7 @@ Codex 也可能读 `AGENTS.override.md`（更近路径优先）。本模板仍�
 
 ## 不要提交
 
-`OWNER.md`、`local.json`、`LOCAL-THIS-PC.md`、日期 `notes/YYYY-MM-DD-*.md`、`notes/CURRENT.md`、活的 `maps/<avatar>/`、USB `catalog.json` / `notes.json` / `LIBRARY.md`、SDK cookie、角色工程、vendor 二进制。见 `.gitignore` 与 `DISCLAIMER.zh-CN.md`。
+`OWNER.md`、`local.json`、`LOCAL-THIS-PC.md`、日期 `notes/YYYY-MM-DD-*.md`、`notes/CURRENT.md`、`notes/HANDOFF.md`、`notes/tracks/`、活的 `maps/<avatar>/`、USB `catalog.json` / `notes.json` / `LIBRARY.md`、SDK cookie、角色工程、vendor 二进制。见 `.gitignore` 与 `DISCLAIMER.zh-CN.md`。
 
 ## 上游 vs 本 fork
 

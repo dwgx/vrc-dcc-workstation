@@ -10,6 +10,8 @@ This repository stays **`vrc-dcc-workstation`**. Do not rename the public git re
 
 A private Worlds Unity tree is **a product that uses the station**. It is not this GitHub repo. Do not commit world IDs, textures, or live overlay maps.
 
+A clone-owner **live-test avatar** (whatever sits in `local.json` `unity_project`) is overlay only. It is **not** the public skeleton’s counterpart, not a default character, and not required for foreign clones.
+
 Per-avatar facts (meshes, Int values, freeze) live in gitignored `maps/<avatar>/`. Public playbooks are generic. [AVATAR_PROFILE.md](AVATAR_PROFILE.md).
 
 ## Route by intent
@@ -25,6 +27,6 @@ Do not send a world job down the avatar `handshake.py <avatar>` path. Do not ins
 
 ## Core vs adapters (not landed as C# yet)
 
-Proposed split: SDK-independent Core (identity, policy, lease, evidence) + Avatar adapter + World adapter. Until that lands, avatar named `vrc_*` stay on `VRCSDK3A` + MA. World named tools in docs are **proposed**, not callable.
+Proposed split: SDK-independent Core (identity, policy, lease, evidence) + Avatar adapter + World adapter. Python Core pieces are in this tree ([FRAMEWORK.md](FRAMEWORK.md)). Until C# splits, avatar named `vrc_*` stay on `VRCSDK3A` + MA. World named tools are **proposed**, not callable. Station world CLI does not POST `8080`.
 
 See [PR_SLICES.md](PR_SLICES.md). Human still clicks SDK **Build & Publish** on both domains.

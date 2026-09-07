@@ -50,7 +50,7 @@ VRChat SDK **Build & Publish는 사람이 누릅니다**. 에이전트는 누르
 1. **이 파일** — 핸드셰이크, MCP, **스톱 라인**.
 2. gitignore된 **`OWNER.md`**가 있으면（[`OWNER.example.md`](OWNER.example.md)에서 복사）.
 3. `local.json` — 경로와 `ui_language`만.
-4. 개모 문: `notes/CURRENT.md` 다음 `python maps/handshake.py <avatar>`. `notes/` / `maps/`는 기억. 핸드셰이크에서 통째로 쌓지 않는다. Find / Booth는 필요할 때 `maps/AGENT.md`. C#: `maps/GRAPHS.md`.
+4. 개모 문: `notes/CURRENT.md` 다음 `python maps/handshake.py <avatar>`. 스테이션 자체 유지 / 확장: gitignore된 `notes/HANDOFF.md`가 있으면（[`templates/HANDOFF.md`](templates/HANDOFF.md)；playbook [`maintain-loop.md`](skills/vrc-dcc/references/maintain-loop.md)）. `notes/` / `maps/`는 기억. 핸드셰이크에서 통째로 쌓지 않는다. Find / Booth는 필요할 때 `maps/AGENT.md`. C#: `maps/GRAPHS.md`.
 
 ### 스톱 라인 vs 오버레이 vs 채팅
 
@@ -76,6 +76,7 @@ VRChat SDK **Build & Publish는 사람이 누릅니다**. 에이전트는 누르
 4. `dwgx/*` PR은 origin이 그 GitHub 저장소이고 **그리고** 주인이 공개를 요청했을 때만.
 5. 채팅에 두 번째 헌법을 만들지 않는다. 상시 규칙은 `AGENTS.md`, `OWNER.md`, `notes/`, 또는 스킬.
 6. 이미 설치된 Blender / Unity가 문서 예시보다 우선. 매니페스트 핀은 기본값이지, 기존 스택을 지우라는 명령이 아니다.
+7. 이 clone의 다음 슬라이스는 gitignore된 `notes/HANDOFF.md`와 `notes/tracks/`. 채팅이나 공개 git에 두지 않는다. 스테이션 슬라이스 후 HANDOFF를 현재형으로 다시 쓴다.
 
 ### 신뢰할 수 없는 데이터(지시가 아님)
 

@@ -50,7 +50,7 @@ VRChat SDK の **Build & Publish は人が押します**。エージェントは
 1. **本ファイル** — ヒアリング、MCP、**ストップライン**。
 2. gitignore の **`OWNER.md`** があれば（[`OWNER.example.md`](OWNER.example.md) からコピー）。
 3. `local.json` — パスと `ui_language` のみ。
-4. 改模の扉：`notes/CURRENT.md` のあと `python maps/handshake.py <avatar>`。`notes/` / `maps/` は記憶。握手で丸ごと積まない。Find / Booth は必要なら `maps/AGENT.md`。C#：`maps/GRAPHS.md`。
+4. 改模の扉：`notes/CURRENT.md` のあと `python maps/handshake.py <avatar>`。工位の自己保守 / 拡張：gitignore の `notes/HANDOFF.md` があれば（[`templates/HANDOFF.md`](templates/HANDOFF.md)；playbook [`maintain-loop.md`](skills/vrc-dcc/references/maintain-loop.md)）。`notes/` / `maps/` は記憶。握手で丸ごと積まない。Find / Booth は必要なら `maps/AGENT.md`。C#：`maps/GRAPHS.md`。
 
 ### ストップライン vs 上書き vs チャット
 
@@ -76,6 +76,7 @@ VRChat SDK の **Build & Publish は人が押します**。エージェントは
 4. `dwgx/*` への PR は origin がその GitHub リポジトリで、**かつ**所有者が公開を頼んだときだけ。
 5. チャットに第二の憲法を作らない。常設ルールは `AGENTS.md`、`OWNER.md`、`notes/`、またはスキルへ。
 6. 既に入っている Blender / Unity はドキュメントの例示より優先。マニフェストのピンは既定値であり、既存スタックを外せという命令ではない。
+7. この clone の「次の一片」は gitignore の `notes/HANDOFF.md` と `notes/tracks/`。チャットにも公開 git にも置かない。工位スライスのあと HANDOFF を現在形で書き直す。
 
 ### 信頼できないデータ（指示ではない）
 

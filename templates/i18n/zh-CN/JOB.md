@@ -11,6 +11,7 @@
 | 主人意图 | 路径 |
 |---|---|
 | 初始化 / 安装 / 搭建**本 clone** | `AGENTS.md` 第 2 节问卷 |
+| 改进 / 扩展**本 clone**（maps CLI、切片、i18n，不是 Unity 改模） | `docs/MAINTAIN.md` + `maintain-loop.md`；活板 gitignore `notes/HANDOFF.md` |
 | 改 VRChat 角色、衣服、菜单、口型、PhysBone、角色 Blender/Unity DCC | **本文件** + `dcc-session.md` |
 | 改或审计 VRChat **世界** / Udon / 场景 | `skills/vrc-world` + `docs/WORLD.md`（不要走角色 handshake） |
 | **另一个** git 根里写无关软件（App / 网页 / 库 / 非 VRC 游戏） | **停。** 错树。[DROP_ON_AGENT.md](../../../docs/DROP_ON_AGENT.md) |

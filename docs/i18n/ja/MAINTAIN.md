@@ -13,7 +13,7 @@
 3. 直すファイルを計画する。**ストップライン**（SDK Publish、ユーザーグローバル MCP、2022.3 上の Unity 6 MCP）を変えるなら確認を待つ。
 4. パッチ。見出し順と i18n 兄弟を同期する（`docs/I18N.md`）。
 5. 双軸レビュー（`skills/vrc-review`）。証拠は実際に走ったコマンド。
-6. 残す教訓 → `notes/`（`templates/AFTER_ACTION.md`）。常設ルール → スキルか `AGENTS.md`。[AGENT_EVOLUTION.md](../../AGENT_EVOLUTION.md)。
+6. 残す教訓 → `notes/`（`templates/AFTER_ACTION.md`）。常設ルール → スキルか `AGENTS.md`。[AGENT_EVOLUTION.md](../../AGENT_EVOLUTION.md)。この clone の次スライスは gitignore の `notes/HANDOFF.md`（[`templates/HANDOFF.md`](../../../templates/HANDOFF.md)）。拡張レーン：`notes/tracks/`。
 
 `.cursor/` やチャットに第二の憲法を作らない。薄いクライアントファイルは `AGENTS.md` を指したまま。
 
@@ -25,7 +25,7 @@ Codex は `AGENTS.override.md` も読むことがある（近いパスが勝つ�
 
 ## コミットしないもの
 
-`OWNER.md`、`local.json`、`LOCAL-THIS-PC.md`、日付付き `notes/YYYY-MM-DD-*.md`、`notes/CURRENT.md`、生きている `maps/<avatar>/`、USB `catalog.json` / `notes.json` / `LIBRARY.md`、SDK cookie、アバタープロジェクト、vendor バイナリ。`.gitignore` と `DISCLAIMER.ja.md`。
+`OWNER.md`、`local.json`、`LOCAL-THIS-PC.md`、日付付き `notes/YYYY-MM-DD-*.md`、`notes/CURRENT.md`、`notes/HANDOFF.md`、`notes/tracks/`、生きている `maps/<avatar>/`、USB `catalog.json` / `notes.json` / `LIBRARY.md`、SDK cookie、アバタープロジェクト、vendor バイナリ。`.gitignore` と `DISCLAIMER.ja.md`。
 
 ## 上流 vs この fork
 

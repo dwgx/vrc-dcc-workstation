@@ -49,10 +49,17 @@ def avatar_dir(name: str) -> Path:
 
 
 def load_review(name: str) -> dict:
-    path = avatar_dir(name) / "REVIEW.json"
+    return load_review_folder(avatar_dir(name))
+
+
+def load_review_folder(folder: Path) -> dict:
+    path = folder / "REVIEW.json"
     if not path.is_file():
         raise SystemExit("missing %s (copy maps/templates/REVIEW.json)" % path)
-    return json.loads(path.read_text(encoding="utf-8"))
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise SystemExit("REVIEW.json must be an object")
+    return data
 
 
 def load_graph(name: str) -> dict | None:

@@ -14,6 +14,6 @@ Suggested overlay files (create when the owner names a world id):
 | `REVIEW.json` | Proven vs new; `world` rows need human in-world evidence |
 | `POLICY.json` | Disable raw execute tools; directory bounds |
 
-Do not copy an avatar `POLICY.json` onto a world. Do not copy one world’s freeze onto another.
+Station framework (no Unity): `python maps/init_world.py <id>` then `world_handshake.py` / `world_gate.py`. Named `world_*` stay proposed.
 
 Station skills: `skills/vrc-world`. Pipeline: `docs/WORLD.md`.

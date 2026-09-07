@@ -6,6 +6,8 @@ Architecture (layers, new avatar, iterate loop): [README.md](README.md). Three g
 |---|---|
 | What this is / how agents work | [AGENT.md](AGENT.md) |
 | **New avatar map** | `python maps/init_avatar.py <id>` · [templates/AVATAR.md](templates/AVATAR.md) |
+| **New world map** | `python maps/init_world.py <id>` · [templates/WORLD.md](templates/WORLD.md) · [docs/FRAMEWORK.md](../docs/FRAMEWORK.md) |
+| World handshake / lease | `python maps/world_handshake.py <id>` · `python maps/world_gate.py <id> begin <review-id>` |
 | Product handshake (POLICY + JOB + REVIEW next) | `python maps/handshake.py <avatar>` · `python maps/handshake.py <avatar> --json` |
 | Which graph (clothes vs USB vs C#) | [GRAPHS.md](GRAPHS.md) |
 | Find on a **live avatar** | `python maps/query.py <avatar> <words>` or Read `maps/<avatar>/MAP.md` |

@@ -97,7 +97,7 @@ def acquire(
             return job, "LEASE_HELD"
         incoming = incoming or owned
     if not incoming:
-        incoming = uuid.uuid4().hex[:12]
+        return job, "NEED_HOLDER"
     keep = (
         current
         if current
@@ -127,8 +127,7 @@ def require(
     if not job.get("open_slice"):
         return "NO_LEASE_BEGIN"
     if not lease_of(job):
-        # Compat: JOB from before S00-c. Caller should stamp via acquire.
-        return None
+        return "NO_LEASE_BEGIN"
     if not lease_active(job, at):
         return "LEASE_EXPIRED"
     owned = str((lease_of(job) or {}).get("holder") or "")

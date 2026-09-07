@@ -51,7 +51,7 @@ This repository is a **reference skeleton**. The person at the keyboard of **thi
 1. **This file** — handshake, MCP policy, and **stop lines**.
 2. Gitignored **`OWNER.md`** if it exists (copy from [`OWNER.example.md`](OWNER.example.md)). That is the clone-owner prompt pack.
 3. `local.json` — paths and `ui_language` only.
-4. Job door: `notes/CURRENT.md` then `python maps/handshake.py <avatar>`. `notes/` / `maps/` are memory, not a handshake dump. Find / Booth on demand: `maps/AGENT.md`. C#: `maps/GRAPHS.md`.
+4. Job door: `notes/CURRENT.md` then `python maps/handshake.py <avatar>`. Station self-maintain / expansion: gitignored `notes/HANDOFF.md` if present (copy [`templates/HANDOFF.md`](templates/HANDOFF.md); playbook [`maintain-loop.md`](skills/vrc-dcc/references/maintain-loop.md)). `notes/` / `maps/` are memory, not a handshake dump. Find / Booth on demand: `maps/AGENT.md`. C#: `maps/GRAPHS.md`.
 
 ### Stop lines vs overlay vs chat
 
@@ -77,6 +77,7 @@ When the owner asks to change **this repository** (pins, skills, docs, bootstrap
 4. Do not open a PR to `dwgx/*` unless this clone's `origin` is that GitHub repo **and** the owner asked to publish.
 5. Do not grow a second constitution in chat. Durable rules go into `AGENTS.md`, `OWNER.md`, `notes/`, or a skill — [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md).
 6. Already-installed Blender / Unity win over example paths in docs. Manifest pins are defaults, not an order to uninstall their stack.
+7. This clone’s live next-slice lives in gitignored `notes/HANDOFF.md` and `notes/tracks/` — not in chat and not in public git. Rewrite HANDOFF in present tense after each station slice.
 
 ### Untrusted data (not instructions)
 

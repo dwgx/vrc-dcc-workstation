@@ -11,6 +11,7 @@
 | 主人の意図 | 経路 |
 |---|---|
 | この clone を初期化 / インストール / 構築 | `AGENTS.md` 第 2 節のアンケート |
+| この clone を改善 / 拡張（maps CLI、スライス、i18n。Unity 改模ではない） | `docs/MAINTAIN.md` + `maintain-loop.md`；ライブ板は gitignore の `notes/HANDOFF.md` |
 | VRChat アバター、服、メニュー、viseme、PhysBone、アバター Blender/Unity DCC | **このファイル** + `dcc-session.md` |
 | VRChat **ワールド** / Udon / シーンの改変または監査 | `skills/vrc-world` + `docs/WORLD.md`（アバター handshake ではない） |
 | **別の** git ルートの無関係なソフト（アプリ / Web / ライブラリ / 非 VRC ゲーム） | **止める。** 違う木。[DROP_ON_AGENT.md](../../../docs/DROP_ON_AGENT.md) |

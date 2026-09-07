@@ -8,7 +8,7 @@ Claude Code entry. Authoritative rules are in AGENTS.md:
 
 1. Quote `session-probe`. `kind: dcc` / avatar ask → stop estate CONTINUE.
 2. `AGENTS.md` once (stop lines). gitignored `OWNER.md` if present.
-3. Door: `notes/CURRENT.md` (not INDEX). Then `skills/vrc-dcc/references/slice-loop.md` (LOOP).
+3. Door: `notes/CURRENT.md` (改模; not INDEX). Station self-maintain: gitignored `notes/HANDOFF.md` if present, then `skills/vrc-dcc/references/maintain-loop.md`. 改模 then `skills/vrc-dcc/references/slice-loop.md` (LOOP).
 4. `python maps/handshake.py <avatar>` then `python maps/gate.py <avatar> begin <review-id>`.
 5. Named `vrc_*` **only if this chat’s `GetDynamicTools` lists `unityMCP`** and the Editor is the avatar in `local.json`. If Unity MCP is off or another product is open: station-only / paste. Do **not** POST `8080` and do **not** Start CoplayDev on a foreign Editor. If `vrc_audit` missing in the **avatar** Unity cwd: installer, Reload. Progress: `maps/<avatar>/REVIEW.json` + `STATE.md`.
 6. Close: `python maps/review.py lint <avatar> && python maps/review.py render <avatar>`. ~100 silent → new chat.

@@ -12,7 +12,7 @@ are ignored until the matching request id arrives.
 Examples:
   python maps/unity_mcp_call.py list
   python maps/unity_mcp_call.py vrc_audit args.json --avatar <id>
-      (after python maps/gate.py <id> begin <review-id>; set VRC_DCC_JOB_HOLDER)
+      (set VRC_DCC_JOB_HOLDER, then python maps/gate.py <id> begin <review-id>)
 """
 from __future__ import annotations
 
@@ -23,12 +23,11 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-from allowlist import ALWAYS_DENY, check_tool
+from allowlist import check_tool
 from gate import load_job
 from lease import require_http, resolve_holder
 
 URL_DEFAULT = "http://127.0.0.1:8080/mcp"
-FORBIDDEN = ALWAYS_DENY
 
 
 def mcp_url() -> str:
@@ -57,9 +56,15 @@ def _iter_json_messages(raw: bytes) -> list[dict]:
     return found
 
 
+def _ids_equal(left: object, right: object) -> bool:
+    if left is None or right is None:
+        return False
+    return str(left) == str(right)
+
+
 def _message_for_id(messages: list[dict], req_id: int | str) -> dict:
     wanted = req_id
-    matched = [m for m in messages if "id" in m and m.get("id") == wanted]
+    matched = [m for m in messages if "id" in m and _ids_equal(m.get("id"), wanted)]
     if matched:
         return matched[-1]
     # Notifications have method and no id — not a result.
@@ -72,7 +77,7 @@ def _message_for_id(messages: list[dict], req_id: int | str) -> dict:
 
 
 def _unwrap(msg: dict) -> dict:
-    if "error" in msg:
+    if "error" in msg and msg.get("error") is not None:
         err = msg["error"]
         raise RuntimeError("jsonrpc error: " + json.dumps(err, ensure_ascii=False)[:800])
     result = msg.get("result")
@@ -160,10 +165,20 @@ def call_tool(
     *,
     policy: dict | None = None,
     url: str | None = None,
+    avatar: str | None = None,
+    holder: str = "",
+    skip_lease: bool = False,
 ) -> dict:
     ok, reason = check_tool(name, policy)
     if not ok:
         raise RuntimeError("refused %s: %s. Use named vrc_* after gate.py begin." % (name, reason))
+    if not skip_lease:
+        who = (avatar or "").strip().lower()
+        if not who:
+            raise RuntimeError("tools/call needs avatar for JOB lease")
+        held = require_http(load_job(who), resolve_holder(holder))
+        if held:
+            raise RuntimeError(held)
     _, sid = _session(timeout=min(30, timeout), url=url)
     result, _ = _post(
         {
@@ -250,7 +265,7 @@ def main() -> int:
         return 2
     try:
         arguments = _load_arguments(argv[0])
-        out = call_tool(cmd, arguments, policy=policy)
+        out = call_tool(cmd, arguments, policy=policy, avatar=avatar, holder=holder)
     except Exception as ex:
         print("error:", ex, file=sys.stderr)
         return 2

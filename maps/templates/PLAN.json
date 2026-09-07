@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "holder": "",
+  "slice": "",
+  "intent": "",
+  "paths": [],
+  "note": "Owned plan. apply needs the same VRC_DCC_JOB_HOLDER and a live JOB lease."
+}

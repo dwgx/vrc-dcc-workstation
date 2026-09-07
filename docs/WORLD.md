@@ -24,7 +24,17 @@ Load `skills/vrc-world`. Do not open Unity, import, Play, bake, or publish merel
 
 Same CoplayDev HTTP rule as avatars: attach **per job**, never user-global. Do not add a second Unity MCP (lighfu, EditorEye, TunaSync UnityMCP-VCC, swax/UnityMCP-VRC as a parallel live bridge) to “cover worlds”. Optional catalog pin `swax-unitymcp-vrc` in `manifests/tools.json` is **not** the default.
 
-Named world tools (`world_probe`, …) are **not implemented** on `com.vrc-dcc.tools` yet. Do not invent `execute_code` / `execute_csharp`.
+Named world tools (`world_probe`, `world_scene_dump`, `world_udon_inventory`) are **not implemented** on `com.vrc-dcc.tools` yet. Do not invent `execute_code` / `execute_csharp`.
+
+Station framework (no Editor):
+
+```
+python maps/init_world.py <world-id>
+python maps/world_handshake.py <world-id>
+python maps/world_gate.py <world-id> begin <review-id>   # VRC_DCC_JOB_HOLDER required
+```
+
+Handshake prints `implemented_world_tools: false`. Architecture: [FRAMEWORK.md](FRAMEWORK.md).
 
 ## 3. Evidence layers (do not collapse)
 

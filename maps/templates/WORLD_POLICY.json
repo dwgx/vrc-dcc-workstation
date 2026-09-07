@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "domain": "world",
+  "world": "WORLD_ID",
+  "unity_product_fingerprint": "",
+  "disable_mcp_tools": ["execute_code", "execute_csharp"],
+  "allow_mcp_tools": [],
+  "sku_quota": 1,
+  "note": "World overlay. Not an avatar POLICY. Named world_* are proposed until S01-c. Do not copy this onto maps/<avatar>/."
+}

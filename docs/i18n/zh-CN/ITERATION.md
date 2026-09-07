@@ -14,6 +14,6 @@
 
 ## 片顺序
 
-S00-a 已在 `9ba91ca` 落地。S00-b（身份失败即停）在本树。丢给 agent 的英文提示词与「别劫持别的仓库」也在本树（[DROP_ON_AGENT.md](../../DROP_ON_AGENT.md)）。**S00-c**（工具白名单 / JOB lease）在本树。不要跳到 World live 或第二套 Unity MCP。完整表见英文页与 [PR_SLICES.md](../../PR_SLICES.md)。
+S00-a 已在 `9ba91ca` 落地。S00-b（身份失败即停）在本树。丢给 agent 的英文提示词与「别劫持别的仓库」也在本树（[DROP_ON_AGENT.md](../../DROP_ON_AGENT.md)）。**S00-c**（工具白名单 / JOB lease）在本树。World **框架**（handshake/gate，无 live dump）与证据指纹 schema 在本树。本 clone 的活下一片在 gitignore 的 `notes/HANDOFF.md`。不要跳到 live `world_*` HTTP 或第二套 Unity MCP。完整表见英文页与 [PR_SLICES.md](../../PR_SLICES.md)。架构：[FRAMEWORK.md](../../FRAMEWORK.md)。
 
 网页 / Astra 可以继续搜。进 git 的是**规则**，不是 ZIP 也不是底模。见 [SOURCES.md](../../SOURCES.md)。

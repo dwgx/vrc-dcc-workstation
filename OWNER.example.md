@@ -23,6 +23,7 @@ Agents: if `OWNER.md` exists, read it after `AGENTS.md`. It is **this clone's** 
 - CoplayDev wizard: **Skip**. AutoRegister off. HTTP only in the avatar project `.cursor/mcp.json`.
 - Follow this project's folders (`Assets/功能`, `菜单/功能` if that is how the shop laid them out). Body-matched vendor prefabs only. Do not guess body blendshapes onto clothing clips. “Done” needs Play / Gesture Manager / Edit proof named in the playbook.
 - Machine paths, USB shelf, closed-chat ids, and per-body asset locks live in `local.json` / `OWNER.md` / `notes/CURRENT.md` — not in public git.
+- Station next-slice for **this working copy**: gitignored `notes/HANDOFF.md` (copy [`templates/HANDOFF.md`](templates/HANDOFF.md)). Expansion: `notes/tracks/`.
 
 ## How to maintain this git tree
 

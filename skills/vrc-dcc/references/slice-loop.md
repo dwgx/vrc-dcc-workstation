@@ -28,9 +28,9 @@ python maps/gate.py <avatar> consume-sku <booth-id>
 
 `begin` must be an **existing** REVIEW row id. `sku_quota` comes from POLICY. Second `begin` with a different id = new chat. `consume-sku` / `mutated` without `begin` = exit 2. After first mutate: `python maps/gate.py <avatar> mutated`. New chat: `python maps/gate.py <avatar> reset`.
 
-Set `VRC_DCC_JOB_HOLDER` (or `gate.py --holder`) to this chat’s id. `begin` prints `lease.holder`. A second chat while that lease is live gets `LEASE_HELD` (exit 2). Expired lease (`job_lease_ttl_sec`, default 3600s) can be taken. `reset` clears the lease.
+Set `VRC_DCC_JOB_HOLDER` (or `gate.py --holder`) **before** `begin`. `begin` without a holder is `NEED_HOLDER`. `begin` prints `lease.holder`. A second chat while that lease is live gets `LEASE_HELD` (exit 2). Expired lease (`job_lease_ttl_sec`, default 3600s) can be taken by a named holder. `reset` needs the holder (or `--force`). JOB.json writes take a file lock so two `begin`s cannot both print `ok`.
 
-Station HTTP client `maps/unity_mcp_call.py` allowlists named `vrc_*` only. `tools/call` needs `--avatar` and a live JOB lease. `execute_code` / `execute_csharp` / upload / publish / `world_*` refuse before HTTP. JSON-RPC `error` and MCP `isError` are exit 2. Progress notifications are not treated as the result (matching request id).
+Station HTTP client `maps/unity_mcp_call.py` allowlists named `vrc_*` only. `tools/call` (CLI **and** `call_tool()`) needs `--avatar` / `avatar=` and a live JOB lease. Fake-MCP tests pass `skip_lease=True`. `execute_code` / `execute_csharp` / upload / publish / `world_*` refuse before HTTP. JSON-RPC `error` and MCP `isError` are exit 2. Progress notifications are not treated as the result (matching request id).
 
 `review.py next` is the queue, not a write permit. Freeze in `notes/CURRENT.md` (if this clone names one) wins on Unity writes.
 
@@ -53,7 +53,7 @@ Chat in the owner's locale (zh-CN / ja / en / ko). Tracked files stay English. P
 
 Empty `avatar=` uses `POLICY.json` `unity_root_name` only. Missing or duplicate Hierarchy names refuse (`NO_AVATAR_IDENTITY` / `NO_AVATAR` / `AMBIGUOUS_AVATAR`). Never the first `VRCAvatarDescriptor` in the scene. `vrc_audit.fitted` is always false. Nipple / GoGo fields carry `nippleIdentity` / `gogoIdentity` (`ok` / `not_applicable` / `ambiguous` / `missing_policy_path`); weights stay `-1` unless `ok`. `isSynced=0` is not fitted. `NEED_PREFAB_PATH` / `NO_BODY_PREFAB` / `WRIST_NOT_GRIP` / `ZERO_WEIGHT_CONSTRAINT` / `LEFTOVER_MENU` = do not hang the SKU.
 
-POLICY `disable_mcp_tools` (default `execute_code`, `execute_csharp`) is applied when the package loads. Optional `allow_mcp_tools` is a closed list. Do not re-enable execute_code to skip identity. Station `unity_mcp_call.py` also fail-closes on names that are not `vrc_*`.
+POLICY `disable_mcp_tools` (default `execute_code`, `execute_csharp`) is applied when the package loads. Optional `allow_mcp_tools` is a closed **`vrc_*` subset** (handshake rejects generic mutators). Do not re-enable execute_code to skip identity. Station `unity_mcp_call.py` also fail-closes on names that are not `vrc_*`.
 
 ## 3. Mutate one row
 

@@ -24,13 +24,13 @@ Do not skip ahead to World live dumps or a second Unity MCP. Land one slice, tes
 | **S00-b** | Landed this tree | Fail-closed identity and POLICY (wrong / duplicate / bad schema). No first-`VRCAvatarDescriptor`, no first `Nipple_` / first `GogoLoco` |
 | **Drop-on-agent** | Landed this tree | Foreign clone paste block; ask-then-act install; skills stay in-clone so they do not hijack other repos |
 | **S00-c** | Landed this tree | Tool allowlist (`vrc_*` only), nonzero MCP errors, matching request id, JOB chat lease |
-| **S01-a** | Docs draft only | `skills/vrc-world` routing. Not live `world_*` |
+| **S01-a** | Framework this tree | World maps CLI + proposed `world_*`. Not live dumps |
 | **S01-b** | Later | Core / Avatar / World assemblies. Do not add Avatar SDK to a Worlds project to compile |
 | **S01-c** | Later | Read-only `world_*` after an authorized Worlds Unity path |
-| **S01-d** | Later | Evidence fingerprints / STALE / owned plan-apply |
-| Library v2 | Later | `on_avatars` per asset × profile. Keep overlay key `kaguya` until that migration |
+| **S01-d** | Schema this tree | Evidence fingerprints / STALE / owned plan-apply (`maps/evidence.py`) |
+| Library v2 | Later | `on_avatars` per asset × profile. Live-test overlay id stays clone-local |
 
-Details: [PR_SLICES.md](PR_SLICES.md). Architecture notes from the web review stay in the clone-owner handoff; this page is what the next agent executes.
+Details: [PR_SLICES.md](PR_SLICES.md). Architecture: [FRAMEWORK.md](FRAMEWORK.md). This clone’s live next-action (uncommitted, overlay, expansion lanes) is gitignored `notes/HANDOFF.md` — not this file. High-ambiguity research: [CHAT_RESEARCH.md](../templates/CHAT_RESEARCH.md).
 
 ## How to land a slice
 
@@ -56,9 +56,9 @@ Promote a lesson the same way as [slice-loop.md](../skills/vrc-dcc/references/sl
 
 ## Tool fence and JOB lease (S00-c)
 
-- Allowlist: named `vrc_*` only. `world_*`, CoplayDev generic mutators, `execute_code` / `execute_csharp`, and any tool whose name contains upload/publish are refused **before** HTTP.
-- `unity_mcp_call.py` treats JSON-RPC `error` and MCP `isError` as failure. Notifications without a matching request id are not a result.
-- `gate.py begin` writes `JOB.json` `lease`. Set `VRC_DCC_JOB_HOLDER`. A second holder while the lease is live gets `LEASE_HELD`. `reset` or expiry (default 3600s, POLICY `job_lease_ttl_sec`) clears it.
+- Allowlist: named `vrc_*` only. POLICY `allow_mcp_tools` is still a `vrc_*` subset (generic mutators stay refused). `world_*`, CoplayDev generic mutators, `execute_code` / `execute_csharp`, and any tool whose name contains upload/publish as a path segment are refused **before** HTTP.
+- `unity_mcp_call.py` treats JSON-RPC `error` and MCP `isError` as failure. Notifications without a matching request id are not a result. Library `call_tool()` needs a live JOB lease (tests use `skip_lease=True` against fake MCP).
+- `gate.py begin` writes `JOB.json` `lease` under a file lock. Set `VRC_DCC_JOB_HOLDER` (required). A second holder while the lease is live gets `LEASE_HELD`. `reset` needs the holder or `--force`. Expiry (default 3600s, POLICY `job_lease_ttl_sec`) lets a new named holder take it.
 
 ## Never on the public base
 

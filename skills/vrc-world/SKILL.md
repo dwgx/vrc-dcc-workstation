@@ -23,7 +23,7 @@ Draft reusable Worlds workflow. Not a live Editor package and not a rename of th
 
 ## Intake
 
-1. Quote `session-probe` if it exists. World intent ≠ avatar `handshake.py`.
+1. Quote `session-probe` if it exists. World intent ≠ avatar `handshake.py`. `python maps/init_world.py <id>` then `python maps/world_handshake.py <id>`. Lease: `python maps/world_gate.py <id> begin <review-id>` with `VRC_DCC_JOB_HOLDER`. Named `world_*` are **not** on `com.vrc-dcc.tools` yet — do not invent `execute_code`. Architecture: [docs/FRAMEWORK.md](../../docs/FRAMEWORK.md).
 2. Confirm Unity version, `Packages/manifest.json` / VPM lock, git/backup, requested evidence layer. Record only tools this host actually exposes.
 3. Identity = project path + Editor instance/epoch + loaded scene GUIDs + prefab stage + descriptor. A port is not identity.
 4. Pipeline stub: [docs/WORLD.md](../../docs/WORLD.md).

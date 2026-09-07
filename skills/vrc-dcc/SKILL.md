@@ -36,7 +36,9 @@ Mesh / weights / visemes / CATS → Blender. MA / menus / PhysBone / FaceEmo / l
 ## 3. On-demand
 
 - [references/slice-loop.md](references/slice-loop.md) — one slice: `handshake.py` + `gate.py` + named `vrc_*` (not invented `execute_code`)
-- [../../docs/ITERATION.md](../../docs/ITERATION.md) — station base loop (fail-closed identity). Not a Unity mutate.
+- [references/maintain-loop.md](references/maintain-loop.md) — improve / expand **this clone**; live board gitignored `notes/HANDOFF.md`
+- [../../docs/FRAMEWORK.md](../../docs/FRAMEWORK.md) — avatar vs world Core/adapters; no live `world_*` yet
+- [../../docs/ITERATION.md](../../docs/ITERATION.md) — public station slice table. Not a Unity mutate.
 - [references/self-review.md](references/self-review.md) — after a station/layer slice: dispatch independent auditors; generator ≠ evaluator
 - [references/dcc-session.md](references/dcc-session.md) — avatar-cwd session (no estate init, no guessed morphs)
 - [references/avatar-intake.md](references/avatar-intake.md) — 改模开局：先命名 `<avatar>`，再 dump；无默认角色

@@ -5,7 +5,7 @@
 clone 후: 계약은 영어 `AGENTS.md`. **주인의 언어로 보고**한다. 작성자 머신 경로를 복사하지 않는다.
 
 - 이 clone 설치 → `templates/i18n/ko/INIT_QUESTIONNAIRE.md`를 다 물은 뒤 `bootstrap.ps1`
-- 개조 → `templates/JOB.md`. 기본 아바타 없음. `gate.py begin` 다음 `VRC_DCC_JOB_HOLDER`. 이름 있는 `vrc_*`만
+- 개조 → `templates/JOB.md`. 기본 아바타 없음. `VRC_DCC_JOB_HOLDER` 먼저, 그다음 `gate.py begin`. 이름 있는 `vrc_*`만
 - 다른 저장소에서 코딩 → **vrc-dcc를 적용하지 않음**. `skills/`를 사용자 전역에 복사하지 않음
 - Blender / Unity가 없어도 문서만 사용 가능. 없는 MCP는 건너뛴다
 

@@ -35,6 +35,10 @@ jobs:
         run: python tests/test_policy_identity.py
       - name: JOB lease and MCP allowlist (S00-c)
         run: python tests/test_s00c_lease_allowlist.py
+      - name: World framework CLI (S01-a)
+        run: python tests/test_s01_world_framework.py
+      - name: Evidence fingerprints (S01-d)
+        run: python tests/test_s01d_evidence.py
 
   guard-no-secrets-or-binaries:
     name: Guard against committed binaries/secrets

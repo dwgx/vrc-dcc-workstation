@@ -37,7 +37,7 @@ Unity product tree (`local.json` `unity_project`) is **not** memory. Home cwd do
 | `notes.json` | Remarks keyed by node `id`. **Never wipe.** |
 | `MAP.md` | Generated. **确定** vs observed. |
 | `REVIEW.json` | Proven vs new + `lessons[]`. |
-| `JOB.json` | One-chat sku quota **and lease**. `python maps/gate.py <avatar> begin <id>` then `VRC_DCC_JOB_HOLDER`. |
+| `JOB.json` | One-chat sku quota **and lease**. Set `VRC_DCC_JOB_HOLDER` **before** `python maps/gate.py <avatar> begin <id>`. |
 | `POLICY.json` | Per-body overlay: root name, body_token, disable_mcp_tools, leftover_needles. Copied to Unity `Assets/VrcDcc/POLICY.json`. |
 | `conflicts.json` | Owner lane winners (AFK / loco / audio). Agent asks if a lane is missing. |
 | `REVIEW.md` | Generated. |
