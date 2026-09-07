@@ -137,3 +137,17 @@ def require(
     if owned and incoming != owned:
         return "LEASE_HELD"
     return None
+
+
+def require_http(
+    job: dict,
+    holder: str,
+    *,
+    at: datetime | None = None,
+) -> str | None:
+    """Station HTTP tools/call: live lease required (no pre-S00-c hole)."""
+    if not job.get("open_slice"):
+        return "NO_LEASE_BEGIN"
+    if not lease_of(job):
+        return "NO_LEASE_BEGIN"
+    return require(job, holder, at=at)

@@ -30,7 +30,7 @@ python maps/gate.py <avatar> consume-sku <booth-id>
 
 Set `VRC_DCC_JOB_HOLDER` (or `gate.py --holder`) to this chat’s id. `begin` prints `lease.holder`. A second chat while that lease is live gets `LEASE_HELD` (exit 2). Expired lease (`job_lease_ttl_sec`, default 3600s) can be taken. `reset` clears the lease.
 
-Station HTTP client `maps/unity_mcp_call.py` allowlists named `vrc_*` only. `execute_code` / `execute_csharp` / upload / publish / `world_*` refuse before HTTP. JSON-RPC `error` and MCP `isError` are exit 2. Progress notifications are not treated as the result (matching request id).
+Station HTTP client `maps/unity_mcp_call.py` allowlists named `vrc_*` only. `tools/call` needs `--avatar` and a live JOB lease. `execute_code` / `execute_csharp` / upload / publish / `world_*` refuse before HTTP. JSON-RPC `error` and MCP `isError` are exit 2. Progress notifications are not treated as the result (matching request id).
 
 `review.py next` is the queue, not a write permit. Freeze in `notes/CURRENT.md` (if this clone names one) wins on Unity writes.
 

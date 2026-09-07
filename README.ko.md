@@ -8,7 +8,7 @@
 
 clone한 뒤 [docs/i18n/ko/I18N.md](docs/i18n/ko/I18N.md)로 UI 언어를 정하세요. **설치 / 세팅**일 때만 [AGENTS.ko.md](AGENTS.ko.md) 핸드셰이크(물은 뒤에 `bootstrap.ps1 -Apply`). 아바타 작업은 [`templates/JOB.md`](templates/JOB.md) (의도로 분류, 암호 문구 없음). 대화는 한국어, git 커밋 메시지는 영어입니다. 아바타 본체는 포함하지 않습니다. 에이전트에 건넬 영어 블록: [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md) ([한국어 메모](docs/i18n/ko/DROP_ON_AGENT.md)). 스킬은 **이 clone**에 둡니다(사용자 전역 금지). Blender / Unity가 없어도 문서만 사용할 수 있습니다.
 
-작업 후 `skills/vrc-review`로 점수를 매기고 `notes/`에 남깁니다. [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md). 스테이션 반복(기본 아바타 없음, 신원 실패 시 정지): [docs/ITERATION.md](docs/ITERATION.md). git에 넣지 않는 것: [docs/SOURCES.md](docs/SOURCES.md).
+작업 후 `skills/vrc-review`로 점수를 매기고 `notes/`에 남깁니다. [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md). 스테이션 반복(기본 아바타 없음, 신원 실패 시 정지, 도구 허용 목록 / JOB lease): [docs/ITERATION.md](docs/ITERATION.md) ([공개 슬라이스](docs/PR_SLICES.md)). git에 넣지 않는 것: [docs/SOURCES.md](docs/SOURCES.md).
 
 > **Blender / Unity / VRChat 바이너리와 아바타 프로젝트는 포함하지 않습니다.** [DISCLAIMER.ko.md](DISCLAIMER.ko.md).
 
@@ -26,12 +26,16 @@ clone한 뒤 [docs/i18n/ko/I18N.md](docs/i18n/ko/I18N.md)로 UI 언어를 정하
 | `docs/i18n/ko/WORKFLOW.md` | Blender → Unity → 사람이 Publish (2026-09) |
 | `docs/i18n/ko/UNITY.md` | CoplayDev UPM과 이름 있는 `vrc_*` |
 | `docs/i18n/ko/I18N.md` | 언어 규칙 |
-| `CLAUDE.md` / `GEMINI.md` / `.cursor/rules/` | 클라이언트 진입점. `AGENTS.md`를 가리킴 |
+| `CLAUDE.md` / `GEMINI.md` / `.github/copilot-instructions.md` / `.cursor/rules/` | 클라이언트 진입점. `AGENTS.md`를 가리킴 |
 | `templates/i18n/ko/INIT_QUESTIONNAIRE.md` | 한국어 설치 설문 |
+| `templates/JOB.md` | 작업 초기화(영어 정본; 의도. 설치 설문이 아님) |
 | `maps/` | 아바타 기억 CLI(`handshake.py` / `gate.py`) + 템플릿. 살아있는 `maps/<id>/` 는 gitignore |
 | `unity/vrc-dcc-tools` | 이름 있는 `vrc_*` (`com.vrc-dcc.tools`) |
 | `skills/vrc-dcc/` / `skills/vrc-review/` / `skills/vrc-world/` | 개조 플레이북, 쌍축 리뷰, 월드/Udon(초안) |
+| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/ITERATION.md` | 아바타 vs 월드 vs 스테이션(영어가 정본) |
+| `docs/SOURCES.md` | 메시 / ZIP은 git에 넣지 않음 |
 | `docs/DROP_ON_AGENT.md` | 붙여넣기용 영어 블록. 다른 저장소를 가로채지 않음 |
+| `manifests/` | 핀(PyPI / GitHub / VPM) |
 | `mcp/*.template` | 필요할 때만 MCP. 사용자 전역 금지 |
 | `scripts/bootstrap.ps1` | 기본은 드라이런. `-Apply`가 gitignore된 `local.json`을 씀 |
 

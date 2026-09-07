@@ -184,9 +184,38 @@ def test_fake_mcp_notify_and_errors() -> None:
     print("PASS fake mcp")
 
 
+def test_cli_lease_before_http() -> None:
+    dest = _seed("example-s00c-http")
+    try:
+        args = dest / "empty.json"
+        args.write_text("{}\n", encoding="utf-8")
+        bare = subprocess.run(
+            [PY, "unity_mcp_call.py", "vrc_audit", str(args)],
+            cwd=str(MAPS),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        if bare.returncode != 2 or "--avatar" not in (bare.stderr or ""):
+            raise SystemExit("CLI without --avatar: %s" % bare.stderr)
+        nobegin = subprocess.run(
+            [PY, "unity_mcp_call.py", "vrc_audit", str(args), "--avatar", "example-s00c-http"],
+            cwd=str(MAPS),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        if nobegin.returncode != 2 or "NO_LEASE_BEGIN" not in (nobegin.stderr or ""):
+            raise SystemExit("CLI without begin: %s" % nobegin.stderr)
+    finally:
+        shutil.rmtree(dest, ignore_errors=True)
+    print("PASS cli lease before http")
+
+
 if __name__ == "__main__":
     test_allowlist()
     test_lease_holders()
     test_gate_lease_cli()
     test_fake_mcp_notify_and_errors()
+    test_cli_lease_before_http()
     print("PASS test_s00c_lease_allowlist")

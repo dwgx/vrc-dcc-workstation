@@ -18,7 +18,7 @@ Human: VRChat SDK Build & Publish
 2. Blender / Unity MCP を Claude / Codex / Cursor / Grok の**ユーザーグローバル**設定に**付けない**。`skills/` をユーザーグローバルにコピーしない。
 3. パッケージ追加や Editor 操作は、**アバター Unity プロジェクト専用のウィンドウ**で行う。
 
-指名 `vrc_*` には記入済みの `POLICY.json`（`unity_root_name`）が必要。シーンの最初のアバターは取らない。`gate.py begin` が JOB lease を書く。反復：[ITERATION.md](../../ITERATION.md)。
+指名 `vrc_*` には記入済みの `POLICY.json`（`unity_root_name`）が必要。シーンの最初のアバターは取らない。工位 HTTP は `vrc_*` のみ。`gate.py begin` が JOB lease を書く（`VRC_DCC_JOB_HOLDER`）。反復：[ITERATION.md](../../ITERATION.md)。
 
 ## 1. Blender（メッシュ / ウェイト / ヴィセム）
 
@@ -44,7 +44,7 @@ Human: VRChat SDK Build & Publish
 1. `manifests/tools.json` の `upm` から CoplayDev MCP for Unity を入れる。
 2. Window → **MCP for Unity** → Start（HTTP `http://localhost:8080/mcp`）。
 3. lighfu UnityAgent / EditorEye / 第二の Unity MCP は入れない。
-4. **MA Merge Armature** / Menu Installer / Parameters で服を合せる。頼まれない限り NDMF を bake しない。
+4. **MA Merge Armature** / Menu Installer / Parameters で服を合せる。頼まれない限り NDMF を bake しない。衣装メニュー：[CLOTHING_MENU.md](../zh-CN/CLOTHING_MENU.md)（日本語ページが無ければ中/英）。
 5. `.prefab` YAML を手で直すより、指名 `vrc_*` を使う。`execute_code` / `execute_csharp` を発明しない。
 6. MCP から `EditorUtility.DisplayDialog` を呼ばない（Editor が固まる）。
 
@@ -52,9 +52,11 @@ Human: VRChat SDK Build & Publish
 
 パッケージ URL：[UNITY.md](UNITY.md)。PhysBone：`skills/vrc-dcc/references/physbones.md`。
 
-## 3. 人が Publish
+## 3. 人が Publish + ワールドで確認
 
 人が VRChat SDK の **Build & Publish** を押す。エージェントは押さない、`upload_vrchat_avatar` を呼ばない、SDK cookie を残さない。
+
+Editor Play が VRCFury の haptic bake で止まるのは服の失敗ではない。Build のあと VRChat で見る：[upload-test.md](../../../skills/vrc-dcc/references/upload-test.md)。店の歩行 vs GoGo：[gogoloco.md](../../../skills/vrc-dcc/references/gogoloco.md)（既定の歩きは MAP/OWNER。キャラ固定ではない）。
 
 ## 4. 仕事のあと
 

@@ -11,7 +11,8 @@ are ignored until the matching request id arrives.
 
 Examples:
   python maps/unity_mcp_call.py list
-  python maps/unity_mcp_call.py vrc_audit maps/<avatar>/vrc-audit-empty.json
+  python maps/unity_mcp_call.py vrc_audit args.json --avatar <id>
+      (after python maps/gate.py <id> begin <review-id>; set VRC_DCC_JOB_HOLDER)
 """
 from __future__ import annotations
 
@@ -23,6 +24,8 @@ import urllib.request
 from pathlib import Path
 
 from allowlist import ALWAYS_DENY, check_tool
+from gate import load_job
+from lease import require_http, resolve_holder
 
 URL_DEFAULT = "http://127.0.0.1:8080/mcp"
 FORBIDDEN = ALWAYS_DENY
@@ -188,24 +191,35 @@ def _load_arguments(path: str) -> dict:
     return data
 
 
+def _take_opt(argv: list[str], flag: str) -> str:
+    if flag not in argv:
+        return ""
+    i = argv.index(flag)
+    if i + 1 >= len(argv):
+        raise RuntimeError("%s needs a value" % flag)
+    val = argv[i + 1]
+    del argv[i : i + 2]
+    return val
+
+
 def main() -> int:
     if len(sys.argv) < 2:
         print(
             "usage: unity_mcp_call.py list\n"
-            "       unity_mcp_call.py <vrc_tool> <args.json> [--policy POLICY.json]",
+            "       unity_mcp_call.py <vrc_tool> <args.json> --avatar <id> [--holder H] [--policy POLICY.json]",
             file=sys.stderr,
         )
         return 2
     cmd = sys.argv[1]
-    policy = None
     argv = list(sys.argv[2:])
-    if "--policy" in argv:
-        i = argv.index("--policy")
-        if i + 1 >= len(argv):
-            print("error: --policy needs a path", file=sys.stderr)
-            return 2
-        policy = load_policy_file(Path(argv[i + 1]))
-        del argv[i : i + 2]
+    try:
+        policy_path = _take_opt(argv, "--policy")
+        avatar = _take_opt(argv, "--avatar").strip().lower()
+        holder = _take_opt(argv, "--holder")
+    except RuntimeError as ex:
+        print("error:", ex, file=sys.stderr)
+        return 2
+    policy = load_policy_file(Path(policy_path)) if policy_path else None
     ok, reason = check_tool(cmd, policy) if cmd != "list" else (True, "")
     if cmd != "list" and not ok:
         print("error: refused %s: %s" % (cmd, reason), file=sys.stderr)
@@ -221,8 +235,18 @@ def main() -> int:
         print("vrc", " ".join(vrc) if vrc else "-")
         print("execute_code", "execute_code" in names)
         return 0
+    if not avatar:
+        print(
+            "error: tools/call needs --avatar after python maps/gate.py <avatar> begin <id>",
+            file=sys.stderr,
+        )
+        return 2
+    held = require_http(load_job(avatar), resolve_holder(holder))
+    if held:
+        print("error:", held, file=sys.stderr)
+        return 2
     if not argv:
-        print("usage: unity_mcp_call.py <vrc_tool> <args.json>", file=sys.stderr)
+        print("usage: unity_mcp_call.py <vrc_tool> <args.json> --avatar <id>", file=sys.stderr)
         return 2
     try:
         arguments = _load_arguments(argv[0])

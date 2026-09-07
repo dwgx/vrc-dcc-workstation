@@ -18,7 +18,7 @@ Human: VRChat SDK Build & Publish
 2. Blender / Unity MCP를 Claude / Codex / Cursor / Grok **사용자 전역** 설정에 **붙이지 않는다**. `skills/`를 사용자 전역에 복사하지 않는다.
 3. 패키지를 넣거나 에디터를 구동할 때는 **아바타 Unity 프로젝트 전용 창**에서 연다.
 
-이름 있는 `vrc_*`에는 채워진 `POLICY.json`(`unity_root_name`)이 필요하다. 씬의 첫 아바타를 고르지 않는다. `gate.py begin`이 JOB lease를 쓴다. 반복: [ITERATION.md](../../ITERATION.md).
+이름 있는 `vrc_*`에는 채워진 `POLICY.json`(`unity_root_name`)이 필요하다. 씬의 첫 아바타를 고르지 않는다. 스테이션 HTTP는 `vrc_*`만. `gate.py begin`이 JOB lease를 쓴다(`VRC_DCC_JOB_HOLDER`). 반복: [ITERATION.md](../../ITERATION.md).
 
 ## 1. Blender（메시 / 웨이트 / viseme 입모양）
 
@@ -44,7 +44,7 @@ Human: VRChat SDK Build & Publish
 1. `manifests/tools.json`의 `upm`으로 CoplayDev MCP for Unity를 넣는다.
 2. Window → **MCP for Unity** → Start（HTTP `http://localhost:8080/mcp`）.
 3. lighfu UnityAgent / EditorEye / 두 번째 Unity MCP는 넣지 않는다.
-4. **MA Merge Armature** / Menu Installer / Parameters로 옷을 합친다. 요청 없이 NDMF를 bake하지 않는다.
+4. **MA Merge Armature** / Menu Installer / Parameters로 옷을 합친다. 요청 없이 NDMF를 bake하지 않는다. 옷 메뉴: [CLOTHING_MENU.md](../zh-CN/CLOTHING_MENU.md) (한국어 페이지가 없으면 중/영).
 5. `.prefab` YAML을 손으로 고치지 말고 이름 있는 `vrc_*`를 쓴다. `execute_code` / `execute_csharp`를 발명하지 않는다.
 6. MCP에서 `EditorUtility.DisplayDialog`를 호출하지 않는다（에디터가 멈춤）.
 
@@ -52,9 +52,11 @@ Human: VRChat SDK Build & Publish
 
 패키지 URL: [UNITY.md](UNITY.md). PhysBone: `skills/vrc-dcc/references/physbones.md`.
 
-## 3. 사람이 Publish
+## 3. 사람이 Publish + 월드에서 확인
 
 사람이 VRChat SDK **Build & Publish**를 누른다. 에이전트는 누르지 않고, `upload_vrchat_avatar`를 호출하지 않고, SDK 쿠키를 저장하지 않는다.
+
+Editor Play가 VRCFury haptic bake에서 멈추는 것은 옷 실패가 아니다. Build 이후 VRChat에서 본다: [upload-test.md](../../../skills/vrc-dcc/references/upload-test.md). 상점 걷기 vs GoGo: [gogoloco.md](../../../skills/vrc-dcc/references/gogoloco.md) (기본 걷기는 MAP/OWNER. 캐릭터 고정이 아님).
 
 ## 4. 작업 후
 
