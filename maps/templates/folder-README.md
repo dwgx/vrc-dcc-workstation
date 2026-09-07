@@ -4,7 +4,7 @@ Codegraph indexes **C# / scripts**. It does not see Modular Avatar, 轮盘, or H
 
 | File | Who writes it |
 |---|---|
-| `JOB.json` | One-chat sku quota. `python maps/gate.py AVATAR_ID`. |
+| `JOB.json` | One-chat sku quota and lease. `python maps/gate.py AVATAR_ID begin <id>`. |
 | `POLICY.json` | Per-body overlay. Copied to Unity `Assets/VrcDcc/POLICY.json`. |
 | `STATE.md` | Humans/agents. Snapshot. |
 | `graph.json` | Regenerated. No remarks. |

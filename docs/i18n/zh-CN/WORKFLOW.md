@@ -14,11 +14,11 @@ Human: VRChat SDK Build & Publish
 
 ## 0. 握手
 
-1. 读 [AGENTS.zh-CN.md](../../../AGENTS.zh-CN.md)。用 `scripts/bootstrap.ps1 -Apply` 从 `local.json.example` 填 `local.json`。
-2. **不要**把 Blender / Unity MCP 写进 Claude / Codex / Cursor / Grok **用户全局**配置。
+1. 读 [AGENTS.zh-CN.md](../../../AGENTS.zh-CN.md)。装站问卷问完后再用 `scripts/bootstrap.ps1 -Apply` 从 `local.json.example` 填 `local.json`。丢给 agent：[DROP_ON_AGENT.md](../../DROP_ON_AGENT.md)。
+2. **不要**把 Blender / Unity MCP 写进 Claude / Codex / Cursor / Grok **用户全局**配置。不要把 `skills/` 拷进用户全局技能目录。
 3. 加包或驱动编辑器时，在**角色 Unity 工程自己的窗口**里打开。
 
-命名 `vrc_*` 需要填好的 `POLICY.json`（`unity_root_name`）。不会抓场景里第一个角色。工位迭代：[ITERATION.md](ITERATION.md)。
+命名 `vrc_*` 需要填好的 `POLICY.json`（`unity_root_name`）。不会抓场景里第一个角色。工位 HTTP 客户端只允许 `vrc_*`；`gate.py begin` 会写 JOB lease（`VRC_DCC_JOB_HOLDER`）。工位迭代：[ITERATION.md](ITERATION.md)。
 
 ## 1. Blender（网格 / 权重 / 口型 viseme）
 

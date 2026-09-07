@@ -14,7 +14,7 @@ namespace VrcDcc.Tools.Editor
         public string unity_root_name = "";
         public string body_token = "";
         public bool require_prefab_path = true;
-        public string[] disable_mcp_tools = { "execute_code" };
+        public string[] disable_mcp_tools = { "execute_code", "execute_csharp" };
         public string[] leftover_needles = Array.Empty<string>();
         public float? expected_hips_y;
         public float hips_slack = 0.05f;

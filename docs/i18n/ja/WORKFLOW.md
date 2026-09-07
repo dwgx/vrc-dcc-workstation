@@ -14,9 +14,11 @@ Human: VRChat SDK Build & Publish
 
 ## 0. ヒアリング
 
-1. [AGENTS.ja.md](../../../AGENTS.ja.md) を読む。`scripts/bootstrap.ps1 -Apply` で `local.json.example` から `local.json` を埋める。
-2. Blender / Unity MCP を Claude / Codex / Cursor / Grok の**ユーザーグローバル**設定に**付けない**。
+1. [AGENTS.ja.md](../../../AGENTS.ja.md) を読む。導入アンケートのあと `scripts/bootstrap.ps1 -Apply` で `local.json.example` から `local.json` を埋める。[DROP_ON_AGENT.md](../../DROP_ON_AGENT.md)。
+2. Blender / Unity MCP を Claude / Codex / Cursor / Grok の**ユーザーグローバル**設定に**付けない**。`skills/` をユーザーグローバルにコピーしない。
 3. パッケージ追加や Editor 操作は、**アバター Unity プロジェクト専用のウィンドウ**で行う。
+
+指名 `vrc_*` には記入済みの `POLICY.json`（`unity_root_name`）が必要。シーンの最初のアバターは取らない。`gate.py begin` が JOB lease を書く。反復：[ITERATION.md](../../ITERATION.md)。
 
 ## 1. Blender（メッシュ / ウェイト / ヴィセム）
 

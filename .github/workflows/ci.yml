@@ -33,6 +33,8 @@ jobs:
         run: python tests/run_s00a_regressions.py
       - name: POLICY identity (S00-b)
         run: python tests/test_policy_identity.py
+      - name: JOB lease and MCP allowlist (S00-c)
+        run: python tests/test_s00c_lease_allowlist.py
 
   guard-no-secrets-or-binaries:
     name: Guard against committed binaries/secrets

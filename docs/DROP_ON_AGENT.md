@@ -22,8 +22,9 @@ Use https://github.com/dwgx/vrc-dcc-workstation (or this clone).
    then bootstrap.ps1 dry-run, then -Apply only after I confirm. Skip missing
    Blender/Unity; docs-only is OK. Never write user-global MCP or user-global skills.
 4. If I asked to edit a VRChat avatar: templates/JOB.md. No default character.
-   python maps/handshake.py <avatar> after I name the id. Named vrc_* only if
-   unityMCP is in THIS chat. Never SDK Build & Publish.
+   python maps/handshake.py <avatar> after I name the id. Then
+   python maps/gate.py <avatar> begin <review-id> with VRC_DCC_JOB_HOLDER.
+   Named vrc_* only if unityMCP is in THIS chat. Never SDK Build & Publish.
 5. If I asked about a VRChat World / Udon: skills/vrc-world, not avatar handshake.
 6. Adapt to MY machine (OS, existing Blender/Unity versions). Do not uninstall my
    stack to match example paths.
@@ -44,6 +45,7 @@ Use https://github.com/dwgx/vrc-dcc-workstation (or this clone).
 | Same root + Worlds/Udon ask | `vrc-world` |
 | Same root + “fix this Python/docs” (station self-maintain) | Patch **this clone** only (`MAINTAIN.md`) |
 | Different git root, generic app/web/game code | **Stop DCC.** This skill does not apply |
+| Avatar MCP after `gate.py begin` | Named `vrc_*` only. Set `VRC_DCC_JOB_HOLDER`. No `execute_code` / upload / `world_*` |
 | Blender/Unity without VRChat avatar intent | **Stop DCC.** Film, other engines, non-VRC Unity are out of scope |
 | No Blender or no Unity on disk | Continue docs/skills; leave MCP off; do not invent paths |
 

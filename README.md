@@ -8,7 +8,7 @@ A **skeleton repository** for a portable VRChat DCC workstation: **Blender 5.x L
 
 Any agent (Claude Code / Codex / Cursor / Gemini / Copilot / Grok) or human can clone this repo and resolve the UI locale ([docs/I18N.md](docs/I18N.md)). **Install / bootstrap this clone:** handshake in [AGENTS.md](AGENTS.md) (or `AGENTS.zh-CN.md` / `AGENTS.ja.md` / `AGENTS.ko.md`). **Avatar / DCC job:** [`templates/JOB.md`](templates/JOB.md) — classify by intent, not a passphrase. This tree is a **reference skeleton**: keep your own Blender/Unity/prompts (`OWNER.example.md` → gitignored `OWNER.md`). Agents may **self-maintain this clone** when you ask; stop lines cannot be waived in chat ([docs/MAINTAIN.md](docs/MAINTAIN.md)). Chat in the user's language; git commits stay English.
 
-After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so the next session does not rediscover the same failure. See [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md). Station self-improve (no default avatar, fail-closed identity): [docs/ITERATION.md](docs/ITERATION.md). What is **not** in git: [docs/SOURCES.md](docs/SOURCES.md).
+After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so the next session does not rediscover the same failure. See [docs/AGENT_EVOLUTION.md](docs/AGENT_EVOLUTION.md). Station self-improve (no default avatar, fail-closed identity, tool allowlist / JOB lease): [docs/ITERATION.md](docs/ITERATION.md). What is **not** in git: [docs/SOURCES.md](docs/SOURCES.md).
 
 **Give this URL to an agent:** [docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md) — English paste block; the agent reports in **your** language. Install is ask-then-act. Skills stay in **this clone** so they do not hijack unrelated coding chats.
 

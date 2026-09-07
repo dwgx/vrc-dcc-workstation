@@ -15,7 +15,7 @@ Architecture (layers, new avatar, iterate loop): [README.md](README.md). Three g
 | New zip on disk | [library/INGEST.md](library/INGEST.md) · `python maps/library/ingest.py` |
 | Refresh avatar after Unity edits | `python maps/refresh.py <avatar> --from-dump dump.txt` |
 | Regen MAP.md | `python maps/render_map.py <avatar>` |
-| Slice gate (lint + JOB sku quota) | `python maps/gate.py <avatar>` · `python maps/gate.py <avatar> begin <id>` |
+| Slice gate (lint + JOB sku quota + lease) | `python maps/gate.py <avatar>` · `python maps/gate.py <avatar> begin <id>` · env `VRC_DCC_JOB_HOLDER` |
 | One Editor audit | named `vrc_audit` (not `python maps/audit.py`) |
 | MergeAnimator / OT / dangling / missing FX paths | `vrc_ma_wiring` / `vrc_ot_inventory` / `vrc_dangling_params` / `vrc_clip_missing_paths` |
 | Prefab / pose / leftover menu | `vrc_prefab_identity` · `vrc_pose_bounds` · `vrc_leftover_menu` |

@@ -36,7 +36,7 @@ Manual fallback: Package Manager → Add package from disk → `unity/vrc-dcc-to
 | `vrc_pose_bounds` | BakeMesh vs Humanoid bone; wrist `dRH≈0`; weight-0 ParentConstraint |
 | `vrc_leftover_menu` | MenuItem / OT / MA param after Owner hand-delete (`POLICY leftover_needles`) |
 
-None of these Instantiate. POLICY `disable_mcp_tools` (default `execute_code`) is applied on Editor load via CoplayDev `EditorPrefs`.
+None of these Instantiate. POLICY `disable_mcp_tools` (default `execute_code`, `execute_csharp`) is applied on Editor load via CoplayDev `EditorPrefs`. Station `unity_mcp_call.py` also refuse-closes non-`vrc_*` names.
 
 ## Python (station, no Unity write)
 

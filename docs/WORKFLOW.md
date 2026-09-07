@@ -14,11 +14,11 @@ Human: VRChat SDK Build & Publish
 
 ## 0. Handshake
 
-1. Read `AGENTS.md`. Fill `local.json` from `local.json.example` (`scripts/bootstrap.ps1 -Apply`).
-2. Do **not** attach Blender/Unity MCP to Claude / Codex / Cursor / Grok **user-global** config.
+1. Read `AGENTS.md`. Fill `local.json` from `local.json.example` (`scripts/bootstrap.ps1 -Apply`) after the install questionnaire. Drop-on-agent paste: [DROP_ON_AGENT.md](DROP_ON_AGENT.md).
+2. Do **not** attach Blender/Unity MCP to Claude / Codex / Cursor / Grok **user-global** config. Do not copy `skills/` into user-global skill dirs.
 3. Open the **avatar Unity project** in its own window when you add packages or drive the Editor.
 
-Named `vrc_*` need a filled `POLICY.json` (`unity_root_name`). They do not pick the first avatar in the scene. Station iteration: [ITERATION.md](ITERATION.md).
+Named `vrc_*` need a filled `POLICY.json` (`unity_root_name`). They do not pick the first avatar in the scene. Station HTTP client allowlists `vrc_*` only; `gate.py begin` takes a JOB lease (`VRC_DCC_JOB_HOLDER`). Station iteration: [ITERATION.md](ITERATION.md).
 
 ## 1. Blender (mesh / weights / visemes)
 

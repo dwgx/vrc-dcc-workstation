@@ -4,7 +4,7 @@
   "unity_root_name": "",
   "body_token": "",
   "require_prefab_path": true,
-  "disable_mcp_tools": ["execute_code"],
+  "disable_mcp_tools": ["execute_code", "execute_csharp"],
   "leftover_needles": [],
   "expected_hips_y": null,
   "hips_slack": 0.05,

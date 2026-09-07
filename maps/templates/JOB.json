@@ -6,5 +6,6 @@
   "skus": [],
   "open_slice": null,
   "mutated": false,
-  "note": "New chat: python maps/gate.py AVATAR_ID reset. One Booth SKU until Owner looks."
+  "lease": null,
+  "note": "New chat: python maps/gate.py AVATAR_ID reset. One Booth SKU until Owner looks. Set VRC_DCC_JOB_HOLDER so a second chat cannot mutate while the lease is live."
 }

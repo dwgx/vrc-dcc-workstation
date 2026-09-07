@@ -6,6 +6,9 @@ Named vrc_* only. Does not write the avatar Unity project tree from a station cw
 Owner may have Unity MCP off or another product on 8080 — do not Start
 CoplayDev from a station window to "fix" a missing catalog.
 
+JSON-RPC errors and MCP result isError are nonzero. Progress notifications
+are ignored until the matching request id arrives.
+
 Examples:
   python maps/unity_mcp_call.py list
   python maps/unity_mcp_call.py vrc_audit maps/<avatar>/vrc-audit-empty.json
@@ -13,44 +16,97 @@ Examples:
 from __future__ import annotations
 
 import json
+import os
 import sys
 import urllib.error
 import urllib.request
+from pathlib import Path
 
-URL = "http://127.0.0.1:8080/mcp"
-FORBIDDEN = frozenset({"execute_code", "execute_csharp"})
+from allowlist import ALWAYS_DENY, check_tool
+
+URL_DEFAULT = "http://127.0.0.1:8080/mcp"
+FORBIDDEN = ALWAYS_DENY
 
 
-def _parse_sse(raw: bytes) -> dict:
+def mcp_url() -> str:
+    return (os.environ.get("VRC_DCC_MCP_URL") or URL_DEFAULT).rstrip("/")
+
+
+def _iter_json_messages(raw: bytes) -> list[dict]:
     text = raw.decode("utf-8", "replace")
+    found: list[dict] = []
     for line in text.splitlines():
+        line = line.strip()
         if line.startswith("data:"):
-            return json.loads(line[5:].strip())
-    if text.strip().startswith("{"):
-        return json.loads(text)
-    raise RuntimeError("no json in response: " + text[:400])
+            line = line[5:].strip()
+        if not line or not line.startswith("{"):
+            continue
+        try:
+            obj = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(obj, dict):
+            found.append(obj)
+    if not found and text.strip().startswith("{"):
+        obj = json.loads(text)
+        if isinstance(obj, dict):
+            found.append(obj)
+    return found
 
 
-def _post(payload: dict, session: str | None, timeout: int = 180) -> tuple[dict, str | None]:
+def _message_for_id(messages: list[dict], req_id: int | str) -> dict:
+    wanted = req_id
+    matched = [m for m in messages if "id" in m and m.get("id") == wanted]
+    if matched:
+        return matched[-1]
+    # Notifications have method and no id — not a result.
+    notify = [m for m in messages if m.get("method") and "id" not in m]
+    if notify and not matched:
+        raise RuntimeError("notify-before-result: no JSON-RPC result for id %r" % wanted)
+    if not messages:
+        raise RuntimeError("no json in response")
+    raise RuntimeError("no JSON-RPC result for id %r in %s" % (wanted, json.dumps(messages)[:400]))
+
+
+def _unwrap(msg: dict) -> dict:
+    if "error" in msg:
+        err = msg["error"]
+        raise RuntimeError("jsonrpc error: " + json.dumps(err, ensure_ascii=False)[:800])
+    result = msg.get("result")
+    if isinstance(result, dict) and result.get("isError"):
+        raise RuntimeError("tool isError: " + json.dumps(result, ensure_ascii=False)[:800])
+    if result is None and "result" not in msg:
+        raise RuntimeError("missing result: " + json.dumps(msg, ensure_ascii=False)[:400])
+    return msg
+
+
+def _post(payload: dict, session: str | None, timeout: int = 180, url: str | None = None) -> tuple[dict, str | None]:
+    target = url or mcp_url()
     body = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(URL, data=body, method="POST")
+    req = urllib.request.Request(target, data=body, method="POST")
     req.add_header("Content-Type", "application/json")
     req.add_header("Accept", "application/json, text/event-stream")
     if session:
         req.add_header("Mcp-Session-Id", session)
+    req_id = payload.get("id")
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             sid = resp.headers.get("mcp-session-id") or session
             data = resp.read()
             if not data:
-                return {}, sid
-            return _parse_sse(data), sid
+                if payload.get("method", "").startswith("notifications/"):
+                    return {}, sid
+                raise RuntimeError("empty MCP body")
+            messages = _iter_json_messages(data)
+            if req_id is None:
+                return (messages[-1] if messages else {}), sid
+            return _unwrap(_message_for_id(messages, req_id)), sid
     except urllib.error.HTTPError as e:
         err = e.read()
         raise RuntimeError("HTTP %s %s" % (e.code, err[:1500].decode("utf-8", "replace"))) from e
 
 
-def _session(timeout: int = 30) -> tuple[dict, str | None]:
+def _session(timeout: int = 30, url: str | None = None) -> tuple[dict, str | None]:
     init_msg, sid = _post(
         {
             "jsonrpc": "2.0",
@@ -59,40 +115,53 @@ def _session(timeout: int = 30) -> tuple[dict, str | None]:
             "params": {
                 "protocolVersion": "2025-03-26",
                 "capabilities": {},
-                "clientInfo": {"name": "vrc-dcc-unity-http", "version": "1.1"},
+                "clientInfo": {"name": "vrc-dcc-unity-http", "version": "1.2"},
             },
         },
         None,
         timeout=timeout,
+        url=url,
     )
-    if "error" in init_msg:
-        raise RuntimeError("initialize: " + json.dumps(init_msg, ensure_ascii=False)[:800])
     _post(
         {"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}},
         sid,
         timeout=15,
+        url=url,
     )
     return init_msg, sid
 
 
-def list_tools(timeout: int = 60) -> list[str]:
-    _, sid = _session(timeout=30)
+def list_tools(timeout: int = 60, url: str | None = None) -> list[str]:
+    _, sid = _session(timeout=30, url=url)
     listed, _ = _post(
         {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}},
         sid,
         timeout=timeout,
+        url=url,
     )
     tools = listed.get("result", {}).get("tools") or []
     return [t.get("name") for t in tools if t.get("name")]
 
 
-def call_tool(name: str, arguments: dict, timeout: int = 180) -> dict:
-    if name in FORBIDDEN:
-        raise RuntimeError(
-            "refused %s. Use named vrc_* (vrc_audit …). Do not invent execute_code."
-            % name
-        )
-    _, sid = _session(timeout=30)
+def load_policy_file(path: Path | None) -> dict | None:
+    if path is None or not path.is_file():
+        return None
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return data if isinstance(data, dict) else None
+
+
+def call_tool(
+    name: str,
+    arguments: dict,
+    timeout: int = 180,
+    *,
+    policy: dict | None = None,
+    url: str | None = None,
+) -> dict:
+    ok, reason = check_tool(name, policy)
+    if not ok:
+        raise RuntimeError("refused %s: %s. Use named vrc_* after gate.py begin." % (name, reason))
+    _, sid = _session(timeout=min(30, timeout), url=url)
     result, _ = _post(
         {
             "jsonrpc": "2.0",
@@ -102,6 +171,7 @@ def call_tool(name: str, arguments: dict, timeout: int = 180) -> dict:
         },
         sid,
         timeout=timeout,
+        url=url,
     )
     return result
 
@@ -122,13 +192,23 @@ def main() -> int:
     if len(sys.argv) < 2:
         print(
             "usage: unity_mcp_call.py list\n"
-            "       unity_mcp_call.py <vrc_tool> <args.json>",
+            "       unity_mcp_call.py <vrc_tool> <args.json> [--policy POLICY.json]",
             file=sys.stderr,
         )
         return 2
     cmd = sys.argv[1]
-    if cmd in FORBIDDEN:
-        print("error: refused %s" % cmd, file=sys.stderr)
+    policy = None
+    argv = list(sys.argv[2:])
+    if "--policy" in argv:
+        i = argv.index("--policy")
+        if i + 1 >= len(argv):
+            print("error: --policy needs a path", file=sys.stderr)
+            return 2
+        policy = load_policy_file(Path(argv[i + 1]))
+        del argv[i : i + 2]
+    ok, reason = check_tool(cmd, policy) if cmd != "list" else (True, "")
+    if cmd != "list" and not ok:
+        print("error: refused %s: %s" % (cmd, reason), file=sys.stderr)
         return 2
     if cmd == "list":
         try:
@@ -141,17 +221,17 @@ def main() -> int:
         print("vrc", " ".join(vrc) if vrc else "-")
         print("execute_code", "execute_code" in names)
         return 0
-    if len(sys.argv) < 3:
+    if not argv:
         print("usage: unity_mcp_call.py <vrc_tool> <args.json>", file=sys.stderr)
         return 2
     try:
-        arguments = _load_arguments(sys.argv[2])
-        out = call_tool(cmd, arguments)
+        arguments = _load_arguments(argv[0])
+        out = call_tool(cmd, arguments, policy=policy)
     except Exception as ex:
         print("error:", ex, file=sys.stderr)
         return 2
     text = json.dumps(out, ensure_ascii=False, indent=2)
-    out_path = sys.argv[2] + ".out.json"
+    out_path = argv[0] + ".out.json"
     with open(out_path, "w", encoding="utf-8") as wf:
         wf.write(text)
         wf.write("\n")

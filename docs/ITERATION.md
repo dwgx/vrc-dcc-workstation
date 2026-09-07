@@ -23,7 +23,7 @@ Do not skip ahead to World live dumps or a second Unity MCP. Land one slice, tes
 | **S00-a** | Landed on `9ba91ca` | No default avatar; dump names stay unresolved; `--on-body` refused; overlay out of git |
 | **S00-b** | Landed this tree | Fail-closed identity and POLICY (wrong / duplicate / bad schema). No first-`VRCAvatarDescriptor`, no first `Nipple_` / first `GogoLoco` |
 | **Drop-on-agent** | Landed this tree | Foreign clone paste block; ask-then-act install; skills stay in-clone so they do not hijack other repos |
-| **S00-c** | Later | Tool allowlist, nonzero MCP errors, request id, JOB lease |
+| **S00-c** | Landed this tree | Tool allowlist (`vrc_*` only), nonzero MCP errors, matching request id, JOB chat lease |
 | **S01-a** | Docs draft only | `skills/vrc-world` routing. Not live `world_*` |
 | **S01-b** | Later | Core / Avatar / World assemblies. Do not add Avatar SDK to a Worlds project to compile |
 | **S01-c** | Later | Read-only `world_*` after an authorized Worlds Unity path |
@@ -53,6 +53,12 @@ Promote a lesson the same way as [slice-loop.md](../skills/vrc-dcc/references/sl
 - Named `vrc_*` resolve **one** root with that name. Zero → `NO_AVATAR`. Two+ → `AMBIGUOUS_AVATAR`. Empty name → `NO_AVATAR_IDENTITY` (never “first descriptor in the scene”).
 - Nipple / GoGo: POLICY path if set (missing path is not a search). Else unique candidate. Zero → `not_applicable` (do not invent weights). Two+ → `ambiguous` (do not take the first).
 - Overlay may set `nipple_smr_path` / `gogo_root_path` for one body. Public templates leave them empty.
+
+## Tool fence and JOB lease (S00-c)
+
+- Allowlist: named `vrc_*` only. `world_*`, CoplayDev generic mutators, `execute_code` / `execute_csharp`, and any tool whose name contains upload/publish are refused **before** HTTP.
+- `unity_mcp_call.py` treats JSON-RPC `error` and MCP `isError` as failure. Notifications without a matching request id are not a result.
+- `gate.py begin` writes `JOB.json` `lease`. Set `VRC_DCC_JOB_HOLDER`. A second holder while the lease is live gets `LEASE_HELD`. `reset` or expiry (default 3600s, POLICY `job_lease_ttl_sec`) clears it.
 
 ## Never on the public base
 

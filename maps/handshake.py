@@ -69,11 +69,13 @@ def cmd_handshake(name: str, as_json: bool) -> int:
         "nipple_smr_path": (policy.get("nipple_smr_path") or "").strip(),
         "gogo_root_path": (policy.get("gogo_root_path") or "").strip(),
         "disable_mcp_tools": policy.get("disable_mcp_tools") or [],
+        "allow_mcp_tools": policy.get("allow_mcp_tools") or [],
         "job": {
             "sku_quota": quota,
             "sku_used": int(job.get("sku_used") or 0),
             "open_slice": job.get("open_slice"),
             "mutated": bool(job.get("mutated")),
+            "lease": job.get("lease") if isinstance(job.get("lease"), dict) else None,
         },
         "open": [
             {
@@ -109,10 +111,20 @@ def cmd_handshake(name: str, as_json: bool) -> int:
     print("gogo_root_path:", payload["gogo_root_path"] or "-")
     tools = payload["disable_mcp_tools"]
     print("disable_mcp_tools:", " ".join(tools) if tools else "-")
+    allow = payload.get("allow_mcp_tools") or []
+    print("allow_mcp_tools:", " ".join(allow) if allow else "-")
     j = payload["job"]
+    lease = j.get("lease") or {}
     print(
-        "job sku %d/%d slice=%s mutated=%s"
-        % (j["sku_used"], j["sku_quota"], j["open_slice"] or "-", j["mutated"])
+        "job sku %d/%d slice=%s mutated=%s lease=%s until %s"
+        % (
+            j["sku_used"],
+            j["sku_quota"],
+            j["open_slice"] or "-",
+            j["mutated"],
+            lease.get("holder") or "-",
+            lease.get("expires") or "-",
+        )
     )
     print("open:", len(nxt), "lessons:", payload["lessons"])
     for it in nxt[:8]:

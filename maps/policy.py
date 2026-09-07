@@ -64,4 +64,18 @@ def validate_policy(folder_id: str, data: Any) -> list[str]:
     sku = data.get("sku_quota", 1)
     if type(sku) is bool or type(sku) is not int or sku < 1:
         errs.append("POLICY sku_quota must be a positive int")
+    ttl = data.get("job_lease_ttl_sec")
+    if ttl is not None and (type(ttl) is bool or type(ttl) is not int or ttl < 1):
+        errs.append("POLICY job_lease_ttl_sec must be a positive int")
+    allow = data.get("allow_mcp_tools")
+    if allow is None:
+        allow = []
+    if not isinstance(allow, list) or any(not isinstance(t, str) or not t.strip() for t in allow):
+        errs.append("POLICY allow_mcp_tools must be a list of non-empty strings")
+    else:
+        seen_allow: set[str] = set()
+        for t in allow:
+            if t in seen_allow:
+                errs.append("POLICY allow_mcp_tools duplicate %r" % t)
+            seen_allow.add(t)
     return errs

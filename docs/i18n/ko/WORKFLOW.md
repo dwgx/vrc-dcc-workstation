@@ -14,9 +14,11 @@ Human: VRChat SDK Build & Publish
 
 ## 0. 핸드셰이크
 
-1. [AGENTS.ko.md](../../../AGENTS.ko.md)를 읽는다. `scripts/bootstrap.ps1 -Apply`로 `local.json.example`에서 `local.json`을 채운다.
-2. Blender / Unity MCP를 Claude / Codex / Cursor / Grok **사용자 전역** 설정에 **붙이지 않는다**.
+1. [AGENTS.ko.md](../../../AGENTS.ko.md)를 읽는다. 설치 설문을 받은 뒤 `scripts/bootstrap.ps1 -Apply`로 `local.json.example`에서 `local.json`을 채운다. [DROP_ON_AGENT.md](../../DROP_ON_AGENT.md).
+2. Blender / Unity MCP를 Claude / Codex / Cursor / Grok **사용자 전역** 설정에 **붙이지 않는다**. `skills/`를 사용자 전역에 복사하지 않는다.
 3. 패키지를 넣거나 에디터를 구동할 때는 **아바타 Unity 프로젝트 전용 창**에서 연다.
+
+이름 있는 `vrc_*`에는 채워진 `POLICY.json`(`unity_root_name`)이 필요하다. 씬의 첫 아바타를 고르지 않는다. `gate.py begin`이 JOB lease를 쓴다. 반복: [ITERATION.md](../../ITERATION.md).
 
 ## 1. Blender（메시 / 웨이트 / viseme 입모양）
 
