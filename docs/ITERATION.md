@@ -16,7 +16,7 @@ Live Editor proof (Play / Gesture Manager / PCVR) is still required before sayin
 
 ## Slice order (Astra + this repo)
 
-Do not skip ahead to World live dumps or a second Unity MCP. Land one slice, test it, then the next.
+Advance work that helps the owner's current product. World production can use [installed tools](WORLD_PRODUCTION.md) now. The S01-b/c ordering applies to the custom station adapter, not ordinary World development.
 
 | Slice | Status | What it is |
 |---|---|---|
@@ -24,11 +24,14 @@ Do not skip ahead to World live dumps or a second Unity MCP. Land one slice, tes
 | **S00-b** | Landed this tree | Fail-closed identity and POLICY (wrong / duplicate / bad schema). No first-`VRCAvatarDescriptor`, no first `Nipple_` / first `GogoLoco` |
 | **Drop-on-agent** | Landed this tree | Foreign clone paste block; ask-then-act install; skills stay in-clone so they do not hijack other repos |
 | **S00-c** | Landed this tree | Tool allowlist (`vrc_*` only), nonzero MCP errors, matching request id, JOB chat lease |
-| **S01-a** | Framework this tree | World maps CLI + proposed `world_*`. Not live dumps |
-| **S01-b** | Later | Core / Avatar / World assemblies. Do not add Avatar SDK to a Worlds project to compile |
-| **S01-c** | Later | Read-only `world_*` after an authorized Worlds Unity path |
-| **S01-d** | Schema this tree | Evidence fingerprints / STALE / owned plan-apply (`maps/evidence.py`) |
-| Library v2 | Later | `on_avatars` per asset × profile. Live-test overlay id stays clone-local |
+| **S01-a** | Framework this tree | World maps CLI + proposed `world_*`. Prefix is not callable (`IMPLEMENTED_WORLD` empty) |
+| **S01-b** | Proposed | Three packages: `com.vrc-dcc.core` / keep `com.vrc-dcc.tools` / `com.vrc-dcc.worlds`. Compile fixtures `NOT_RUN` until an Editor runs them |
+| **S01-c** | Proposed | Read-only `world_probe` only, after S01-b and an authorized Worlds Unity path. Two Editors; opaque instance routing |
+| **S01-d** | Schema this tree | Evidence fingerprints / STALE / `mutation_revision` / owned plan-apply. Timestamp-wash refused |
+| **World production** | Workflow and CLI this tree | Installed native MCP / provider CLI or SDK; optional maps; successive World slices without Avatar quota; mutation history survives reset |
+| **Web handoff** | This tree | Recoverable producer task/dispatch and original outputs; optional offline bundle integrity checker |
+| **Chat absorb** | Landed this tree | 2026-09-07 Chat decisions rewritten here. Zip stays overlay |
+| Library v2 | Later | `asset_id × profile_id`. Live-test overlay id stays clone-local |
 
 Details: [PR_SLICES.md](PR_SLICES.md). Architecture: [FRAMEWORK.md](FRAMEWORK.md). This clone’s live next-action (uncommitted, overlay, expansion lanes) is gitignored `notes/HANDOFF.md` — not this file. High-ambiguity research: [CHAT_RESEARCH.md](../templates/CHAT_RESEARCH.md).
 
@@ -56,9 +59,9 @@ Promote a lesson the same way as [slice-loop.md](../skills/vrc-dcc/references/sl
 
 ## Tool fence and JOB lease (S00-c)
 
-- Allowlist: named `vrc_*` only. POLICY `allow_mcp_tools` is still a `vrc_*` subset (generic mutators stay refused). `world_*`, CoplayDev generic mutators, `execute_code` / `execute_csharp`, and any tool whose name contains upload/publish as a path segment are refused **before** HTTP.
-- `unity_mcp_call.py` treats JSON-RPC `error` and MCP `isError` as failure. Notifications without a matching request id are not a result. Library `call_tool()` needs a live JOB lease (tests use `skip_lease=True` against fake MCP).
-- `gate.py begin` writes `JOB.json` `lease` under a file lock. Set `VRC_DCC_JOB_HOLDER` (required). A second holder while the lease is live gets `LEASE_HELD`. `reset` needs the holder or `--force`. Expiry (default 3600s, POLICY `job_lease_ttl_sec`) lets a new named holder take it.
+- Allowlist: named `vrc_*` only on avatar jobs. POLICY `allow_mcp_tools` is still a `vrc_*` subset (generic mutators stay refused). `world_*` on a world job still need `IMPLEMENTED_WORLD` (empty until S01-c). These restrictions belong to the station named-tool client. World production uses discovered project tools under [WORLD_PRODUCTION.md](WORLD_PRODUCTION.md). Avatar and World jobs use different Editors; a shared `8080` is not a target.
+- `unity_mcp_call.py` treats JSON-RPC `error` and MCP `isError` as failure. Notifications without a matching request id are not a result. Keep `Mcp-Session-Id` (do not drop it because MCP 2026-07-28 removed protocol sessions). Library `call_tool()` needs a live JOB lease (tests use `skip_lease=True` against fake MCP).
+- `gate.py begin` writes `JOB.json` `lease` under a file lock. Set `VRC_DCC_JOB_HOLDER` (required). A second holder while the lease is live gets `LEASE_HELD`. World `begin` can switch slices for the same holder without a reset; inherited Avatar SKU quotas do not apply. `reset` needs the holder or `--force`. Expiry (default 3600s, POLICY `job_lease_ttl_sec`) lets a new named holder take it.
 
 ## Never on the public base
 

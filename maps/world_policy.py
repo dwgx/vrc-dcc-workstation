@@ -31,7 +31,5 @@ def validate_world_policy(folder_id: str, data: Any) -> list[str]:
         errs.append("WORLD POLICY unity_product_fingerprint must be a string")
     elif isinstance(root, str) and root.strip() in {"WORLD_ID", "AVATAR_ID"}:
         errs.append("WORLD POLICY unity_product_fingerprint is still a placeholder")
-    sku = data.get("sku_quota", 1)
-    if type(sku) is bool or type(sku) is not int or sku < 1:
-        errs.append("WORLD POLICY sku_quota must be a positive int")
+    # Older overlays inherited sku_quota from Avatar POLICY. Worlds ignore it.
     return errs

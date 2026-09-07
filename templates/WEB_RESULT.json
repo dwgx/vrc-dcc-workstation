@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "task_id": null,
+  "dispatch_id": null,
+  "artifact_class": null,
+  "status": "running",
+  "producer_session": null,
+  "chat_urls": [],
+  "web_model": {
+    "requested": null,
+    "visible_selection": null,
+    "visible_reasoning_setting": null,
+    "observation_time": null
+  },
+  "actual_prompts_file": null,
+  "actual_prompts_bytes": null,
+  "actual_prompts_sha256": null,
+  "owner_review": "pending",
+  "engine_status": "not_tested",
+  "assets": [],
+  "blocked_reason": null,
+  "next_action": null
+}

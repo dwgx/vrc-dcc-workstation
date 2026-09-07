@@ -50,7 +50,7 @@ def render() -> Path:
     lines.append("python maps/library/scan.py")
     lines.append("```")
     lines.append("")
-    lines.append("Find on the USB **before** Booth. `wear_fusion` means a fusion prefab exists in the listing heuristic, not that Edit already fit. Do not unpack unitypackages on the shelf unless the owner asked. Do not Ultra. Do not split the shelf by body.")
+    lines.append("Find on the USB **before** Booth. `wear_fusion` means a fusion prefab exists in the listing heuristic, not that Edit already fit. Do not unpack unitypackages on the shelf unless the owner asked. Do not Ultra. Do not split the shelf by body. World kits: `query.py library Modern` — they live under `世界\\`, not `通用散件\\道具`.")
     lines.append("")
 
     def row(nid: str, node: dict, meta: dict) -> None:
@@ -67,6 +67,20 @@ def render() -> Path:
             lines.append("  - " + meta["note"].replace("\n", " "))
         if src:
             lines.append("  - source: " + src)
+        lines.append("")
+
+    world_kinds = {"world", "world-map", "world-kit", "world-gizmo"}
+    lines.append("## World kits (not avatar 道具)")
+    lines.append("")
+    any_world = False
+    for node in catalog.get("nodes", []):
+        col = node.get("collection") or ""
+        if not (col.startswith("世界") or (node.get("kind") or "") in world_kinds):
+            continue
+        any_world = True
+        row(node["id"], node, notes.get(node["id"], {}))
+    if not any_world:
+        lines.append("(none — world packs belong in `世界\\地图` / `世界\\建筑家具` / `世界\\功能`)")
         lines.append("")
 
     lines.append("## Legacy overlay key `kaguya` = installed (not a generic on-body API)")
@@ -124,7 +138,7 @@ def render() -> Path:
     lines.append("")
     lines.append("1. USB path in `local.json` `unityvrchat_library` reachable.")
     lines.append("2. `python maps/library/scan.py` (rebuilds catalog, keeps notes).")
-    lines.append("3. New lock: patch overlay notes.json key `kaguya` only for that historical profile + `map_id`.")
+    lines.append("3. New lock: patch overlay `notes.json` key `kaguya` only for that historical profile + `map_id`.")
     lines.append("4. Optional sidecar on a pack folder: `item.json` (bodies, booth_id, note). Scan fills empty keys only.")
     lines.append("5. New zip: drop in `unityvrchat_stage`, read `INGEST.md`, owner confirms bucket, then scan.")
     lines.append("")

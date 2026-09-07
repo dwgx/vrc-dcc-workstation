@@ -39,12 +39,14 @@ def main() -> None:
     )
 
     job = json.loads((TEMPL / "JOB.json").read_text(encoding="utf-8"))
-    job.pop("avatar", None)
+    for key in ("avatar", "sku_quota", "sku_used", "skus"):
+        job.pop(key, None)
     job["domain"] = WORLD
     job["world"] = wid
     job["note"] = (
         "World JOB. python maps/world_gate.py %s begin <id>. Set VRC_DCC_JOB_HOLDER. "
-        "Named world_* are proposed — not implemented."
+        "Continue across slices with the same holder; preserve mutation_revision. "
+        "For installed Editor tools use docs/WORLD_PRODUCTION.md. Station world_* remain proposed."
     ) % wid
     (dest / "JOB.json").write_text(
         json.dumps(job, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -55,22 +57,22 @@ def main() -> None:
         "domain": WORLD,
         "world": wid,
         "updated": today,
-        "note": "Seeded world map. world_* dumps are S01-c. Human SDK Publish.",
+        "note": "Optional world ledger. Replace the example with the current production slice. Human SDK Publish.",
         "lessons": [],
         "items": [
             {
                 "id": "example.world-probe",
                 "node": "",
                 "area": "scene",
-                "title": "Read-only world probe (proposed world_probe)",
+                "title": "Inspect the target World with available project tools",
                 "asked": "",
                 "status": "unreviewed",
                 "gate": "edit",
                 "slice": "",
                 "owner_ok": False,
                 "evidence": [],
-                "must_not": ["execute_code", "SDK Publish from the agent"],
-                "notes": "Not implemented on com.vrc-dcc.tools yet.",
+                "must_not": ["SDK Publish from the agent"],
+                "notes": "Discover installed tools. docs/WORLD_PRODUCTION.md; no station world_* dependency.",
             }
         ],
     }

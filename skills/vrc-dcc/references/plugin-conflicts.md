@@ -12,7 +12,7 @@ Two gizmos that both write the **same playable** (AFK, Base loco, Action emotes,
 
 ## Example bias (Owner fills `conflicts.json`)
 
-Do not copy another body's winners. One fusion table that used this station: [examples/composite-avatar.md](examples/composite-avatar.md). Pattern:
+Do not copy another body's winners. Record this profile using [examples/README.md](examples/README.md). Pattern:
 
 | Lane | Typical choice | Loser | How |
 |---|---|---|---|

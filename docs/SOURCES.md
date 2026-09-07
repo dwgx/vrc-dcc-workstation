@@ -24,16 +24,20 @@ What *does* belong in git: how to handshake any named avatar, fail-closed identi
 | Source | Use | Do not |
 |---|---|---|
 | This repo + [PR_SLICES.md](PR_SLICES.md) | Canonical loop | Rename to a private world |
-| [CoplayDev unity-mcp](https://github.com/CoplayDev/unity-mcp) | Default Editor bridge + named `vrc_*` | Second MCP, wizard Configure All |
+| [CoplayDev unity-mcp](https://github.com/CoplayDev/unity-mcp) | Default Editor bridge + named `vrc_*`. Custom-tool scan, [multi-instance](https://coplaydev.github.io/unity-mcp/guides/multi-instance), [instance routing](https://coplaydev.github.io/unity-mcp/architecture/instance-routing) | Second MCP, wizard Configure All, first-session fallback, deleting `Mcp-Session-Id` to chase MCP 2026-07-28 |
 | [felixchaos/vrchat-avatar-modding-skill](https://github.com/felixchaos/vrchat-avatar-modding-skill) | Unadapted mesh → Blender stop | Install as a second skill constitution |
 | [sentfromspace blog](https://sentfromspace.xyz/blog/claude-vrchat-avatar/) / gummidot fork | INDEX split, dangling params, evidence after Play | `execute_csharp` package, port 14523, WD-ON as a law |
 | [XiaoboooOvO/VRChatEditorSkill](https://github.com/XiaoboooOvO/VRChatEditorSkill) (MIT) | Evidence ladder, inspect≠upload, detect toolchain before loading a plugin playbook, menu-first trace | Vendor the zip; make lilycalInventory the default wardrobe (this station’s CN-shop default is Modular Avatar) |
-| Official MA / NDMF / VRChat SDK docs | API truth | Agent Build & Publish |
+| Official MA / NDMF / VRChat SDK docs | API truth. [ClientSim](https://creators.vrchat.com/worlds/clientsim/), [Build & Test](https://creators.vrchat.com/worlds/udon/using-build-test/), [late joiners](https://creators.vrchat.com/worlds/udon/networking/late-joiners/), UdonSharp bundled in Worlds SDK | Agent Build & Publish; treating ClientSim as late-join; reinstalling legacy `com.vrchat.udonsharp` |
+| [Unity 2022.3 GlobalObjectId](https://docs.unity3d.com/2022.3/Documentation/ScriptReference/GlobalObjectId.html) / Prefab Stage | World identity fields | First `VRCSceneDescriptor`; auto-save to mint a scene GUID |
+| [Official Unity MCP](https://docs.unity3d.com/Packages/com.unity.ai.assistant@2.19/manual/integration/unity-mcp-get-started.html) | Know it is Unity 6 and **deprecated** | Install on 2022.3; treat deprecation as a reason to upgrade this avatar pipeline |
 | TunaSync / swax UnityMCP-VRC / lighfu / EditorEye | Catalog / later experiment | Default live bridge on 2022.3 |
-| Private world handoff (ENV-001, 源栈织网, 15 PNGs) | Overlay only | Commit IDs, textures, or that product name as this GitHub repo |
+| Private world handoffs and production assets | Overlay only | Commit private IDs, textures, or use a product name as this GitHub repo |
 
 Evidence labels we use on dumps: [evidence-layers.md](../skills/vrc-dcc/references/evidence-layers.md).
 
 ## Quality bar
 
 A zip in Downloads is not `verified`. `STATIC_SOURCE` ≠ `CLIENT_RUNTIME`. `eval-agent-contract.py` + synthetic CLI tests are `PASS` for the **station**. An avatar is `world` only with `owner_ok` after SDK upload ([review-board.md](../skills/vrc-dcc/references/review-board.md)).
+
+Chat / Codex export zips are the same rule: extract locally under gitignored `notes/packs/`, rewrite decisions into this tree, do not `git add` the zip or the JSON dump. 2026-09-07 S01 research landed as [FRAMEWORK.md](FRAMEWORK.md) + allowlist `IMPLEMENTED_WORLD`.

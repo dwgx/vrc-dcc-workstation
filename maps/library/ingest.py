@@ -19,7 +19,11 @@ def guess(name: str) -> str:
     m = BOOTH_RE.search(name)
     booth = m.group(1) if m else ""
     hint = "booth %s — " % booth if booth else ""
-    return hint + "Owner names the collection folder (do not invent a top-level bucket)"
+    return hint + (
+        "Avatar: 角色 / 通用散件 / 工具与插件. "
+        "World map/furniture/world Udon: 世界\\地图 | 世界\\建筑家具 | 世界\\功能. "
+        "Owner confirms. Do not put world kits in 通用散件\\道具."
+    )
 
 
 def main() -> int:
@@ -43,6 +47,7 @@ def main() -> int:
         if m:
             print("  listing: https://booth.pm/ja/items/" + m.group(1))
     print("Do not split the shelf by body. Do not Ultra. Do not unpack unitypackage on the USB root.")
+    print("World kits go under 世界\\ (maps / furniture / gizmos), not 通用散件\\道具.")
     return 0
 
 

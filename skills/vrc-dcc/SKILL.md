@@ -35,6 +35,8 @@ Mesh / weights / visemes / CATS → Blender. MA / menus / PhysBone / FaceEmo / l
 
 ## 3. On-demand
 
+- [references/web-handoff.md](references/web-handoff.md) — bounded web research / candidate production, interruption recovery and offline result checks
+
 - [references/slice-loop.md](references/slice-loop.md) — one slice: `handshake.py` + `gate.py` + named `vrc_*` (not invented `execute_code`)
 - [references/maintain-loop.md](references/maintain-loop.md) — improve / expand **this clone**; live board gitignored `notes/HANDOFF.md`
 - [../../docs/FRAMEWORK.md](../../docs/FRAMEWORK.md) — avatar vs world Core/adapters; no live `world_*` yet

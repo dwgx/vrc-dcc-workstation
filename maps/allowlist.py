@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Fail-closed MCP tool names for avatar jobs. No HTTP. No Unity."""
+"""Names accepted by the station's optional named-tool client. No HTTP. No Unity.
+
+This is not a global filter for native MCP, an installed provider CLI/SDK, or
+project-owned Editor builders. See docs/WORLD_PRODUCTION.md for production.
+Prefix is not a ship bit: this client accepts only implemented station tools.
+IMPLEMENTED_WORLD stays empty until a station World adapter actually ships.
+"""
 from __future__ import annotations
 
 from typing import Any
@@ -14,6 +20,8 @@ ALWAYS_DENY = frozenset(
 )
 AVATAR_PREFIX = "vrc_"
 WORLD_PREFIX = "world_"
+# Prefix is not a ship bit. S01-c may add world_probe only after an authorized Worlds Editor.
+IMPLEMENTED_WORLD = frozenset()
 
 
 def _names(policy: dict | None, key: str) -> list[str]:
@@ -62,7 +70,7 @@ def check_tool(
     *,
     domain: str = "avatar",
 ) -> tuple[bool, str]:
-    """Return (allowed, reason). Avatar: vrc_*. World: world_* (proposed names)."""
+    """Return (allowed, reason). Avatar: named vrc_*. World: implemented world_* only."""
     n = (name or "").strip()
     if not n:
         return False, "empty tool name"
@@ -75,13 +83,27 @@ def check_tool(
         return False, "POLICY disable_mcp_tools %r" % n
     allow = _names(policy, "allow_mcp_tools")
     prefix = WORLD_PREFIX if d == "world" else AVATAR_PREFIX
+
+    def _world_shipped() -> tuple[bool, str] | None:
+        if d != "world":
+            return None
+        if n not in IMPLEMENTED_WORLD:
+            return False, "world_* not implemented (S01-c ships world_probe only)"
+        return None
+
     if allow:
         if n not in allow:
             return False, "not on POLICY allow_mcp_tools"
         if not n.startswith(prefix):
             return False, "allow_mcp_tools is still %s* only" % prefix
+        blocked = _world_shipped()
+        if blocked:
+            return blocked
         return True, "allow_mcp_tools"
     if n.startswith(prefix):
+        blocked = _world_shipped()
+        if blocked:
+            return blocked
         return True, "%s prefix" % prefix.rstrip("_")
     if d == "world":
         return False, "not a named world_* tool"

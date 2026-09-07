@@ -14,14 +14,14 @@ Quote `session-probe`. `kind: station` → patch **this clone** only. Do not wri
 |---|---|
 | Clothes / menus / visemes / this avatar | `CURRENT.md` → `slice-loop.md` → `handshake.py <avatar>` |
 | Pins / skills / i18n / maps CLI / slices / “what next for the station” | `HANDOFF.md` → this file |
-| Worlds / Udon | `skills/vrc-world` — still not live `world_*` until that slice |
+| Worlds / Udon | `skills/vrc-world` + `docs/WORLD_PRODUCTION.md`; installed tools can support production now |
 
 ## 1. Read (once)
 
 1. `AGENTS.md` stop lines. Gitignored `OWNER.md` if present.
 2. `notes/HANDOFF.md` (present tense). Then **one** track file if the mission is that lane.
 3. `git status` — uncommitted overlay vs skeleton.
-4. `docs/ITERATION.md` only for the named public slice. Do not skip ahead to World live or a second Unity MCP.
+4. `docs/ITERATION.md` only for the named public slice. S01-b/c order the custom station adapter work; they do not block the authorized project writer's production tools.
 
 ## 2. One mission
 
@@ -38,7 +38,9 @@ Commit only when the owner asks. English message. Do not force-push.
 | Lesson for the next body | — | `skills/vrc-dcc/references/` |
 | Control loop | — | `maps/` + `unity/vrc-dcc-tools` |
 
-High-ambiguity SDK/Udon/MCP facts: copy [`templates/CHAT_RESEARCH.md`](../../../templates/CHAT_RESEARCH.md) into gitignored `notes/packs/` and give it to a web-research chat. Do not skip ahead to live `world_*` HTTP.
+High-ambiguity SDK/Udon/MCP facts: copy [`templates/CHAT_RESEARCH.md`](../../../templates/CHAT_RESEARCH.md) into gitignored `notes/packs/` and give it to a web-research chat. Research and the proposed station adapter are not prerequisites for using discovered project tools.
+
+For delegated browser work, use [web-handoff.md](web-handoff.md) and `templates/WEB_TASK.md`: one assignment, recoverable send state, original outputs, and an offline integrity check before content review. Recover current disk evidence first; use targeted history only for missing decisions. A private project wrapper is not a shipped station capability.
 
 ## Never
 

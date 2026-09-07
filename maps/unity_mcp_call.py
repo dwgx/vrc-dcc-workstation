@@ -95,6 +95,8 @@ def _post(payload: dict, session: str | None, timeout: int = 180, url: str | Non
     req.add_header("Content-Type", "application/json")
     req.add_header("Accept", "application/json, text/event-stream")
     if session:
+        # Keep the CoplayDev session pin. MCP 2026-07-28 dropped protocol
+        # sessions; do not delete this header to chase that spec.
         req.add_header("Mcp-Session-Id", session)
     req_id = payload.get("id")
     try:

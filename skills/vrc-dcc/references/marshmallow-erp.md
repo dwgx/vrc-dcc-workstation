@@ -6,7 +6,7 @@ Load with [clothing-fit.md](clothing-fit.md) when the job is 棉花糖 / 胸跟�
 
 ## What marshmallow does at bake
 
-Preset paths are **per body**. Dump the live marshmallow Setup. Stock Rurune collider names may **not** exist on a fusion armature — then breasts clip arms until you slot body colliders. Do not borrow outfit Physics (they die when the outfit is off). One fusion fill-in: [examples/composite-avatar.md](examples/composite-avatar.md).
+Preset paths are **per body**. Dump the live marshmallow Setup. Stock Rurune collider names may **not** exist on a fusion armature — then breasts clip arms until you slot body colliders. Do not borrow outfit Physics (they die when the outfit is off). Record this setup using [examples/README.md](examples/README.md).
 
 Do **not**:
 
@@ -18,7 +18,7 @@ Do **not**:
 
 ## Collider paths
 
-Preset collider names are **per body**. If `_PhysBone_collider[]` is all null, slot colliders on the **body** armature. Do not copy numbers from an outfit Physics object. Fusion example: [examples/composite-avatar.md](examples/composite-avatar.md).
+Preset collider names are **per body**. If `_PhysBone_collider[]` is all null, slot colliders on the **body** armature. Do not copy numbers from an outfit Physics object. Profile recording: [examples/README.md](examples/README.md).
 
 ## SPS / PCS — keep the holes on torso bones
 

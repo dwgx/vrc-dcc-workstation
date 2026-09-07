@@ -16,7 +16,7 @@ from product import WORLD, product_dir
 from review import lint_data, load_review_folder, open_items
 from world_policy import validate_world_policy
 
-HANDSHAKE = "1.0-world"
+HANDSHAKE = "1.1-world"
 PROPOSED = ["world_probe", "world_scene_dump", "world_udon_inventory"]
 
 
@@ -59,12 +59,15 @@ def cmd_handshake(name: str, as_json: bool) -> int:
         "policy": str(policy_file.as_posix()),
         "proposed_tools": PROPOSED,
         "implemented_world_tools": False,
+        "production_route": "discover_installed_editor_tools",
+        "production_guide": "docs/WORLD_PRODUCTION.md",
+        "station_adapter_optional": True,
+        "policy_scope": "station_named_tool_client",
         "disable_mcp_tools": policy.get("disable_mcp_tools") or [],
         "job": {
-            "sku_quota": int(policy.get("sku_quota") or job.get("sku_quota") or 1),
-            "sku_used": int(job.get("sku_used") or 0),
             "open_slice": job.get("open_slice"),
             "mutated": bool(job.get("mutated")),
+            "mutation_revision": int(job.get("mutation_revision") or 0),
             "lease": job.get("lease") if isinstance(job.get("lease"), dict) else None,
         },
         "open": [
@@ -77,10 +80,13 @@ def cmd_handshake(name: str, as_json: bool) -> int:
             for it in nxt
         ],
         "unity": (
-            "world_* are proposed, not on com.vrc-dcc.tools. Do not invent execute_code. "
-            "Do not POST 8080 from station. Do not install Avatar SDK into a Worlds project."
+            "Installed project tools can support World production now. Discover their actual schemas "
+            "and verify the selected Editor/project. Proposed station world_* are not implemented; "
+            "their roadmap does not block native MCP, CLI, SDK or project-owned Editor builders. "
+            "Keep Avatar and World SDKs in their respective projects."
         ),
-        "next": "python maps/world_gate.py %s begin <review-id> (lease only; no live dump)" % name,
+        "next": "Follow docs/WORLD_PRODUCTION.md in the authorized World project",
+        "station_ledger_next": "python maps/world_gate.py %s begin <review-id> (optional ledger)" % name,
     }
     if as_json:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
@@ -90,16 +96,20 @@ def cmd_handshake(name: str, as_json: bool) -> int:
     print("kind: world-product")
     print("proposed_tools:", " ".join(PROPOSED))
     print("implemented_world_tools: false")
+    print("production_route:", payload["production_route"])
+    print("production_guide:", payload["production_guide"])
+    print("policy_scope:", payload["policy_scope"])
     print("disable_mcp_tools:", " ".join(payload["disable_mcp_tools"]) if payload["disable_mcp_tools"] else "-")
     j = payload["job"]
     lease = j.get("lease") or {}
     print(
-        "job sku %d/%d slice=%s mutated=%s lease=%s"
-        % (j["sku_used"], j["sku_quota"], j["open_slice"] or "-", j["mutated"], lease.get("holder") or "-")
+        "job slice=%s mutated=%s revision=%d lease=%s"
+        % (j["open_slice"] or "-", j["mutated"], j["mutation_revision"], lease.get("holder") or "-")
     )
     print("open:", len(nxt))
     print("unity:", payload["unity"])
     print("next:", payload["next"])
+    print("station_ledger_next:", payload["station_ledger_next"])
     return 0
 
 

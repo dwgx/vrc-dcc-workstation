@@ -2,47 +2,68 @@
 name: vrc-world
 description: >-
   VRChat Worlds / Udon / scene / multiplayer state (世界, UdonSharp,
-  SceneDescriptor, ClientSim). Auto-apply only when the owner named a VRChat
-  Worlds job or this clone is vrc-dcc-workstation with a Worlds ask. Do not use
-  for generic Unity/game scenes, avatar clothes, or Modular Avatar. Do not
-  auto-apply a user-global copy onto another repo. Named world dumps are
-  proposed, not invented execute_code. Never click SDK Build & Publish.
+  SceneDescriptor, ClientSim). Use for a named VRChat Worlds job, or a
+  vrc-dcc-workstation clone with a Worlds ask. Do not use for generic
+  Unity/game scenes, avatar clothes, or Modular Avatar. Do not auto-apply a
+  user-global copy onto another repo. Production uses discovered installed
+  tools; proposed station world_* tools are optional future adapters.
 ---
 
 # vrc-world
 
-Draft reusable Worlds workflow. Not a live Editor package and not a rename of this repository. A private world product (if the clone owner has one) stays in gitignored overlay — see [docs/DOMAINS.md](../../docs/DOMAINS.md).
+Build and verify the requested World with the project's existing toolchain.
+Start with [WORLD_PRODUCTION.md](../../docs/WORLD_PRODUCTION.md), or its
+[Chinese entry](../../docs/i18n/zh-CN/WORLD_PRODUCTION.md). Keep private project
+facts in the project handoff or ignored overlay ([DOMAINS.md](../../docs/DOMAINS.md)).
 
-## Route
+## Route by the owner's intent
 
-- **Inspect / intake:** read-only. Do not open an Editor, import, refresh, Play, bake, build, save, or publish merely to inspect.
-- **Station maintenance:** edit this clone only (`docs/MAINTAIN.md`).
-- **World changes:** exact approved Worlds Unity project + operation plan. Never install Avatar SDK / MA to satisfy avatar `vrc_*` assemblies.
-- **Avatar changes:** `skills/vrc-dcc`, not this file.
-- **Unknown target:** report ambiguity. Do not select the first `VRCSceneDescriptor`.
+- **Production:** recover the current project, writer and accepted state; reuse
+  existing authorization and continue the requested implementation and checks.
+- **Inspect / intake:** honor the read-only scope. Opening Unity, importing,
+  refreshing, playing or saving is not necessary just to inspect disk records.
+- **Station maintenance:** improve this clone under `docs/MAINTAIN.md`.
+- **Avatar changes:** use `skills/vrc-dcc`. Avatar handshake and SKU/session
+  limits do not apply to World production.
 
-## Intake
+If the owner named **ENV-001** / read-only takeover for a specific world folder,
+use [references/intake.md](references/intake.md) for that bounded return record.
+For production, use native MCP or an installed provider CLI/SDK against the
+project's bridge. Discover actual tools, select the observed instance and read
+back its project and scenes. Support project-owned Editor C# / Blender builders
+where useful. Do not guess nonexistent tool names or the target from port 8080.
 
-1. Quote `session-probe` if it exists. World intent ≠ avatar `handshake.py`. `python maps/init_world.py <id>` then `python maps/world_handshake.py <id>`. Lease: `python maps/world_gate.py <id> begin <review-id>` with `VRC_DCC_JOB_HOLDER`. Named `world_*` are **not** on `com.vrc-dcc.tools` yet — do not invent `execute_code`. Architecture: [docs/FRAMEWORK.md](../../docs/FRAMEWORK.md).
-2. Confirm Unity version, `Packages/manifest.json` / VPM lock, git/backup, requested evidence layer. Record only tools this host actually exposes.
-3. Identity = project path + Editor instance/epoch + loaded scene GUIDs + prefab stage + descriptor. A port is not identity.
-4. Pipeline stub: [docs/WORLD.md](../../docs/WORLD.md).
+## Production loop
 
-If the owner named **ENV-001** / read-only takeover for a specific world folder: follow [references/intake.md](references/intake.md) and stop after the return record. A missing Editor is not a reason to start one.
+1. Recover the requested outcome, owned write set, current state and backup.
+   Read only the references needed for this slice.
+2. Use one writer for a shared Editor or overlapping assets. Independent
+   delegated research/model preparation can progress alongside it.
+3. Produce a complete useful slice. Inspect models, materials and colliders;
+   compile scripts as needed, save and reopen for readback. After a timeout,
+   inspect effects before retrying. Continue across slices in the same task.
+4. Keep UdonSharp proxy / backing / compiled program distinct from runtime:
+   [udon-builder.md](references/udon-builder.md).
+5. For shared state, check ownership, late join, owner leave, persistence and
+   local opt-out: [network-evidence.md](references/network-evidence.md).
+6. Record relevant results and remaining checks. ClientSim, Desktop, PCVR and
+   real multiplayer prove different things. Authorized Build & Test can be
+   agent-driven; the owner performs SDK Build & Publish.
+7. Save a concise handoff and continue the next authorized action. Recover
+   completed outputs after compaction instead of redoing them.
 
-## After an explicit write grant
+## Optional station records
 
-1. Inventory source and shared consumers. Smallest write set + expected pre-state.
-2. Discover the live tool schema. Names in [docs/PR_SLICES.md](../../docs/PR_SLICES.md) are proposed until `GetDynamicTools` lists them.
-3. One writer lease. Preserve unrelated dirty scenes.
-4. Keep UdonSharp proxy / backing / compiled program distinct from runtime. [udon-builder.md](references/udon-builder.md).
-5. Shared state: ownership, caller checks, late join, owner leave, persistence, local opt-out. [network-evidence.md](references/network-evidence.md).
-6. Apply, read back, record operation id. Timeout → inspect; do not assume it did not run.
-7. Mark affected evidence STALE. ClientSim ≠ Desktop ≠ PCVR ≠ real multiplayer.
-8. Human clicks SDK Publish.
+Existing project records are sufficient. When useful, initialize
+`python maps/init_world.py <id>` and read `python maps/world_handshake.py <id>`.
+`world_gate.py <id> begin <review-id>` uses `VRC_DCC_JOB_HOLDER` for a writer lease,
+allows successive slices and preserves mutation history. This is bookkeeping.
 
-## Progressive disclosure
+`implemented_world_tools: false` describes the unshipped station adapter only.
+It does not block installed production tools or require waiting for S01-b/c.
+See [WORLD.md](../../docs/WORLD.md) and [FRAMEWORK.md](../../docs/FRAMEWORK.md).
 
-[content.md](references/content.md) for textures / VRCUrl. Do not load a 200-row research catalog into every slice.
-
-Do not invent `execute_code`. Do not POST `8080` when another product owns the Editor.
+[web-handoff.md](../vrc-dcc/references/web-handoff.md) supports delegated research,
+design references and candidate materials; reuse existing project receipt formats
+when they already work. [content.md](references/content.md) covers textures and
+VRCUrl. Keep project dimensions, downloaded assets and private chat IDs in overlay.

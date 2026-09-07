@@ -34,6 +34,8 @@ Station HTTP client `maps/unity_mcp_call.py` allowlists named `vrc_*` only. `too
 
 `review.py next` is the queue, not a write permit. Freeze in `notes/CURRENT.md` (if this clone names one) wins on Unity writes.
 
+World jobs: `skills/vrc-world`. Do not call `world_*` until `IMPLEMENTED_WORLD` lists them. Avatar and World jobs use different Editors.
+
 Chat in the owner's locale (zh-CN / ja / en / ko). Tracked files stay English. Public git is optional.
 
 ## 2. Handshake Unity once

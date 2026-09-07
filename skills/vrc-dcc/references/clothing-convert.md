@@ -2,7 +2,7 @@
 
 Load with [clothing-fit.md](clothing-fit.md) when the job is 换素体 / 他体服 / clothes authored for a **different** base onto **this** live mesh. Menus stay [clothing-menu.md](clothing-menu.md). Chest physics: [marshmallow-erp.md](marshmallow-erp.md). Agent mistakes: [vrc-agent-pitfalls.md](vrc-agent-pitfalls.md).
 
-Identify **source body** and **target body** before any scale. A fusion, a stock base, and a different Booth SKU with a similar display name are three jobs. `wear_fusion` in the USB catalog means a listed prefab heuristic, not that Edit already fit. Worked example: [examples/composite-avatar.md](examples/composite-avatar.md).
+Identify **source body** and **target body** before any scale. A fusion, a stock base, and a different Booth SKU with a similar display name are three jobs. `wear_fusion` in the USB catalog means a listed prefab heuristic, not that Edit already fit. Profile recording: [examples/README.md](examples/README.md).
 
 ## Stop lines (cannot waive in chat)
 
@@ -125,7 +125,7 @@ Hands and toes are **two** fits. N anchors are **N** fits. Wiring pass is not th
 | 6. Mesh GO translate | Moving the renderer transform does **not** move skinned verts | “I moved the renderer so the toes should follow” |
 | 7. Stop | Owner looks in Edit | Hide the miss in notes |
 
-A filled fusion pass: [examples/composite-avatar.md](examples/composite-avatar.md). Do not copy another body's world poses.
+Record this fusion pass using [examples/README.md](examples/README.md). Do not copy another body's world poses.
 
 ## 10. Worked example
 

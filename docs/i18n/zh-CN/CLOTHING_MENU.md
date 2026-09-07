@@ -71,4 +71,4 @@ MCP 里禁止 `EditorUtility.DisplayDialog`。SDK Publish 人点。
 
 ## 示例菜单树
 
-不要抄另一只角色的 Int。活体写 `maps/<avatar>/`。英文示例：[composite-avatar.md](../../../skills/vrc-dcc/references/examples/composite-avatar.md)。
+不要抄另一只角色的 Int。活体写 `maps/<avatar>/`。通用记录方式：[examples/README.md](../../../skills/vrc-dcc/references/examples/README.md)。

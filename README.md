@@ -4,7 +4,7 @@
 **English** · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 <!-- I18N:END -->
 
-A **skeleton repository** for a portable VRChat DCC workstation: **Blender 5.x LTS** (mesh / weights / visemes) plus **Unity 2022.3** (Modular Avatar / NDMF / PhysBones / menus), driven by AI agents over MCP. Worlds / Udon are a separate draft skill (`skills/vrc-world`); this repo is not a private world product.
+A **skeleton repository** for a portable VRChat DCC workstation: **Blender 5.x LTS** (mesh / weights / visemes) plus **Unity 2022.3** (Modular Avatar / NDMF / PhysBones / menus), driven by AI agents over MCP. Worlds / Udon use [the World production workflow](docs/WORLD_PRODUCTION.md) and `skills/vrc-world`, with installed Unity/Blender tools. Private world products stay in their own projects.
 
 Any agent (Claude Code / Codex / Cursor / Gemini / Copilot / Grok) or human can clone this repo and resolve the UI locale ([docs/I18N.md](docs/I18N.md)). **Install / bootstrap this clone:** handshake in [AGENTS.md](AGENTS.md) (or `AGENTS.zh-CN.md` / `AGENTS.ja.md` / `AGENTS.ko.md`). **Avatar / DCC job:** [`templates/JOB.md`](templates/JOB.md) — classify by intent, not a passphrase. This tree is a **reference skeleton**: keep your own Blender/Unity/prompts (`OWNER.example.md` → gitignored `OWNER.md`). Agents may **self-maintain this clone** when you ask; stop lines cannot be waived in chat ([docs/MAINTAIN.md](docs/MAINTAIN.md)). Chat in the user's language; git commits stay English.
 
@@ -32,8 +32,8 @@ After a job, agents score the slice (`skills/vrc-review`) and write `notes/` so 
 | `templates/JOB.md` | Avatar / DCC job init (intent; not the install questionnaire) |
 | `maps/` | Per-avatar memory CLI (`handshake.py`, `gate.py`) + templates. Live `maps/<id>/` is gitignored |
 | `unity/vrc-dcc-tools` | Named `vrc_*` Editor package (`com.vrc-dcc.tools`) on CoplayDev 8080 |
-| `skills/vrc-dcc/` / `skills/vrc-review/` / `skills/vrc-world/` | Avatar playbook, dual-axis review, Worlds/Udon (draft) |
-| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/AVATAR_PROFILE.md` / `docs/ITERATION.md` | Avatar vs world vs station; world stub; public PR slices; no default character; how the base iterates |
+| `skills/vrc-dcc/` / `skills/vrc-review/` / `skills/vrc-world/` | Avatar playbook, dual-axis review, Worlds/Udon production |
+| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/AVATAR_PROFILE.md` / `docs/ITERATION.md` | Avatar vs world vs station; World production and adapter roadmap; public PR slices; no default character; how the base iterates |
 | `docs/SOURCES.md` | What stays out of git (meshes, vendor zips); steal vs refuse public stacks |
 | `docs/DROP_ON_AGENT.md` | English paste block: clone URL → install questionnaire or 改模 job; do not hijack other repos |
 | `manifests/` | Live pins (PyPI / GitHub / VPM). Re-check with `scripts/refresh-pins.ps1` |

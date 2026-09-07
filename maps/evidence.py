@@ -41,6 +41,7 @@ def fingerprint(
     lease_id: str | None = None,
     path: str = "",
     captured_at: str | None = None,
+    mutation_revision: int | str | None = None,
 ) -> dict[str, Any]:
     if layer not in LAYERS:
         raise ValueError("unknown evidence layer %r" % layer)
@@ -55,13 +56,28 @@ def fingerprint(
         "lease_id": lease_id or "",
         "product": {"domain": domain, "id": product_id},
         "path": path,
+        "mutation_revision": mutation_revision if mutation_revision is not None else "",
         "stale": False,
         "stale_reason": None,
     }
 
 
+def _revision(val: object) -> int | None:
+    if val in (None, ""):
+        return 0
+    try:
+        return int(val)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None
+
+
 def is_stale(row: dict, job: dict) -> str | None:
-    """Return a STALE token or None if this fingerprint may still be cited."""
+    """Return a STALE token or None if this fingerprint may still be cited.
+
+    Lease + mutation_revision hygiene only. sha256 is of the captured blob,
+    not a live rehash. Empty lease_id is not a hard fail. apply_allowed()
+    does not match PLAN fingerprints. Do not rewrite old receipts to wash STALE.
+    """
     if not isinstance(row, dict):
         return "EVIDENCE_BAD"
     if row.get("stale"):
@@ -71,6 +87,14 @@ def is_stale(row: dict, job: dict) -> str | None:
     got = str(row.get("lease_id") or "")
     if got and owned and got != owned:
         return "STALE_LEASE"
+    job_rev = _revision(job.get("mutation_revision"))
+    row_rev = _revision(row.get("mutation_revision"))
+    if job_rev is None or row_rev is None:
+        return "STALE_MUTATED"
+    if row_rev != job_rev:
+        return "STALE_MUTATED"
+    if job_rev > 0:
+        return None
     cap = parse_iso(str(row.get("captured_at") or ""))
     mut_at = parse_iso(str(job.get("mutated_at") or ""))
     if job.get("mutated"):

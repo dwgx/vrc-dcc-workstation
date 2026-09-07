@@ -20,13 +20,13 @@ Per-avatar facts (meshes, Int values, freeze) live in gitignored `maps/<avatar>/
 |---|---|
 | Install / bootstrap **this clone** | `AGENTS.md` section 2 |
 | Avatar / clothes / MA / PhysBones | `templates/JOB.md` + `skills/vrc-dcc` |
-| Worlds / Udon / scene / multiplayer state | `skills/vrc-world` + [WORLD.md](WORLD.md) |
+| Worlds / Udon / scene / multiplayer state | `skills/vrc-world` + [WORLD_PRODUCTION.md](WORLD_PRODUCTION.md) |
 | Patch pins / skills / docs | `docs/MAINTAIN.md` then [CONTRIBUTING.md](../CONTRIBUTING.md) |
 
 Do not send a world job down the avatar `handshake.py <avatar>` path. Do not install Avatar SDK / Modular Avatar into a Worlds project to satisfy `com.vrc-dcc.tools`. Do not install Worlds SDK into an avatar project because a playbook mentioned Udon.
 
 ## Core vs adapters (not landed as C# yet)
 
-Proposed split: SDK-independent Core (identity, policy, lease, evidence) + Avatar adapter + World adapter. Python Core pieces are in this tree ([FRAMEWORK.md](FRAMEWORK.md)). Until C# splits, avatar named `vrc_*` stay on `VRCSDK3A` + MA. World named tools are **proposed**, not callable. Station world CLI does not POST `8080`.
+Proposed packages: `com.vrc-dcc.core` (no SDK/MCP types) + keep `com.vrc-dcc.tools` as Avatar adapter + `com.vrc-dcc.worlds`. Python Core pieces are in this tree ([FRAMEWORK.md](FRAMEWORK.md)). Until C# splits, avatar named `vrc_*` stay on `VRCSDK3A` + MA. Station World named tools are **proposed**, not callable (`IMPLEMENTED_WORLD` empty). Installed native MCP / provider CLI or SDK and project-owned builders can support World production now; the C# split is not a prerequisite. Avatar and World jobs use **different Editors**. Station world CLI does not POST `8080`.
 
 See [PR_SLICES.md](PR_SLICES.md). Human still clicks SDK **Build & Publish** on both domains.

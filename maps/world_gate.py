@@ -7,7 +7,8 @@
   python world_gate.py <world-id> mutated
   python world_gate.py <world-id> reset
 
-Same lease tokens as gate.py. Named world_* dumps are S01-c (not this file).
+Same writer lease as gate.py, without Avatar SKU or per-chat slice limits.
+This optional station ledger does not control the project's native Unity tools.
 """
 from __future__ import annotations
 
@@ -33,6 +34,8 @@ def load_job(name: str) -> dict:
     path = wdir(name) / "JOB.json"
     if not path.is_file():
         data = dict(JOB_DEFAULT)
+        for key in ("avatar", "sku_quota", "sku_used", "skus"):
+            data.pop(key, None)
         data["domain"] = WORLD
         data["world"] = name
         return data
@@ -45,7 +48,8 @@ def load_job(name: str) -> dict:
 def save_job(name: str, data: dict) -> None:
     data["domain"] = WORLD
     data["world"] = name
-    data.pop("avatar", None)
+    for key in ("avatar", "sku_quota", "sku_used", "skus"):
+        data.pop(key, None)
     data["updated"] = date.today().isoformat()
     path = wdir(name) / "JOB.json"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -85,17 +89,8 @@ def cmd_begin(name: str, slice_id: str, holder: str = "", ttl_override: int = 0)
         return refuse("begin id is not a REVIEW row; python maps/world_handshake.py %s" % name)
     with lock_folder(dest):
         job = load_job(name)
-        if pol.get("sku_quota"):
-            try:
-                job["sku_quota"] = int(pol["sku_quota"])
-            except (TypeError, ValueError):
-                pass
-        open_id = job.get("open_slice")
-        if open_id and open_id != slice_id:
-            return refuse(
-                "second product this chat; python maps/world_gate.py %s reset" % name,
-                {"open_slice": open_id, "wanted": slice_id},
-            )
+        # One writer may continue through several World slices in the same task.
+        # acquire still rejects a competing live holder; keep project revisions.
         who = resolve_holder(holder)
         job, err = acquire(job, holder=who, slice_id=slice_id, ttl=ttl_sec(pol, ttl_override))
         if err:
@@ -129,6 +124,7 @@ def cmd_mutated(name: str, holder: str = "") -> int:
             return refuse(held, {"lease": job.get("lease")})
         job["mutated"] = True
         job["mutated_at"] = iso(now_utc())
+        job["mutation_revision"] = int(job.get("mutation_revision") or 0) + 1
         save_job(name, job)
         payload = {"ok": True, "mutated": True, "open_slice": job.get("open_slice")}
     print(json.dumps(payload, ensure_ascii=False))
@@ -143,11 +139,13 @@ def cmd_reset(name: str, holder: str = "", force: bool = False) -> int:
             held = require_http(job, resolve_holder(holder))
             if held:
                 return refuse(held, {"lease": job.get("lease")})
-        quota = int(job.get("sku_quota") or 1)
         fresh = dict(JOB_DEFAULT)
         fresh["domain"] = WORLD
         fresh["world"] = name
-        fresh["sku_quota"] = quota
+        # Releasing bookkeeping does not undo project changes or refresh evidence.
+        for key in ("mutated", "mutated_at", "mutation_revision"):
+            if key in job:
+                fresh[key] = job[key]
         fresh["note"] = job.get("note") or ""
         save_job(name, fresh)
         payload = {"ok": True, "reset": True, "domain": WORLD}

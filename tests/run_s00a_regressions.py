@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import time
@@ -26,6 +27,7 @@ def main() -> int:
             capture_output=True,
             text=True,
             encoding="utf-8",
+            env={**os.environ, "PYTHONUTF8": "1"},
         )
         elapsed_ms = int((time.perf_counter() - t0) * 1000)
         expected = 0

@@ -25,13 +25,15 @@ KIND_DIR = {
     "妆造": "makeup", "插件": "plugin", "模型": "body", "面捕": "tracking",
     "饰品": "accessory", "配饰": "accessory", "道具": "prop", "音效": "sfx",
     "表情和动画": "motion", "预制件": "prefab", "Base": "body", "工具与插件": "plugin",
+    "地图": "world-map", "建筑家具": "world-kit", "功能": "world-gizmo",
 }
 BUCKET_NAMES = set(KIND_DIR) | {
     "角色", "通用散件", "工具与插件", "模型库", "Other", "A更新", "补档",
-    "模型本体", "unity散件",
+    "模型本体", "unity散件", "世界",
 }
 ASSET_EXT = {".unitypackage", ".fbx", ".prefab", ".vrm", ".blend"}
 PACK_EXT = {".unitypackage", ".zip", ".rar", ".7z"}
+WORLD_KINDS = {"world", "world-map", "world-kit", "world-gizmo"}
 
 
 def load_json(path: Path, default):
@@ -46,6 +48,14 @@ def booth_prefix(name: str) -> str | None:
 
 
 def kind_from_parts(parts: tuple[str, ...]) -> str:
+    if parts and parts[0] == "世界":
+        if "地图" in parts:
+            return "world-map"
+        if "建筑家具" in parts:
+            return "world-kit"
+        if "功能" in parts:
+            return "world-gizmo"
+        return "world"
     blob = "".join(parts)
     if "衣服" in blob:
         return "clothes"
@@ -92,6 +102,10 @@ def collection_of(rel: Path) -> str:
         return "通用散件"
     if parts[0] == "工具与插件":
         return "工具与插件"
+    if parts[0] == "世界":
+        if len(parts) > 1:
+            return "世界/" + parts[1]
+        return "世界"
     return parts[0]
 
 
@@ -135,10 +149,41 @@ def wear_fusion(bodies: list[str]) -> bool:
     return False
 
 
-def node_id(booth: str | None, name: str) -> str:
+def shelf_domain(rel: Path) -> str:
+    """Return the shelf namespace used for IDs and deduplication."""
+    return "world" if rel.parts and rel.parts[0] == "世界" else "avatar"
+
+
+def is_world_node(node: dict) -> bool:
+    """Recognize an old catalog row as World without inspecting shelf files."""
+    collection = str(node.get("collection") or "")
+    rel = str(node.get("rel") or "").replace("\\", "/")
+    kind = str(node.get("kind") or "")
+    return (
+        collection == "世界"
+        or collection.startswith("世界/")
+        or rel == "世界"
+        or rel.startswith("世界/")
+        or kind in WORLD_KINDS
+    )
+
+
+def is_avatar_path(node: dict) -> bool:
+    rel = str(node.get("rel") or "").replace("\\", "/")
+    return rel in {"角色", "通用散件", "工具与插件"} or rel.startswith((
+        "角色/", "通用散件/", "工具与插件/",
+    ))
+
+
+def node_id(booth: str | None, name: str, domain: str = "avatar") -> str:
     if booth:
-        return "booth." + booth
-    return "pack." + name
+        # Keep the historical avatar id. World entries need their own stable
+        # namespace so render/find notes cannot overwrite an avatar entry that
+        # happens to use the same Booth id.
+        prefix = "world.booth." if domain == "world" else "booth."
+        return prefix + booth
+    prefix = "world.pack." if domain == "world" else "pack."
+    return prefix + name
 
 
 def label_of(name: str, booth: str | None) -> str:
@@ -197,15 +242,70 @@ def merge_notes(notes: dict, seed: dict, sidecars: dict[str, dict]) -> dict:
     return notes
 
 
+def migrate_legacy_world_notes(notes: dict, old_catalog: dict, nodes: list[dict]) -> dict:
+    """Move only unambiguous old World Booth/pack notes to namespaced ids.
+
+    A legacy row is eligible only when the old catalog proves that it was
+    exactly one World row, its copies are also World rows, and no Avatar row
+    shares its old id. Ambiguous rows stay under the old key rather than
+    guessing ownership.
+    """
+    if not isinstance(notes, dict) or not isinstance(old_catalog, dict):
+        return notes
+    current_ids = {str(node.get("id") or "") for node in nodes if isinstance(node, dict)}
+    old_by_id: dict[str, list[dict]] = {}
+    for row in old_catalog.get("nodes", []):
+        if not isinstance(row, dict):
+            continue
+        row_id = str(row.get("id") or "")
+        if row_id.startswith(("booth.", "pack.")):
+            old_by_id.setdefault(row_id, []).append(row)
+    for old_id, rows in old_by_id.items():
+        worlds = []
+        for row in rows:
+            copies = row.get("copies")
+            copies = [] if copies is None else copies
+            copies_are_world = isinstance(copies, list) and all(
+                isinstance(copy, dict)
+                and not is_avatar_path(copy)
+                and is_world_node(copy)
+                for copy in copies
+            )
+            if is_world_node(row) and copies_are_world:
+                worlds.append(row)
+        avatars = [row for row in rows if row not in worlds]
+        if len(worlds) != 1 or avatars:
+            continue
+        booth = str(worlds[0].get("booth_id") or "").strip()
+        if old_id.startswith("booth."):
+            if not booth or old_id != "booth." + booth:
+                continue
+            new_id = "world.booth." + booth
+        else:
+            if booth:
+                continue
+            new_id = "world." + old_id
+        if (
+            str(worlds[0].get("id") or "") != old_id
+            or old_id not in notes
+            or new_id not in current_ids
+            or new_id in notes
+        ):
+            continue
+        notes[new_id] = notes.pop(old_id)
+    return notes
+
+
 def scan(root: Path) -> tuple[list[dict], dict[str, dict]]:
     nodes: list[dict] = []
-    by_booth: dict[str, dict] = {}
+    by_booth: dict[tuple[str, str], dict] = {}
     seen_pack: set[str] = set()
     sidecars: dict[str, dict] = {}
-    roots = [root / "角色", root / "通用散件", root / "工具与插件"]
+    roots = [root / "角色", root / "通用散件", root / "工具与插件", root / "世界"]
 
     def emit(path: Path, booth: str | None, kind: str, rel: Path) -> None:
-        nid = node_id(booth, path.name)
+        domain = shelf_domain(rel)
+        nid = node_id(booth, path.name, domain)
         bodies = bodies_of(rel, path.name)
         extra = sidecar(path) if path.is_dir() else {}
         if extra.get("bodies"):
@@ -225,16 +325,17 @@ def scan(root: Path) -> tuple[list[dict], dict[str, dict]]:
         if extra:
             sidecars[nid] = extra
         if booth:
-            prev = by_booth.get(booth)
+            booth_key = (domain, booth)
+            prev = by_booth.get(booth_key)
             if prev is None:
-                by_booth[booth] = node
+                by_booth[booth_key] = node
                 return
             copy = {"rel": rel.as_posix(), "collection": node["collection"], "bodies": bodies, "path": str(path)}
             if prefer_copy(node, prev):
                 copy = {"rel": prev["rel"], "collection": prev["collection"], "bodies": prev["bodies"], "path": prev["path"]}
                 node["copies"] = list(prev.get("copies") or []) + [copy]
                 node["id"] = prev["id"]
-                by_booth[booth] = node
+                by_booth[booth_key] = node
             else:
                 prev.setdefault("copies", []).append(copy)
                 if node["wear_fusion"]:
@@ -283,7 +384,7 @@ def write_catalog(root: Path, nodes: list[dict]) -> Path:
         "root": str(root),
         "updated": date.today().isoformat(),
         "dump": "scan",
-        "dump_note": "Folder names + Booth ids. Does not unpack unitypackages. Skips 模型库/VRChat400+.",
+        "dump_note": "Folder names + Booth ids. Does not unpack unitypackages. Skips 模型库/VRChat400+. World kits live under 世界/.",
         "count": len(nodes),
         "nodes": nodes,
     }
@@ -299,10 +400,13 @@ def main() -> int:
         print("USB library missing:", root or "(unset)", file=sys.stderr)
         print("Set local.json unityvrchat_library (or UNITYVRCHAT_LIBRARY)", file=sys.stderr)
         return 2
+    catalog_path = HERE / "catalog.json"
+    old_catalog = load_json(catalog_path, {})
     nodes, sidecars = scan(root)
     write_catalog(root, nodes)
     notes_path = HERE / "notes.json"
     notes = load_json(notes_path, {})
+    notes = migrate_legacy_world_notes(notes, old_catalog, nodes)
     seed = load_json(HERE / "seed.json", {})
     notes = merge_notes(notes, seed, sidecars)
     keep = set(seed) | set(sidecars)

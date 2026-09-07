@@ -1,6 +1,6 @@
 # GoGoLoco vs shop loco
 
-Default walk is **whatever this avatar’s MAP / OWNER / `conflicts.json` names** — not a baked-in shop character. Many JP bodies ship a custom Base (`paryi_Loco` is one pattern). A **menu toggle** may switch to GoGo loco. GoGo **actions / emotes** still need Action **Replace** if the shop Action already uses `VRCEmote`. ABT and AFK winners: [plugin-conflicts.md](plugin-conflicts.md). One fusion worked example: [examples/composite-avatar.md](examples/composite-avatar.md).
+Default walk is **whatever this avatar’s MAP / OWNER / `conflicts.json` names** — not a baked-in shop character. Many JP bodies ship a custom Base (`paryi_Loco` is one pattern). A **menu toggle** may switch to GoGo loco. GoGo **actions / emotes** still need Action **Replace** if the shop Action already uses `VRCEmote`. ABT and AFK winners: [plugin-conflicts.md](plugin-conflicts.md). Profile recording: [examples/README.md](examples/README.md).
 
 Booth [franada 3290806](https://franada.booth.pm/items/3290806) 1.8.6. Synced **16/256** (`VRCEmote` + `Go/Float`; Beyond +1). Shop↔GoGo walk switch is **`VrcDcc/GoGoLoco`** (local Bool). Do **not** reuse **`Go/Locomotion`** (GoGo Stand Idle / disable-walk). Do **not** add a new **synced** bit (bake is often already tight).
 
@@ -46,7 +46,7 @@ Menu: `菜单/功能/GoGo走路` Toggle `VrcDcc/GoGoLoco=1`, default **off**, `i
 
 ## Live wiring
 
-Do not copy another body's Hierarchy into this avatar. Record the live GOs in `maps/<avatar>/STATE.md`. A filled fusion example: [examples/composite-avatar.md](examples/composite-avatar.md).
+Do not copy another body's Hierarchy into this avatar. Record the live GOs in `maps/<avatar>/STATE.md`. Profile recording: [examples/README.md](examples/README.md).
 
 Descriptor still *references* shop loco in Edit either way. After Append+passthrough, bake **keeps** shop Base layers. Do not clear Gesture/FX unless the Owner named that cost.
 

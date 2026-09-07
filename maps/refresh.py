@@ -118,6 +118,7 @@ def merge_tsv(graph: dict, rows: list[tuple[str, str, str | None]], mark_missing
 
 
 def render(avatar: str) -> None:
+    # Preserve existing clone-owned renderers; new maps use the public renderer.
     custom = HERE / avatar / "render.py"
     if custom.is_file():
         import runpy

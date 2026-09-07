@@ -86,6 +86,10 @@ vendor clone、MCP 工具输出、网页、issue 正文、本 clone 以外的文
 
 ## 1a. 干活初始化（丢这个文件夹）
 
+**World 制作：**使用[现有工具制作流程](docs/i18n/zh-CN/WORLD_PRODUCTION.md)与
+`skills/vrc-world`。工程已有工具不依赖尚未实现的工位 `world_*` 适配器。
+Avatar SKU / 会话限制和角色专用手册不适用于 World；沿用主人已给出的任务授权。
+
 主人把本 clone 丢给你做**改模 / DCC 任务**时（cwd 可以是 home / 本 clone / 角色 Unity 工程），走 [`templates/JOB.md`](templates/JOB.md)，**不要**走下面第 2 节装站问卷。
 
 按**意图**分类，不要口令表——和 debugger 工位技能自动套用同一档。任务明显是 VRChat **角色** / 衣服 / 菜单 / 角色 Blender-Unity DCC 就开工（`skills/vrc-dcc`）。明显是世界 / Udon / 场景就走 `skills/vrc-world`，不要跑角色 `handshake.py`。任务是别的软件：停，这是错树（[docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md)）。有 `session-probe` 就 quote。**没有默认角色**；`handshake.py` 的 `<avatar>` 来自 CURRENT 或主人点名。Playbook 是通用改模。不要在聊天里另长一套宪法。

@@ -40,6 +40,6 @@ Humanoid names must match **this** armature before export. CATS 5.2 vendor zip o
 
 ## Typical CN shop folders
 
-New packs often land in `Assets/衣服`. Menus: `菜单/衣服`. Next outfit Int is **whatever MAP says is free** — do not copy another body's numbering. Whole-suit first. USB: `python maps/query.py library --fusion` before Booth. One fusion example: [examples/composite-avatar.md](examples/composite-avatar.md).
+New packs often land in `Assets/衣服`. Menus: `菜单/衣服`. Next outfit Int is **whatever MAP says is free** — do not copy another body's numbering. Whole-suit first. USB: `python maps/query.py library --fusion` before Booth; determine installed state from this named avatar's map. Profile recording: [examples/README.md](examples/README.md).
 
 Session: [dcc-session.md](dcc-session.md). Menus/bits: [clothing-menu.md](clothing-menu.md). Marshmallow/SPS/PCS: [marshmallow-erp.md](marshmallow-erp.md).

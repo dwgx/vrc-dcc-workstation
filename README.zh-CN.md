@@ -4,7 +4,7 @@
 [English](README.md) · **简体中文** · [日本語](README.ja.md) · [한국어](README.ko.md)
 <!-- I18N:END -->
 
-便携 **VRChat DCC** 工作站的**骨架仓库**：**Blender 5.x LTS**（网格 / 权重 / 口型）+ **Unity 2022.3**（Modular Avatar / NDMF / PhysBone / 菜单），由 AI agent 经 MCP 驱动。世界 / Udon 是另一条草案技能（`skills/vrc-world`）；本仓库不是某个私有世界产品。
+便携 **VRChat DCC** 工作站的**骨架仓库**：**Blender 5.x LTS**（网格 / 权重 / 口型）+ **Unity 2022.3**（Modular Avatar / NDMF / PhysBone / 菜单），由 AI agent 经 MCP 驱动。世界 / Udon 使用[现有工具制作流程](docs/i18n/zh-CN/WORLD_PRODUCTION.md)与 `skills/vrc-world`，具体世界产品保留在各自工程。
 
 任意 agent（Claude Code / Codex / Cursor / Gemini / Copilot / Grok）或人 clone 后，按 [docs/i18n/zh-CN/I18N.md](docs/i18n/zh-CN/I18N.md) 选定界面语言。**装站 / 初始化本 clone** 才走 [AGENTS.zh-CN.md](AGENTS.zh-CN.md) 问卷（先问再 `bootstrap.ps1 -Apply`）。改模干活走 [`templates/JOB.md`](templates/JOB.md) / [中文](templates/i18n/zh-CN/JOB.md)（按意图分类，不要口令）。本树是**参考骨架**：保留自己的 Blender / Unity / 提示词（`OWNER.example.md` → gitignore 的 `OWNER.md`）。主人要求时 agent 可以**改这个 clone**；聊天不能取消红线（[docs/i18n/zh-CN/MAINTAIN.md](docs/i18n/zh-CN/MAINTAIN.md)）。**对话用中文**；git 提交说明保持英文。本仓库不含角色工程。
 
@@ -33,8 +33,8 @@
 | `templates/i18n/zh-CN/JOB.md` | 干活初始化（按意图；不是装站问卷） |
 | `maps/` | 每角色记忆 CLI（`handshake.py` / `gate.py`）+ 模板。活的 `maps/<id>/` 被 gitignore |
 | `unity/vrc-dcc-tools` | 命名 `vrc_*`（`com.vrc-dcc.tools`）挂在 CoplayDev 8080 |
-| `skills/vrc-dcc/` / `skills/vrc-review/` / `skills/vrc-world/` | 改模手册、双轴审查、世界/Udon（草案；技能正文英文） |
-| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/AVATAR_PROFILE.md` / `docs/ITERATION.md` | 角色 vs 世界 vs 工位；世界草稿；公开 PR 切片；无默认角色；基线怎么迭代 |
+| `skills/vrc-dcc/` / `skills/vrc-review/` / `skills/vrc-world/` | 改模手册、双轴审查、世界/Udon 制作（技能正文英文） |
+| `docs/DOMAINS.md` / `docs/WORLD.md` / `docs/PR_SLICES.md` / `docs/AVATAR_PROFILE.md` / `docs/ITERATION.md` | 角色 vs 世界 vs 工位；World 制作与适配器路线；公开 PR 切片；无默认角色；基线怎么迭代 |
 | `docs/i18n/zh-CN/SOURCES.md` | 底模/ZIP 不进 git；公开栈偷什么、拒什么 |
 | `docs/DROP_ON_AGENT.md` | 英文可复制提示词：clone 地址 → 问卷或改模；不要劫持别的仓库 |
 | `manifests/` | 钉选（PyPI / GitHub / VPM）。用 `scripts/refresh-pins.ps1` 复核 |

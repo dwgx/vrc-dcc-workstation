@@ -39,6 +39,7 @@ JOB_DEFAULT = {
     "skus": [],
     "open_slice": None,
     "mutated": False,
+    "mutation_revision": 0,
     "lease": None,
 }
 
@@ -290,6 +291,7 @@ def cmd_mutated(name: str, holder: str = "") -> int:
             return refuse(held, {"lease": job.get("lease")})
         job["mutated"] = True
         job["mutated_at"] = iso(now_utc())
+        job["mutation_revision"] = int(job.get("mutation_revision") or 0) + 1
         save_job(name, job)
         payload = {"ok": True, "mutated": True, "open_slice": job.get("open_slice")}
     print(json.dumps(payload, ensure_ascii=False))
@@ -307,6 +309,10 @@ def cmd_reset(name: str, holder: str = "", force: bool = False) -> int:
         fresh = dict(JOB_DEFAULT)
         fresh["avatar"] = name
         fresh["sku_quota"] = quota
+        # Reset releases this task's quota/lease, not the project's change history.
+        for key in ("mutated", "mutated_at", "mutation_revision"):
+            if key in job:
+                fresh[key] = job[key]
         fresh["note"] = job.get("note") or ""
         fresh["lease"] = None
         save_job(name, fresh)

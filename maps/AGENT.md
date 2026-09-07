@@ -16,7 +16,7 @@ python library/ingest.py
 powershell ../scripts/graphs-ready.ps1
 ```
 
-`--kaguya` on library queries is **overlay-only**: it filters notes.json key `kaguya` for one historical profile. It is not a generic on-this-avatar API. Missing key is unset, not `never`. Other bodies: `query.py <avatar>`.
+`--on-body` is refused until the catalog has an explicit avatar profile. Determine installed state from `query.py <avatar>`. Legacy `--kaguya` reads only that clone-local overlay key; a missing key is `unset`, not `never` and not evidence about another avatar.
 
 ## What this is
 
@@ -55,8 +55,8 @@ Home cwd must not write the avatar Unity project (`local.json` `unity_project`).
 
 **On the USB shelf** (owned, not necessarily installed): `query.py library` / `LIBRARY.md`. Same Booth id in two collections collapses to **one** node; extra copies stay in `copies`.
 
-1. Adding clothes: `query.py library --fusion` then the named words.
-2. Already on this avatar: `query.py <avatar>` (not a library `--on-body` flag).
+1. Adding clothes: `query.py library --fusion` then the named words; compare candidates with the named avatar's map.
+2. Already on body: `query.py <avatar>`.
 3. Miss: `notes/INDEX.md` then one skill reference (`clothing-menu.md`, `params-256.md`).
 4. Still miss: YAML/grep in the **avatar window**, or named `vrc_*`.
 5. Web / Booth **last**. Do not spawn a subagent to grep MAP.md or walk the USB root.
@@ -80,7 +80,7 @@ JSON dumps with a `nodes` array also merge by `id`.
 After packs land on the shelf (`local.json` `unityvrchat_library`; Owner confirmed ingest). **Not** the same stack as a Unity mutate.
 
 1. `python maps/library/scan.py` — catalog regen, `notes.json` kept.
-2. Overlay historical profile only: patch `maps/library/notes.json` key `kaguya` + `map_id`. Do not treat that key as installed-on-whatever-avatar-is-selected.
+2. Installed/removed: record the named avatar in `maps/<avatar>/`. Preserve any legacy `maps/library/notes.json` `kaguya` key as clone-local history; do not reuse it for another profile.
 3. Optional `item.json` in the pack folder on the shelf. Scan fills empty keys only.
 
 ## Booth / web

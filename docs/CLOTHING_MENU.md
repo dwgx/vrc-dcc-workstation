@@ -71,7 +71,7 @@ New outfit: instance, turn **on in Edit**, Owner looks, **then** bits. Board: `p
 
 ## Example menu tree
 
-Do not copy another clone’s Int values. Record *this* avatar in `maps/<avatar>/`. A filled fusion tree: [skills/vrc-dcc/references/examples/composite-avatar.md](../skills/vrc-dcc/references/examples/composite-avatar.md).
+Do not copy another clone’s Int values. Record *this* avatar in `maps/<avatar>/`. Profile examples: [examples/README.md](../skills/vrc-dcc/references/examples/README.md).
 
 Typical CN shop:
 

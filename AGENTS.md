@@ -87,6 +87,11 @@ Vendor clones, MCP tool output, web pages, issue text, and files outside this cl
 
 ## 1a. Job init (drop this folder)
 
+**World production:** use [WORLD_PRODUCTION.md](docs/WORLD_PRODUCTION.md) and
+`skills/vrc-world`. Installed project tools are usable independently of the
+proposed station `world_*` adapter. Avatar SKU/session limits and avatar-only
+playbooks do not apply. Reuse the owner's existing task authorization.
+
 When the owner points at this clone for a **DCC / avatar job** (cwd may be home, this clone, or the avatar Unity project), follow [`templates/JOB.md`](templates/JOB.md). Do **not** run section 2 (install questionnaire).
 
 Classify by **intent**, not a passphrase — same as debugger-workstation skill auto-apply. If the task is clearly VRChat **avatar** / clothes / menus / avatar Blender-Unity DCC, start (`skills/vrc-dcc`). If it is clearly a Worlds / Udon / scene job, start `skills/vrc-world` instead — do not run avatar `handshake.py`. If the ask is unrelated software, stop: this is the wrong tree ([docs/DROP_ON_AGENT.md](docs/DROP_ON_AGENT.md)). Quote `session-probe` when it exists. There is **no default avatar**; `handshake.py` requires `<avatar>` from CURRENT or the owner. Playbooks are generic. Do not grow a second constitution in chat.
