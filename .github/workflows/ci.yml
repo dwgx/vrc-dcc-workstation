@@ -46,6 +46,19 @@ jobs:
       - name: Existing map renderer compatibility
         run: python tests/test_refresh_render.py
 
+  image-inspection:
+    name: Image inspection (optional Pillow tool)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install image inspection dependency
+        run: python -m pip install -r scripts/requirements-images.txt
+      - name: Image inspection regressions
+        run: python tests/test_inspect_image_assets.py
+
   guard-no-secrets-or-binaries:
     name: Guard against committed binaries/secrets
     runs-on: ubuntu-latest

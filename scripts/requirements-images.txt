@@ -1,0 +1,2 @@
+# Reproducible dependency for scripts/inspect_image_assets.py
+Pillow==12.3.0

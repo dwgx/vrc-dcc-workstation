@@ -147,7 +147,7 @@ What landed, what was skipped, leftover risk (SDK upload still human).
 ## 3. MCP policy
 
 - Skills always; MCP processes only when this job edits a live scene.
-- One blender-mcp **client** at a time (Cursor **or** Claude Desktop, not both).
+- One controlling blender-mcp client per target instance. Independent instances may run together when the installed client/addon supports explicit routing and current document identity is verified; see [instance routing](skills/vrc-dcc/references/dcc-instance-routing.md).
 - Unity: CoplayDev unity-mcp (HTTP `http://localhost:8080/mcp` after UPM in the **open** project) plus named `vrc_*` (`com.vrc-dcc.tools`). Do not add lighfu UnityAgent / a second Unity MCP. Official Unity 6 MCP / `com.unity.ai.assistant` stays off a 2022.3 avatar project.
 - Do not use TunaSync UnityMCP-VCC or swax/UnityMCP-VRC as this station's **default** Editor bridge. Catalog pins are discovery, not install.
 
@@ -182,7 +182,7 @@ An outfit **not adapted** to this body: stop. Unity merge will not fix weights.
 
 - Click VRChat Build & Publish, call `upload_vrchat_avatar`, or store SDK cookies.
 - Install official Unity MCP into the 2022.3 avatar project.
-- Load blender-mcp in two GUI clients at once.
+- Drive the same Blender target concurrently from two GUI clients.
 - Merge Blender/Unity servers into four-runtime **user** MCP.
 - Treat session jsonl as the live Unity scene.
 

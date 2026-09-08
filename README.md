@@ -70,7 +70,7 @@ There is a live repo named TunaSync UnityMCP-VCC; **do not use it** (or swax/Uni
 - Official Unity 6 MCP on a 2022.3 avatar project
 - Blender + Unity MCP in four-runtime **user-global** config
 - Copying `skills/` into user-global skill directories (unrelated repos start 改模)
-- Two blender-mcp GUI clients at once
+- Two GUI clients controlling the same Blender target concurrently
 
 ## License
 

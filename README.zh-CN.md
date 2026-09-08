@@ -73,7 +73,7 @@ powershell -File .\scripts\bootstrap.ps1 -Apply
 - 往 2022.3 角色工程装官方 Unity 6 MCP
 - 把 Blender + Unity MCP 写进四套运行时的**用户全局**配置
 - 把 `skills/` 拷进用户全局技能目录（别的仓库写代码会被拐去改模）
-- 两个 blender-mcp GUI 客户端同时开
+- 两个 GUI 客户端同时控制同一 Blender 目标
 
 本机绝对路径只写在 gitignore 的 `local.json` / `OWNER.md`，不要推进 GitHub。
 

@@ -4,10 +4,16 @@ Use a **web-enabled, high-reasoning** chat (ChatGPT, etc.) for decisions that ne
 
 ## How
 
+The sample below concerns station adapter architecture. For material work use
+[MATERIAL_TASK.md](MATERIAL_TASK.md); for ongoing source absorption use
+[research-maintenance.md](../skills/vrc-dcc/references/research-maintenance.md).
+Reuse only questions relevant to the current decision and verify the installed
+versions before presenting this sample's historical details as current facts.
+
 For a delegated browser researcher, wrap this prompt in [WEB_TASK.md](WEB_TASK.md) with `artifact_class=research`. The [web handoff workflow](../skills/vrc-dcc/references/web-handoff.md) records dispatch identity, actual prompts, interrupted sends, saved research and file checks. Keep source verification separate from file integrity.
 
 1. Copy this file’s “Paste block” into gitignored `notes/packs/<date>/PROMPT.md` and fill the clone-local blanks (no SDK cookies, no `C:\Users\…` unless the owner wants that machine in the research).
-2. Attach or paste [`docs/FRAMEWORK.md`](../docs/FRAMEWORK.md), [`docs/DOMAINS.md`](../docs/DOMAINS.md), [`docs/PR_SLICES.md`](../docs/PR_SLICES.md), [`docs/WORLD.md`](../docs/WORLD.md), [`skills/vrc-dcc/references/evidence-layers.md`](../skills/vrc-dcc/references/evidence-layers.md).
+2. Attach only relevant excerpts from [`docs/FRAMEWORK.md`](../docs/FRAMEWORK.md), [`docs/DOMAINS.md`](../docs/DOMAINS.md), [`docs/PR_SLICES.md`](../docs/PR_SLICES.md), [`docs/WORLD.md`](../docs/WORLD.md) or [`skills/vrc-dcc/references/evidence-layers.md`](../skills/vrc-dcc/references/evidence-layers.md).
 3. Ask for **decisions**, not a second constitution. Promote a rule here only if the next foreign clone would hit it (`docs/SOURCES.md`). The 2026-09-07 pack is already absorbed in [FRAMEWORK.md](../docs/FRAMEWORK.md); re-run only if Unity / CoplayDev / MCP / Worlds SDK facts changed.
 
 ## Paste block (English)
@@ -18,7 +24,7 @@ Reply with decisions + cited URLs. Do not write malware, exploits, or VRChat upl
 
 Constraints (hard):
 - Public repo is a skeleton: no default avatar, no world product rename.
-- Human clicks VRChat SDK Build & Publish. No upload_* APIs. No execute_code / execute_csharp.
+- Human clicks VRChat SDK Build & Publish. No upload_* APIs. Discover installed tool names and honor the selected project's execution scope; do not invent callable tools from this architecture prompt.
 - CoplayDev unity-mcp is the default Editor bridge. No second Unity MCP. No Unity 6 MCP on 2022.3 avatars.
 - Do not add Avatar SDK / Modular Avatar to a Worlds project to compile avatar tools.
 - Do not add Worlds SDK to an avatar project because a playbook mentioned Udon.

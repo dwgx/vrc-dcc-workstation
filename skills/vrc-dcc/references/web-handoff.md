@@ -27,7 +27,7 @@ Choose an artifact class before execution:
 |---|---|---|
 | `research` | Decisions, primary URLs, checked versions/dates, uncertainty | Verify material claims against sources; reconcile with project constraints |
 | `design_reference` | Original concept/comparison image | Owner/design review; it is not a model or a scale drawing |
-| `base_color_candidate` | Original candidate color image | Decode/dimensions, visual review, tiling and engine import settings; it is not a complete PBR material |
+| `base_color_candidate` | Original candidate color image | Decode/dimensions, review for its declared surface/UV role and engine import settings; it is not a complete PBR material |
 | `model_reference` | Reference images or dimensions for a separate modeling task | Mesh construction, scale, pivot, normals, UVs, colliders and actual engine import |
 
 Use a bounded question with a concrete implementation consequence. Routine local
@@ -109,6 +109,13 @@ Open the actual output next. Research needs source-backed decisions, not only
 links. Images need dimensions/format inspection and visual QA. A color image does
 not imply valid normal/roughness/height maps. Concept geometry needs measured
 construction and collision tests before it can inform engine acceptance.
+
+Use [material-production.md](material-production.md) to select checks for
+repeating textures, atlases and unique surfaces. The optional image inspector
+reports actual pixels and Pillow decode observations; it is not a full container
+integrity validator. Keep per-criterion deviations and unknowns alongside
+production status. Supersede an overbroad acceptance record without erasing its
+original files or repeating the completed browser request.
 
 ## Absorb and continue
 

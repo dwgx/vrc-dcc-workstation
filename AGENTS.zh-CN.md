@@ -145,7 +145,7 @@ Avatar SKU / 会话限制和角色专用手册不适用于 World；沿用主人�
 ## 3. MCP 策略
 
 - 技能始终可读；MCP 进程只在本任务编辑活场景时启动。
-- 同一时间只有一个 blender-mcp **客户端**（Cursor **或** Claude Desktop，不要两个一起）。
+- 同一 Blender 目标实例由一个 blender-mcp 客户端控制。已安装客户端/插件支持明确路由并核对当前文档身份后，独立实例可并行使用；见[实例路由](skills/vrc-dcc/references/dcc-instance-routing.md)。
 - Unity：在**已打开的工程**里装 CoplayDev unity-mcp（HTTP `http://localhost:8080/mcp`）加上命名 `vrc_*`（`com.vrc-dcc.tools`）。不要加 lighfu UnityAgent / 第二套 Unity MCP。官方 Unity 6 MCP / `com.unity.ai.assistant` 不要进 2022.3 角色工程。
 - 不要把 TunaSync UnityMCP-VCC 或 swax/UnityMCP-VRC 当成本站**默认** Editor 桥。清单里的 pin 是发现项，不是安装令。
 
@@ -180,7 +180,7 @@ MA Merge Armature、菜单、参数、PhysBone、FaceEmo、lilToon → Unity。
 
 - 点 VRChat Build & Publish、调用 `upload_vrchat_avatar`、保存 SDK cookie。
 - 往 2022.3 角色工程装官方 Unity MCP。
-- 两个 GUI 客户端同时挂 blender-mcp。
+- 两个 GUI 客户端同时控制同一 Blender 目标。
 - 把 Blender/Unity 服务写进四套运行时的**用户全局** MCP。
 - 把会话 jsonl 当成当前 Unity 场景。
 

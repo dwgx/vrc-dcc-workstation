@@ -13,7 +13,7 @@
 3. 클라이언트: `uvx --python 3.11 blender-mcp==<pin from manifests/tools.json>`.
 4. 프로젝트 MCP 또는 `claude --mcp-config mcp/local.mcp.json`으로 붙인다.
 
-blender-mcp 클라이언트는 한 번에 하나.
+같은 Blender 대상 인스턴스는 blender-mcp 클라이언트 하나가 제어합니다. 독립 인스턴스는 설치된 구성의 라우팅 지원과 현재 문서를 확인하세요. [인스턴스 선택](../../../skills/vrc-dcc/references/dcc-instance-routing.md)을 참고하세요.
 
 ## Unity 2022.3
 

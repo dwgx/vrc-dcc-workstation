@@ -66,7 +66,7 @@ TunaSync UnityMCP-VCC라는 저장소는 있지만, 이 스테이션의 기본 �
 - 2022.3 아바타 프로젝트에 공식 Unity 6 MCP를 넣는 것
 - Blender + Unity MCP를 네 런타임 **사용자 전역** 설정에 넣는 것
 - `skills/`를 사용자 전역 스킬 디렉터리에 복사하는 것
-- blender-mcp GUI 클라이언트를 동시에 두 개 쓰는 것
+- 같은 Blender 대상을 GUI 클라이언트 두 개에서 동시에 제어
 
 ## 라이선스
 

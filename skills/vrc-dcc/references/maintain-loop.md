@@ -15,6 +15,7 @@ Quote `session-probe`. `kind: station` → patch **this clone** only. Do not wri
 | Clothes / menus / visemes / this avatar | `CURRENT.md` → `slice-loop.md` → `handshake.py <avatar>` |
 | Pins / skills / i18n / maps CLI / slices / “what next for the station” | `HANDOFF.md` → this file |
 | Worlds / Udon | `skills/vrc-world` + `docs/WORLD_PRODUCTION.md`; installed tools can support production now |
+| World / avatar methods, source absorption or recurring research | `HANDOFF.md` → [research-maintenance.md](research-maintenance.md); optional private `notes/RESEARCH.md` |
 
 ## 1. Read (once)
 

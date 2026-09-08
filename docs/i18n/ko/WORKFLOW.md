@@ -26,7 +26,7 @@ Human: VRChat SDK Build & Publish
 
 1. 사람: **Interface: Blender MCP**를 켜고 N 패널에서 **Start MCP Server**（포트 9876）.
 2. 클라이언트: `uvx --python 3.11 blender-mcp==<pin>`. 필요하면 `UV_PYTHON_PREFERENCE=only-managed`.
-3. blender-mcp **클라이언트는 한 번에 하나**（Cursor **또는** Claude Desktop. 둘 다 금지）.
+3. 같은 Blender 대상 인스턴스는 blender-mcp 클라이언트 하나가 제어합니다. 독립 인스턴스는 라우팅 지원과 현재 문서를 확인하세요. [인스턴스 선택](../../../skills/vrc-dcc/references/dcc-instance-routing.md)을 참고하세요.
 4. 웨이트, viseme, 아마추어 이름, CATS（선택 vendor `Alrauna/Cats-Blender-Plugin`）는 Blender에 둔다.
 5. Unity용 FBX를 보낸다. Humanoid 본 이름은 Modular Avatar 머지 전에 **대상** 아마추어와 같아야 한다.
 6. 옷이 이 몸에 **아직 맞지 않으면 멈춘다**. Unity MA는 웨이트를 고치지 못한다.

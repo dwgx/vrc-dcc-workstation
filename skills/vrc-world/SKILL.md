@@ -23,6 +23,9 @@ facts in the project handoff or ignored overlay ([DOMAINS.md](../../docs/DOMAINS
 - **Inspect / intake:** honor the read-only scope. Opening Unity, importing,
   refreshing, playing or saving is not necessary just to inspect disk records.
 - **Station maintenance:** improve this clone under `docs/MAINTAIN.md`.
+- **Research / method improvement:** use the shared
+  [research maintenance loop](../vrc-dcc/references/research-maintenance.md).
+  Recover source revisions and active web requests before starting more research.
 - **Avatar changes:** use `skills/vrc-dcc`. Avatar handshake and SKU/session
   limits do not apply to World production.
 
@@ -67,3 +70,8 @@ See [WORLD.md](../../docs/WORLD.md) and [FRAMEWORK.md](../../docs/FRAMEWORK.md).
 design references and candidate materials; reuse existing project receipt formats
 when they already work. [content.md](references/content.md) covers textures and
 VRCUrl. Keep project dimensions, downloaded assets and private chat IDs in overlay.
+
+Use [material production](../vrc-dcc/references/material-production.md) for
+surface/UV briefs, shader-specific channels and criterion-level review.
+[DCC instance routing](../vrc-dcc/references/dcc-instance-routing.md) distinguishes
+offline work, Blender background Python and the installed MCP client's capabilities.

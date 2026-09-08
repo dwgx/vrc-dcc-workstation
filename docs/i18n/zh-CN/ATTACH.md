@@ -13,7 +13,7 @@
 3. 客户端：`uvx --python 3.11 blender-mcp==<pin from manifests/tools.json>`。
 4. 用工程 MCP 或 `claude --mcp-config mcp/local.mcp.json` 挂接。
 
-同一时间只有一个 blender-mcp 客户端。
+同一 Blender 目标实例由一个 blender-mcp 客户端控制。独立实例须核对已安装组件的路由支持与当前文档身份；见[实例路由](../../../skills/vrc-dcc/references/dcc-instance-routing.md)。
 
 ## Unity 2022.3
 

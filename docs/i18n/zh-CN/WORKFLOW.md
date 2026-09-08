@@ -26,7 +26,7 @@ Human: VRChat SDK Build & Publish
 
 1. 人：启用 **Interface: Blender MCP**，N 面板 **Start MCP Server**（端口 9876）。
 2. 客户端：`uvx --python 3.11 blender-mcp==<pin>`，需要时设 `UV_PYTHON_PREFERENCE=only-managed`。
-3. 同一时间只有一个 blender-mcp **客户端**（Cursor **或** Claude Desktop，不要两个一起）。
+3. 同一 Blender 目标实例由一个 blender-mcp 客户端控制。独立实例须核对路由支持与当前文档身份；见[实例路由](../../../skills/vrc-dcc/references/dcc-instance-routing.md)。
 4. 权重、口型、骨架名、CATS（可选 vendor `Alrauna/Cats-Blender-Plugin`）留在 Blender。
 5. 导出给 Unity 的 FBX。Humanoid 骨骼名必须在 Modular Avatar 合并前与**目标**骨架一致。
 6. 衣服**还没适配**这具身体：**停**。Unity 的 MA 修不好权重。

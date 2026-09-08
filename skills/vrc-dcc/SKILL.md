@@ -6,7 +6,8 @@ description: >-
   locales.json kind is vrc-dcc-workstation, or the owner named a VRChat
   avatar job. Do not use for generic app/web/game code, non-VRChat Unity,
   Blender film/VFX, or unrelated PRs. Do not auto-apply a user-global copy
-  onto another repo. Worlds/Udon: skills/vrc-world. handshake.py <avatar>
+  onto another repo. Worlds/Udon: skills/vrc-world. Research and station
+  maintenance use notes/HANDOFF.md. Live avatar work: handshake.py avatar-id
   then gate.py then named vrc_* (not invented execute_code). Never
   user-global MCP. Never SDK Build & Publish.
 ---
@@ -17,7 +18,16 @@ Canonical after clone: this repository root. Machine paths belong in gitignored 
 
 **Scope:** this clone (`locales.json` kind `vrc-dcc-workstation`) or a named VRChat avatar Unity window. Another git root whose ask is not VRChat 改模: stop. Do not handshake, do not attach Blender/Unity MCP. Keep this skill **in this clone**; do not copy it to user-global skills.
 
-## 1. Init (every VRC job)
+## 1. Route by intent
+
+For **research, materials methodology or station maintenance**, recover
+`notes/HANDOFF.md` and use [research-maintenance.md](references/research-maintenance.md)
+or [maintain-loop.md](references/maintain-loop.md). No live avatar handshake is
+needed for that work. World production/research uses [vrc-world](../vrc-world/SKILL.md).
+
+Briefs, file inventory and research stay on that route. Writing an avatar
+project's UVs, materials, import settings or other assets is **live avatar work**;
+use the existing CURRENT → handshake → gate → named-tool workflow below.
 
 If the window cwd is a **named VRChat avatar Unity project**, or the ask is clearly a VRChat avatar / DCC job **in this clone**, load [references/dcc-session.md](references/dcc-session.md), [references/slice-loop.md](references/slice-loop.md), and [references/token-budget.md](references/token-budget.md) first. Classify by intent (see `templates/JOB.md`); do not require a passphrase. Do not treat four-runtime `CONTINUE.md` as this job after `kind: dcc` or after that intent. Home/station cwd: do not write the avatar Unity project; paste for a Unity window. Door: `notes/CURRENT.md` Products table names `<avatar>`. Run `python maps/handshake.py <avatar>`. If `vrc_audit` is missing from `unityMCP` after reopen, Unity window: `scripts/install-vrc-dcc-tools.ps1` then Reload. Another git root whose ask is not VRChat: stop (see [docs/DROP_ON_AGENT.md](../../docs/DROP_ON_AGENT.md)).
 
@@ -35,6 +45,9 @@ Mesh / weights / visemes / CATS → Blender. MA / menus / PhysBone / FaceEmo / l
 
 ## 3. On-demand
 
+- [references/material-production.md](references/material-production.md) — surface role, UV/camera brief, shader channels and separate acceptance evidence
+- [references/dcc-instance-routing.md](references/dcc-instance-routing.md) — offline, background and live MCP routes with actual target identity
+- [references/research-maintenance.md](references/research-maintenance.md) — incremental source recovery and portable improvements across agents
 - [references/web-handoff.md](references/web-handoff.md) — bounded web research / candidate production, interruption recovery and offline result checks
 
 - [references/slice-loop.md](references/slice-loop.md) — one slice: `handshake.py` + `gate.py` + named `vrc_*` (not invented `execute_code`)

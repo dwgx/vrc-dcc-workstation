@@ -141,7 +141,7 @@ VRChat SDK の **Build & Publish は人が押します**。エージェントは
 ## 3. MCP 方針
 
 - スキルは常に読む。MCP プロセスは今のシーンを編集する仕事のときだけ。
-- blender-mcp の**クライアントは同時に 1 つ**（Cursor **または** Claude Desktop）。
+- 同じ Blender 対象インスタンスを制御する blender-mcp クライアントは 1 つ。導入済みクライアントとアドオンが明示的な振り分けに対応し、現在のドキュメントを確認できれば、独立インスタンスを並行利用できます。[インスタンス選択](skills/vrc-dcc/references/dcc-instance-routing.md)を参照。
 - Unity：開いているプロジェクトで CoplayDev unity-mcp（HTTP `http://localhost:8080/mcp`）と指名 `vrc_*`（`com.vrc-dcc.tools`）。lighfu UnityAgent / 第二の Unity MCP は入れない。公式 Unity 6 MCP / `com.unity.ai.assistant` は 2022.3 アバタープロジェクトに入れない。
 - TunaSync UnityMCP-VCC や swax/UnityMCP-VRC を本ステーションの**既定**ブリッジにしない。カタログの pin は発見用であり、導入指示ではない。
 
@@ -176,7 +176,7 @@ MA Merge Armature、メニュー、パラメータ、PhysBone、FaceEmo、lilToo
 
 - Build & Publish、`upload_vrchat_avatar`、SDK cookie の保存。
 - 2022.3 アバタープロジェクトへ公式 Unity MCP を入れる。
-- blender-mcp を GUI クライアント 2 つに同時接続。
+- 同じ Blender 対象を GUI クライアント 2 つから同時に操作すること。
 - Blender/Unity を四系統の**ユーザーグローバル** MCP に入れる。
 - セッション jsonl を今の Unity シーンだと思い込む。
 

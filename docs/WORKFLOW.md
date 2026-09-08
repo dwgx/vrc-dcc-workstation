@@ -26,7 +26,7 @@ Target editor: **Blender 5.2 LTS**. Connect with PyPI `blender-mcp` at the pin i
 
 1. Human: enable **Interface: Blender MCP**, N-panel **Start MCP Server** (port 9876).
 2. Client: `uvx --python 3.11 blender-mcp==<pin>` with `UV_PYTHON_PREFERENCE=only-managed` when needed.
-3. One blender-mcp **client** at a time (Cursor **or** Claude Desktop, not both).
+3. One controlling blender-mcp client per target instance. Independent instances need verified routing and current document identity; see [instance routing](../skills/vrc-dcc/references/dcc-instance-routing.md).
 4. Weights, visemes, armature names, CATS (optional vendor `Alrauna/Cats-Blender-Plugin`) stay in Blender.
 5. Export FBX for Unity. Humanoid bone names must match the **target** armature before Modular Avatar merge.
 6. Outfit **not adapted** to this body: **stop**. Unity MA will not fix weights.

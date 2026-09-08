@@ -23,6 +23,8 @@ One command or one file. Not a backlog dump.
 - Completed acceptance checks, remaining checks, and any evidence made stale by later edits.
 - Active web task/dispatch, producer, task-card and STATUS paths, bundle root,
   artifact class, owned write set and conversation URL, if applicable.
+- Research source board, last consumed revisions/fingerprints and recurring
+  task ID when relevant; optionally use [RESEARCH.md](RESEARCH.md).
 
 After compaction read these pointers, verify present state and continue the next
 action. Use targeted history only when a decision is missing. Do not replay a

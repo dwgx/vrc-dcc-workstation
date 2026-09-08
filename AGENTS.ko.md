@@ -141,7 +141,7 @@ VRChat SDK **Build & Publish는 사람이 누릅니다**. 에이전트는 누르
 ## 3. MCP 정책
 
 - 스킬은 항상 읽기. MCP 프로세스는 지금 씬을 편집할 때만.
-- blender-mcp **클라이언트는 한 번에 하나**(Cursor **또는** Claude Desktop).
+- 같은 Blender 대상 인스턴스는 blender-mcp 클라이언트 하나가 제어합니다. 설치된 클라이언트와 애드온이 명시적 라우팅을 지원하고 현재 문서를 확인했다면 독립 인스턴스를 병렬로 사용할 수 있습니다. [인스턴스 선택](skills/vrc-dcc/references/dcc-instance-routing.md)을 참고하세요.
 - Unity: **열린 프로젝트**에서 CoplayDev unity-mcp(HTTP `http://localhost:8080/mcp`)와 이름 있는 `vrc_*`(`com.vrc-dcc.tools`). lighfu UnityAgent / 두 번째 Unity MCP는 넣지 마세요. 공식 Unity 6 MCP / `com.unity.ai.assistant`는 2022.3 아바타 프로젝트에 넣지 마세요.
 - TunaSync UnityMCP-VCC나 swax/UnityMCP-VRC를 이 스테이션의 **기본** 브리지로 쓰지 마세요. 카탈로그 pin은 발견용이지 설치 명령이 아닙니다.
 
@@ -176,7 +176,7 @@ MA Merge Armature, 메뉴, 파라미터, PhysBone, FaceEmo, lilToon → Unity.
 
 - Build & Publish, `upload_vrchat_avatar`, SDK 쿠키 저장.
 - 2022.3 아바타 프로젝트에 공식 Unity MCP 설치.
-- blender-mcp를 GUI 클라이언트 두 개에 동시에 연결.
+- 같은 Blender 대상을 GUI 클라이언트 두 개에서 동시에 제어.
 - Blender/Unity를 네 런타임의 **사용자 전역** MCP에 넣기.
 - 세션 jsonl을 현재 Unity 씬으로 착각.
 

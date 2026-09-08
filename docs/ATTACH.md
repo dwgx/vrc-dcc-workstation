@@ -13,7 +13,9 @@ Templates live in `mcp/*.template`. `-Apply` writes gitignored `.cursor/mcp.json
 3. Client: `uvx --python 3.11 blender-mcp==<pin from manifests/tools.json>`.
 4. Attach via project MCP (`.cursor/mcp.json` / `.mcp.json`) or `claude --mcp-config mcp/local.mcp.json`.
 
-One blender-mcp client at a time.
+Use one controlling blender-mcp client per target instance. For independent
+instances, verify installed routing support and current document identity
+([instance routing](../skills/vrc-dcc/references/dcc-instance-routing.md)).
 
 ## Unity 2022.3
 

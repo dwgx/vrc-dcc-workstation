@@ -1,5 +1,9 @@
 # Blender (VRC)
 
+Choose offline, background or live work using
+[instance routing](references/dcc-instance-routing.md). Background Python and
+multiple-target MCP support are separate capabilities to verify.
+
 - Exe path: `local.json` `blender_exe` (handshake). Target: **5.2 LTS**.
 - MCP add-on: enable **Interface: Blender MCP**, then N-panel **Start MCP Server** (port 9876).
 - Client: `uvx --python 3.11 blender-mcp==<pin>` with `UV_PYTHON_PREFERENCE=only-managed` if default Python is 3.14+.
