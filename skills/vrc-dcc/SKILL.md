@@ -48,6 +48,7 @@ Mesh / weights / visemes / CATS → Blender. MA / menus / PhysBone / FaceEmo / l
 - [references/material-production.md](references/material-production.md) — surface role, UV/camera brief, shader channels and separate acceptance evidence
 - [references/dcc-instance-routing.md](references/dcc-instance-routing.md) — offline, background and live MCP routes with actual target identity
 - [references/research-maintenance.md](references/research-maintenance.md) — incremental source recovery and portable improvements across agents
+- [references/upstream-updates.md](references/upstream-updates.md) — reconcile source updates with local improvements; return portable fixes to the source
 - [references/web-handoff.md](references/web-handoff.md) — bounded web research / candidate production, interruption recovery and offline result checks
 
 - [references/slice-loop.md](references/slice-loop.md) — one slice: `handshake.py` + `gate.py` + named `vrc_*` (not invented `execute_code`)

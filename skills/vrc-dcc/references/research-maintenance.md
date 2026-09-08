@@ -56,6 +56,11 @@ Save unsupported proposals as proposals, not capabilities.
    Record landed commit, validation and unconsumed source revisions in the
    handoff. A research answer alone is not a landed station update.
 
+For consumers already using the template, follow [upstream-updates.md](upstream-updates.md):
+compare each adopted baseline with local changes and the new source candidate.
+Record actual project integration separately from source publication, and return
+portable project fixes through the existing coordinator/contribution workflow.
+
 When recurring follow-up is requested, use the runtime's supported scheduler and
 save its existing task/automation ID in the private board. Check for duplicates
 before creating another. Continue from source cursors; remain quiet when nothing

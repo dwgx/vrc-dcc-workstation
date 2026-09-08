@@ -25,6 +25,9 @@ One command or one file. Not a backlog dump.
   artifact class, owned write set and conversation URL, if applicable.
 - Research source board, last consumed revisions/fingerprints and recurring
   task ID when relevant; optionally use [RESEARCH.md](RESEARCH.md).
+- When template updates matter: source candidate last checked, per-file baseline,
+  actual local integration and pending local/source differences. Existing project
+  records or [UPSTREAM_UPDATE.md](UPSTREAM_UPDATE.md) are sufficient.
 
 After compaction read these pointers, verify present state and continue the next
 action. Use targeted history only when a decision is missing. Do not replay a

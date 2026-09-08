@@ -6,6 +6,10 @@ will change, then inspect the relevant content. The optional
 [research executor brief](../../../templates/RESEARCH_EXECUTOR.md) supports a
 separate collector returning evidence to the station coordinator.
 
+For concrete Avatar reuse candidates from Blender Copilot and the resource
+library, see [avatar-source-adoption.md](avatar-source-adoption.md): expression
+blueprint consumers, viseme deformation and FBX import/export evidence.
+
 ## Identify what is available
 
 Record the source URL, inspected revision or snapshot date, and what it contains.

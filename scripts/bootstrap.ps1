@@ -19,6 +19,33 @@ $RepoRoot = Split-Path -Parent $PSScriptRoot
 if ([string]::IsNullOrWhiteSpace($InstallRoot)) {
     $InstallRoot = $RepoRoot
 }
+$InstallRoot = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($InstallRoot)
+
+function Assert-PlainPath([string]$Path) {
+    $cursor = $Path
+    while ($cursor) {
+        $item = Get-Item -LiteralPath $cursor -Force -ErrorAction SilentlyContinue
+        if ($item -and ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) {
+            throw "Inspect linked install paths before writing: $cursor"
+        }
+        $parent = Split-Path -Parent $cursor
+        if (-not $parent -or $parent -eq $cursor) { break }
+        $cursor = $parent
+    }
+}
+
+function Write-NewText([string]$Path, [string]$Text) {
+    Assert-PlainPath $Path
+    if (Test-Path -LiteralPath $Path -PathType Leaf) {
+        Write-Host "kept existing $Path"
+        return
+    }
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Path) | Out-Null
+    $bytes = (New-Object System.Text.UTF8Encoding $false).GetBytes($Text)
+    $stream = [IO.File]::Open($Path, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write)
+    try { $stream.Write($bytes, 0, $bytes.Length) } finally { $stream.Dispose() }
+    Write-Host "wrote $Path"
+}
 
 function Test-Exe([string]$Path) {
     return (-not [string]::IsNullOrWhiteSpace($Path)) -and (Test-Path -LiteralPath $Path)
@@ -93,34 +120,70 @@ Write-Host ("  [{0}] uvx      {1}" -f $(if ($uvx) { 'OK' } else { 'MISSING' }), 
 Write-LocaleBanner -RepoRoot $InstallRoot -Locale $uiLocale
 
 if (-not $Apply) {
-    Write-Host 'dry-run only. Re-run with -Apply to write .mcp.json, .cursor\mcp.json, mcp\local.mcp.json, and local.json (if missing).'
+    Write-Host 'dry-run only. Re-run with -Apply to create missing MCP/local.json. Existing MCP is kept; a separate InstallRoot must be empty.'
     exit 0
 }
 
-function Test-SamePath($a, $b) {
-    if (-not (Test-Path -LiteralPath $a)) { return $false }
-    if (-not (Test-Path -LiteralPath $b)) { return $false }
-    return ((Resolve-Path -LiteralPath $a).Path -eq (Resolve-Path -LiteralPath $b).Path)
+Assert-PlainPath $RepoRoot
+Assert-PlainPath $InstallRoot
+foreach ($path in @($outMcp, (Join-Path $InstallRoot '.mcp.json'), (Join-Path $InstallRoot '.cursor\mcp.json'), $localJson)) {
+    Assert-PlainPath $path
+    if (Test-Path -LiteralPath $path -PathType Container) { throw "Expected a configuration file: $path" }
 }
+$envHint = $null
+foreach ($cand in @($UiLanguage, $env:WORKSTATION_UI_LANG, $env:VRC_DCC_UI_LANG, $env:DEBUGGER_UI_LANG)) {
+    if (-not [string]::IsNullOrWhiteSpace($cand)) { $envHint = $cand; break }
+}
+$localeUpdate = $null
+if ($envHint -and (Test-Path -LiteralPath $localJson -PathType Leaf)) {
+    # An explicit locale choice may fill an empty preference, not reset local paths.
+    $existing = Get-Content -LiteralPath $localJson -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ($existing -isnot [pscustomobject]) { throw 'local.json must be a JSON object to update its locale.' }
+    $preference = $existing.PSObject.Properties['ui_language']
+    if ($null -eq $preference -or [string]::IsNullOrWhiteSpace([string]$preference.Value)) {
+        $existing | Add-Member -NotePropertyName ui_language -NotePropertyValue $uiLocale -Force
+        $localeUpdate = ($existing | ConvertTo-Json -Depth 100) + [Environment]::NewLine
+    }
+}
+$sourceFull = [IO.Path]::GetFullPath($RepoRoot).TrimEnd('\', '/')
+$targetFull = [IO.Path]::GetFullPath($InstallRoot).TrimEnd('\', '/')
+$sameRoot = $sourceFull.Equals($targetFull, [StringComparison]::OrdinalIgnoreCase)
 
-if (-not (Test-SamePath $RepoRoot $InstallRoot)) {
-    Write-Host "copy skeleton $RepoRoot -> $InstallRoot"
+if (-not $sameRoot) {
+    if ($targetFull.StartsWith($sourceFull + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase) -or
+        $sourceFull.StartsWith($targetFull + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'Source and separate InstallRoot must not overlap.'
+    }
+    if (Test-Path -LiteralPath $InstallRoot) {
+        if (-not (Test-Path -LiteralPath $InstallRoot -PathType Container) -or
+            @(Get-ChildItem -LiteralPath $InstallRoot -Force).Count) {
+            throw 'InstallRoot contains existing files. Use scripts/compare_upstream.py for a reviewed update, or run that installation''s own bootstrap to fill missing configuration. New installations need an empty directory.'
+        }
+    }
+    # Plan all copies first. Existing installations use the update workflow.
+    $copies = @()
     foreach ($rel in @('manifests', 'skills', 'docs', 'scripts', 'templates', 'mcp')) {
         $src = Join-Path $RepoRoot $rel
-        $dst = Join-Path $InstallRoot $rel
         if (-not (Test-Path -LiteralPath $src)) { continue }
-        New-Item -ItemType Directory -Force -Path $dst | Out-Null
-        Get-ChildItem -LiteralPath $src -Force | Where-Object {
-            $_.Name -notin @('local.mcp.json', '__pycache__', '.venv')
-        } | ForEach-Object {
-            Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $dst $_.Name) -Recurse -Force
+        Assert-PlainPath $src
+        foreach ($item in @(Get-ChildItem -LiteralPath $src -Recurse -Force)) {
+            $relative = $item.FullName.Substring($sourceFull.Length + 1)
+            if ($relative -match '(^|[\\/])(__pycache__|\.venv)([\\/]|$)' -or $item.Name -eq 'local.mcp.json') { continue }
+            Assert-PlainPath $item.FullName
+            if (-not $item.PSIsContainer) { $copies += $relative }
         }
     }
     foreach ($f in @('AGENTS.md', 'AGENTS.zh-CN.md', 'AGENTS.ja.md', 'AGENTS.ko.md', 'README.md', 'CLAUDE.md', 'GEMINI.md', 'OWNER.example.md', 'locales.json', 'local.json.example')) {
         $src = Join-Path $RepoRoot $f
-        if (Test-Path -LiteralPath $src) {
-            Copy-Item -LiteralPath $src -Destination (Join-Path $InstallRoot $f) -Force
-        }
+        Assert-PlainPath $src
+        if (Test-Path -LiteralPath $src -PathType Leaf) { $copies += $f }
+    }
+    Write-Host "copy skeleton $RepoRoot -> $InstallRoot"
+    foreach ($relative in $copies) {
+        $dest = Join-Path $InstallRoot $relative
+        Assert-PlainPath $dest
+        New-Item -ItemType Directory -Force -Path (Split-Path -Parent $dest) | Out-Null
+        [IO.File]::Copy((Join-Path $RepoRoot $relative), $dest, $false)
     }
 }
 
@@ -138,33 +201,25 @@ $mcpTargets = @(
     (Join-Path $InstallRoot '.cursor\mcp.json')
 )
 foreach ($dest in $mcpTargets) {
-    New-Item -ItemType Directory -Force -Path (Split-Path $dest) | Out-Null
-    [System.IO.File]::WriteAllText($dest, $text, $utf8)
-    Write-Host "wrote $dest"
+    Write-NewText $dest $text
 }
 
 if (-not (Test-Path -LiteralPath $localJson)) {
-    Copy-Item -LiteralPath $localExample -Destination $localJson
-    $obj = Get-Content -LiteralPath $localJson -Raw -Encoding UTF8 | ConvertFrom-Json
+    $obj = Get-Content -LiteralPath $localExample -Raw -Encoding UTF8 | ConvertFrom-Json
     if ($unityHits.Count) { $obj.unity_editor = $unityHits[0] }
     if ($blenderHits.Count) { $obj.blender_exe = $blenderHits[0] }
     if ($uvx) { $obj.uvx = $uvx }
     $obj | Add-Member -NotePropertyName install_root -NotePropertyValue $InstallRoot -Force
+    if ($envHint) { $obj | Add-Member -NotePropertyName ui_language -NotePropertyValue $uiLocale -Force }
     $json = $obj | ConvertTo-Json -Depth 6
-    [System.IO.File]::WriteAllText($localJson, $json + [Environment]::NewLine, $utf8)
-    Write-Host "wrote $localJson (fill unity_project if needed)"
+    Write-NewText $localJson ($json + [Environment]::NewLine)
 } else {
     Write-Host "kept existing $localJson"
 }
 
-$envHint = $null
-foreach ($cand in @($UiLanguage, $env:WORKSTATION_UI_LANG, $env:VRC_DCC_UI_LANG, $env:DEBUGGER_UI_LANG)) {
-    if (-not [string]::IsNullOrWhiteSpace($cand)) { $envHint = $cand; break }
-}
-if ($envHint) {
-    Save-WorkstationLocale -RepoRoot $InstallRoot -Locale $uiLocale -InstallRoot $InstallRoot -WriteLocale
-} else {
-    Save-WorkstationLocale -RepoRoot $InstallRoot -InstallRoot $InstallRoot
+if ($null -ne $localeUpdate) {
+    [IO.File]::WriteAllText($localJson, $localeUpdate, $utf8)
+    Write-Host "filled empty ui_language in $localJson"
 }
 
 if ($CloneMcp) {

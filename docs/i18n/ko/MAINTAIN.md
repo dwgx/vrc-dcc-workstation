@@ -30,3 +30,15 @@ Codex는 `AGENTS.override.md`도 읽을 수 있다（가까운 경로가 이김�
 ## 업스트림 vs 이 fork
 
 `dwgx/vrc-dcc-workstation`에 공개하는 것은 선택. 이 clone의 `origin`이 그 저장소이고 **그리고** 주인이 공개를 요청했을 때만. 다른 remote는 주인을 따른다.
+
+기존 clone이나 템플릿을 복사한 프로젝트에서는
+[업스트림 업데이트 절차](../../../skills/vrc-dcc/references/upstream-updates.md)를 사용한다.
+이전에 채택한 소스 버전, 현재 로컬 변경, 이번에 선택한 업스트림 커밋을 비교하고
+유용한 개선을 통합한다. 재사용 가능한 로컬 개선은 기존 기여 절차로 소스에 돌려준다.
+브랜치가 `master`라고 가정하지 말고 확인한다. 소스 공개와 개별 프로젝트의 통합
+완료는 별도로 기록한다.
+
+선택 사항인 [읽기 전용 비교 도구](../../../scripts/compare_upstream.py)는 Git clone과
+Git이 없는 프로젝트의 파일 매핑을 지원한다. 파일별 채택 기록은 기존 형식이나
+[UPSTREAM_UPDATE.md](../../../templates/UPSTREAM_UPDATE.md)를 사용한다.
+필요할 때 확인한다. bootstrap이나 타임스탬프 기반 복사는 병합을 대신하지 않는다.

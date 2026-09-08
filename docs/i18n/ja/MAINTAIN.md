@@ -30,3 +30,15 @@ Codex は `AGENTS.override.md` も読むことがある（近いパスが勝つ�
 ## 上流 vs この fork
 
 `dwgx/vrc-dcc-workstation` への公開は任意。この clone の `origin` がそのリポジトリで、**かつ**所有者が公開を頼んだときだけ。他の remote は所有者に従う。
+
+既存の clone やテンプレートをコピーしたプロジェクトでは、
+[上流更新の手順](../../../skills/vrc-dcc/references/upstream-updates.md)を使う。
+採用済みのソース版、現在のローカル変更、今回選んだ上流コミットを比較し、
+必要な改善を取り込む。汎用的なローカル改善は既存の貢献手順でソースへ戻す。
+ブランチ名を `master` と決めつけず確認する。ソースの公開と各プロジェクトの
+取り込み完了は別の状態として記録する。
+
+任意の[読み取り専用比較ツール](../../../scripts/compare_upstream.py)は Git clone と、
+Git を使わないプロジェクトのファイル対応表を扱える。ファイル別の採用記録は
+既存の形式または [UPSTREAM_UPDATE.md](../../../templates/UPSTREAM_UPDATE.md)を使う。
+確認は必要に応じて行う。bootstrap やタイムスタンプによるコピーはマージの代わりにならない。

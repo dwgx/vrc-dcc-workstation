@@ -30,3 +30,13 @@ Codex 也可能读 `AGENTS.override.md`（更近路径优先）。本模板仍�
 ## 上游 vs 本 fork
 
 推到 `dwgx/vrc-dcc-workstation` 是可选的：仅当本 clone 的 `origin` 就是该仓库**并且**主人要求公开发布。其它 remote 听主人。
+
+已有 clone 或复制过模板的项目，使用[上游更新方法](../../../skills/vrc-dcc/references/upstream-updates.md)。
+比较原来采用的源版本、项目当前改动和这次选定的上游提交，融入有用变化，
+并通过现有贡献流程把通用的本地改进回传源仓库。核对实际分支，不假设都叫
+`master`。源仓库已发布和具体项目已融合是两件事。
+
+可选的[只读对比工具](../../../scripts/compare_upstream.py)支持 Git clone，
+也支持没有 Git 的项目按文件映射。逐文件采用记录可沿用项目现有格式，或使用
+[UPSTREAM_UPDATE.md](../../../templates/UPSTREAM_UPDATE.md)。按需检查；
+bootstrap 和按时间戳复制都不能替代合并与验证。

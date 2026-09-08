@@ -23,3 +23,8 @@ Live DCC MCP is per-job. Mesh/weight problems stay in Blender (CATS 5.2 vendor).
 Progressive disclosure: keep `SKILL.md` short; load `references/physbones.md` and gummidot Docs only when that job needs them.
 
 Pin source of truth: GitHub releases + PyPI (`scripts/refresh-pins.ps1`). Do not treat a third-party VPM catalog or an old README install snippet as a downgrade signal.
+
+Consumer projects can evolve independently and return reusable fixes. Follow
+[upstream-updates.md](../skills/vrc-dcc/references/upstream-updates.md) to reconcile
+source and local deltas on demand. Record source publication and actual consumer
+integration separately; a newer template does not rewrite completed project tasks.

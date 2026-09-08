@@ -23,6 +23,8 @@ facts in the project handoff or ignored overlay ([DOMAINS.md](../../docs/DOMAINS
 - **Inspect / intake:** honor the read-only scope. Opening Unity, importing,
   refreshing, playing or saving is not necessary just to inspect disk records.
 - **Station maintenance:** improve this clone under `docs/MAINTAIN.md`.
+  For project templates and local agent improvements, use
+  [upstream updates](../vrc-dcc/references/upstream-updates.md) on demand.
 - **Research / method improvement:** use the shared
   [research maintenance loop](../vrc-dcc/references/research-maintenance.md).
   Recover source revisions and active web requests before starting more research.

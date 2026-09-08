@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "source_path": "templates/MATERIAL_TASK.md",
+      "target_path": ".production/MATERIAL_TASK.md",
+      "base_commit": null
+    },
+    {
+      "source_path": "skills/vrc-world/references/network-evidence.md",
+      "target_path": ".production/references/network-evidence.md",
+      "base_commit": null
+    }
+  ]
+}
