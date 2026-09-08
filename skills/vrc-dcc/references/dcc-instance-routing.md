@@ -35,6 +35,11 @@ handoff. Use existing project bridges/builders when supported; proposed station
 `world_*` adapters are not a prerequisite. See
 [World production](../../../docs/WORLD_PRODUCTION.md) and [lazy MCP](../lazy-mcp.md).
 
+For named mesh dimensions, the optional [measurement reader](mesh-measurement.md)
+returns current file/scene identity, evaluated local/world bounds and an explicit
+unit conversion policy. It can use an isolated file-based route without opening
+an MCP connection; its receipt does not establish clearance or engine acceptance.
+
 Blender documents command-line arguments in its
 [manual](https://docs.blender.org/manual/en/latest/advanced/command_line/arguments.html).
 Use the version matching the installed executable; this workflow does not assert

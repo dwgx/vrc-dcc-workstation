@@ -41,6 +41,8 @@ jobs:
         run: python tests/test_s01d_evidence.py
       - name: Web producer handoff
         run: python tests/test_web_handoff.py
+      - name: Blender measurement math and units
+        run: python tests/test_blender_measurement.py
       - name: World asset shelf
         run: python tests/test_world_shelf.py
       - name: Existing map renderer compatibility

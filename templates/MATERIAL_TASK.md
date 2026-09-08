@@ -40,6 +40,11 @@ scope:
 
 Define the checks before sending:
 
+When geometry measurements are needed, the optional
+[mesh measurement reader](../skills/vrc-dcc/references/mesh-measurement.md) can
+record named Blender mesh bounds, current file/scene and units. Link the receipt
+under geometry references; keep desired clearance and engine scale checks separate.
+
 | Criterion | Method/reference | Result and evidence |
 |---|---|---|
 | File format and native size | Decode originals; optional image inspector | observed / deviation / unknown |
