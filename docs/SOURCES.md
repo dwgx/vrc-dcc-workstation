@@ -34,6 +34,19 @@ What *does* belong in git: how to handshake any named avatar, fail-closed identi
 | TunaSync / swax UnityMCP-VRC / lighfu / EditorEye | Catalog / later experiment | Default live bridge on 2022.3 |
 | Private world handoffs and production assets | Overlay only | Commit private IDs, textures, or use a product name as this GitHub repo |
 
+## Resource libraries and implementation candidates
+
+These sources help discover and develop methods; the catalog is not an install
+queue. Use [source-learning.md](../skills/vrc-dcc/references/source-learning.md)
+and the optional [research executor brief](../templates/RESEARCH_EXECUTOR.md)
+for question-led collection and a usable return to the coordinator.
+
+| Source | Useful input | Check before adoption |
+|---|---|---|
+| [vrc-mod-guide](https://dwgx.github.io/vrc-mod-guide/) / [source](https://github.com/dwgx/vrc-mod-guide) | World/avatar resource discovery, authored tutorial bodies, video metadata and archive pointers | Inspect the relevant body; historical link/credibility labels do not verify current technical claims. Keep third-party asset rights separate from the catalog. |
+| [blender-copilot](https://github.com/dwgx/blender-copilot) | Measurement, mesh checks, UV/material operations, export and avatar-parameter implementation patterns | Trace actual registration, handler and result; distinguish heuristics/templates from measured behavior. Verify target routing and installed versions before a live task. |
+| [VRCD documentation entry](https://docs.vrcd.org.cn/books/vrc-YcF/page/vrc) | Chinese community documentation and leads to related World/avatar methods | Record which pages were actually read; verify consequential SDK/tool claims against current original documentation. |
+
 Evidence labels we use on dumps: [evidence-layers.md](../skills/vrc-dcc/references/evidence-layers.md).
 
 ## Quality bar

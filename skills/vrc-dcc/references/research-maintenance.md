@@ -22,6 +22,12 @@ and superseded verdicts distinguishable. Do not replay completed requests.
 
 ## Research only a consequential gap
 
+For resource libraries and external tool repositories, use
+[source-learning.md](source-learning.md) to distinguish available content from
+read evidence and extract a useful implementation. The optional
+[RESEARCH_EXECUTOR.md](../../../templates/RESEARCH_EXECUTOR.md) defines a
+collector-to-coordinator return without replacing a project's working format.
+
 State the decision a result will change, the installed versions, evidence
 already available, unresolved question and desired return. Use
 [web-handoff.md](web-handoff.md) for delegated browser work; use
